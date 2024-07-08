@@ -14,7 +14,6 @@ const firebaseConfig = {
 };
 
 
-console.log("auth domain:       ====> " ,import.meta.env.VITE_authDomain)
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export default app

@@ -23,7 +23,7 @@ export default function Sidebar() {
 
   React.useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 640); // Adjust breakpoint as needed
+      setIsSmallScreen(window.innerWidth <= 719); // Adjust breakpoint as needed
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -39,7 +39,6 @@ export default function Sidebar() {
     <React.Fragment>
       {isSmallScreen ? (
         <>
-          <Button onClick={handleButtonClick}>Open Drawer</Button>
           <Drawer open={open} onClose={closeDrawer} className="bg-[#2f3349] ">
             <div className="mb-2 flex items-center justify-between p-4 bg-[#2f3349]">
               <Logo color={"text-white"} />
@@ -164,6 +163,10 @@ export default function Sidebar() {
               Documentation
             </Button>
           </Drawer>
+          <div className="flex-grow w-full px-4">
+            <Topbar handleButtonClick={handleButtonClick}/>
+            <Outlet />
+          </div>
         </>
       ) : (
         <div className="flex px-4">

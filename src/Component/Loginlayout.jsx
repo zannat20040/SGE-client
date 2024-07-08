@@ -1,16 +1,14 @@
 import React from "react";
 import { FaLeaf } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 export default function Loginlayout({ HandleLogin, loading }) {
   return (
     <div className="  md:bg-[#f6f6f6] bg-white ">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-between  gap-0 md:gap-10">
         <div className="p-4 md:p-10  lg:col-span-2 ">
-          <div className="flex items-center gap-3">
-            <FaLeaf className="text-indigo-500 text-2xl" />
-            <h1 className="font-semibold text-black text-2xl">Shabuj Global</h1>
-          </div>
+          <Logo color={'text-black'}/>
           <div className="h-full hidden md:flex items-center justify-center px-10 w-full">
             <img
               src="https://st.depositphotos.com/1144687/1902/i/450/depositphotos_19024147-stock-photo-drawing-city-over-book.jpg"

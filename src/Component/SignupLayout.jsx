@@ -1,15 +1,13 @@
 import React from "react";
 import { FaLeaf } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
   return (
     <div className="   bg-white ">
       <div className=" p-4 md:p-10  pb-16 card h-full  w-full  rounded-none container mx-auto">
-        <div className="flex items-center gap-3">
-          <FaLeaf className="text-indigo-500 text-2xl" />
-          <h1 className="font-semibold text-black text-2xl">Shabuj Global</h1>
-        </div>
+        <Logo color={'text-black'}/>
         <h1 className="font-bold text-4xl mt-20 text-center">
           Welcome to Shabuj Global
         </h1>

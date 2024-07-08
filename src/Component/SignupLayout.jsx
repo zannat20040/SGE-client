@@ -120,7 +120,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
             </label>
           </div>
           <div className="form-control ">
-            <button className="btn  text-white font-semibold uppercase bg-indigo-500">
+            <button className="btn  text-white font-medium uppercase bg-indigo-500">
               {loading ? "Wait a Moment ... " : "Signup"}
             </button>
           </div>

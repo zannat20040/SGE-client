@@ -2,7 +2,7 @@ import React from "react";
 import { FaLeaf } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-export default function Loginlayout() {
+export default function Loginlayout({ HandleLogin, loading }) {
   return (
     <div className="  md:bg-[#f6f6f6] bg-white ">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-between  gap-0 md:gap-10">
@@ -26,7 +26,7 @@ export default function Loginlayout() {
             {" "}
             Please sign-in to your account and start the adventure{" "}
           </p>
-          <form className="mt-10 ">
+          <form className="mt-10 " onSubmit={HandleLogin}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-black">Email</span>
@@ -35,6 +35,7 @@ export default function Loginlayout() {
                 type="email"
                 className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
                 required
+                name="email"
               />
             </div>
             <div className="form-control ">
@@ -45,6 +46,7 @@ export default function Loginlayout() {
                 type="password"
                 className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
                 required
+                name="password"
               />
             </div>
             <div className="form-control my-3">
@@ -58,19 +60,19 @@ export default function Loginlayout() {
               </label>
             </div>
             <div className="form-control ">
-              <button className="btn  text-white font-semibold uppercase bg-indigo-500">
-                Login
+              <button className="btn  text-white font-medium uppercase bg-indigo-500">
+                {loading ? "Wait a momemt..." : "Login"}
               </button>
             </div>
-            <div className=" mt-2 text-center">
-              <p className="inline text-sm">
-                New on our platform?{' '}
-                <Link className="inline text-sm text-indigo-500" to={"/signup"}>
-                  Create an account
-                </Link>
-              </p>
-            </div>
           </form>
+          <div className=" mt-2 text-center">
+            <p className="inline text-sm">
+              New on our platform?{" "}
+              <Link className="inline text-sm text-indigo-500" to={"/signup"}>
+                Create an account
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

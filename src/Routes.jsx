@@ -7,6 +7,7 @@ import {
   Link,
 } from "react-router-dom";
 import Login from "./Layout/Login";
+import Signup from "./Layout/Signup";
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ export const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "about",
-    element: <div>About</div>,
+    path: "signup",
+    element: <Signup />,
   },
 ]);

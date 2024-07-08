@@ -1,5 +1,6 @@
 import React from "react";
 import { FaLeaf } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function Loginlayout() {
   return (
@@ -32,7 +33,7 @@ export default function Loginlayout() {
               </label>
               <input
                 type="email"
-                className="input focus:outline-none input-bordered rounded bg-white border-2 border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
                 required
               />
             </div>
@@ -42,7 +43,7 @@ export default function Loginlayout() {
               </label>
               <input
                 type="password"
-                className="input focus:outline-none input-bordered rounded bg-white border-2 border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
                 required
               />
             </div>
@@ -61,9 +62,13 @@ export default function Loginlayout() {
                 Login
               </button>
             </div>
-            <div className=" flex justify-center  gap-2 mt-2 ">
-              <p className="inline text-sm">New on our platform?</p>
-              <p className="inline text-sm text-indigo-500"> Create an account </p>
+            <div className=" mt-2 text-center">
+              <p className="inline text-sm">
+                New on our platform?{' '}
+                <Link className="inline text-sm text-indigo-500" to={"/signup"}>
+                  Create an account
+                </Link>
+              </p>
             </div>
           </form>
         </div>

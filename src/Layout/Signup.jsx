@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SignupLayout from "../Component/SignupLayout";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import swal from 'sweetalert';
+import { updateProfile } from "firebase/auth";
 
 export default function Signup() {
   const [isPassSame, setIsPassSame] = useState(true)
+  const { createWithPass, loading, setLoading } = useContext(AuthContext);
+
+
   const HandleSignup = (e) => {
     e.preventDefault();
 
@@ -30,8 +36,30 @@ export default function Signup() {
       confirmpass,
     };
 
+    createWithPass(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+        updateProfile(user, {
+        displayName: `${firstName} ${lastName}`,
+      })
+        .then(() => {
+          swal("Bingo!", "Welcome to our Shabuj Global Education!", "success");
+          console.log(user)
+          setLoading(false)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })
+    .catch((error) => {
+      setLoading(false)
+      swal("Opps!", error.message, "error");
+    });
+
+
+
     setIsPassSame(true);
     console.log(data)
   };
-  return <SignupLayout HandleSignup={HandleSignup} isPassSame={isPassSame} />;
+  return <SignupLayout HandleSignup={HandleSignup} isPassSame={isPassSame} loading={loading} />;
 }

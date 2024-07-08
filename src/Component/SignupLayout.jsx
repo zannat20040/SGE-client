@@ -2,7 +2,7 @@ import React from "react";
 import { FaLeaf } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-export default function SignupLayout({ HandleSignup, isPassSame }) {
+export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
   return (
     <div className="   bg-white ">
       <div className=" p-4 md:p-10  pb-16 card h-full  w-full  rounded-none container mx-auto">
@@ -72,7 +72,6 @@ export default function SignupLayout({ HandleSignup, isPassSame }) {
               <input
                 type="number"
                 className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
-                required
                 name="wpnumber"
               />
             </div>
@@ -91,7 +90,9 @@ export default function SignupLayout({ HandleSignup, isPassSame }) {
             </div>
             <div className="form-control ">
               <label className="label">
-                <span className="label-text text-black">Confirm Password *</span>
+                <span className="label-text text-black">
+                  Confirm Password *
+                </span>
               </label>
               <input
                 type="password"
@@ -100,7 +101,9 @@ export default function SignupLayout({ HandleSignup, isPassSame }) {
                 name="confirmpass"
               />
             </div>
-            {!isPassSame  && <p className="text-red-700 ">&#10060; Passowrd doesn't match</p>}
+            {!isPassSame && (
+              <p className="text-red-700 ">&#10060; Passowrd doesn't match</p>
+            )}
           </div>
 
           <div className="form-control my-3">
@@ -118,7 +121,7 @@ export default function SignupLayout({ HandleSignup, isPassSame }) {
           </div>
           <div className="form-control ">
             <button className="btn  text-white font-semibold uppercase bg-indigo-500">
-              Signup
+              {loading ? "Wait a Moment ... " : "Signup"}
             </button>
           </div>
         </form>

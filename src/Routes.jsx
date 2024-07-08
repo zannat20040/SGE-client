@@ -9,6 +9,7 @@ import {
 import Login from "./Layout/Login";
 import Signup from "./Layout/Signup";
 import Dashboard from "./Layout/Dashboard";
+import MemDasboard from "./Member Dashboard/MemDasboard";
 
 export const router = createBrowserRouter([
   {
@@ -21,5 +22,11 @@ export const router = createBrowserRouter([
   },{
     path: "dashboard",
     element: <Dashboard />,
+    children:[
+      {
+        path:"",
+        element:<MemDasboard />
+      }
+    ]
   },
 ]);

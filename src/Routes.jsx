@@ -10,6 +10,8 @@ import Login from "./Layout/Login";
 import Signup from "./Layout/Signup";
 import Dashboard from "./Layout/Dashboard";
 import MemDasboard from "./Member Dashboard/MemDasboard";
+import NewMember from "./Member Dashboard/NewMember";
+import AllMembers from "./Member Dashboard/AllMembers";
 
 export const router = createBrowserRouter([
   {
@@ -19,13 +21,23 @@ export const router = createBrowserRouter([
   {
     path: "signup",
     element: <Signup />,
-  },{
-    path: "dashboard",
+  },
+  
+  {
+    path: "/dashboard",
     element: <Dashboard />,
     children:[
       {
-        path:"",
+        path:"member",
         element:<MemDasboard />
+      } ,
+      {
+        path:"newmember",
+        element:<NewMember />
+      } ,
+      {
+        path:"allmembers",
+        element:<AllMembers />
       }
     ]
   },

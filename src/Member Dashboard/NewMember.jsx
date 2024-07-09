@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Select, Option } from "@material-tailwind/react";
 
 export default function NewMember() {
   const HandleNewMemberAdd = (e) => {
@@ -39,7 +38,6 @@ export default function NewMember() {
           </label>
           <input
             type="text"
-            placeholder="text"
             className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
             required
             name="firstName"
@@ -51,7 +49,6 @@ export default function NewMember() {
           </label>
           <input
             type="text"
-            placeholder="email"
             className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
             required
             name="lastName"
@@ -65,7 +62,6 @@ export default function NewMember() {
           </label>
           <input
             type="email"
-            placeholder="email"
             className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
             required
             name="email"
@@ -77,7 +73,6 @@ export default function NewMember() {
           </label>
           <input
             type="number"
-            placeholder="email"
             className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
             required
             name="primeNumber"
@@ -89,7 +84,6 @@ export default function NewMember() {
           </label>
           <input
             type="number"
-            placeholder="email"
             className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
             required
             name="wpnumber"

@@ -23,7 +23,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               </label>
               <input
                 type="text"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
                 required
                 name="firstName"
               />
@@ -34,7 +34,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               </label>
               <input
                 type="text"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
                 required
                 name="lastName"
               />
@@ -47,7 +47,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               </label>
               <input
                 type="email"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
                 required
                 name="email"
               />
@@ -58,7 +58,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               </label>
               <input
                 type="number"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
                 required
                 name="number"
               />
@@ -69,7 +69,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               </label>
               <input
                 type="number"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
                 name="wpnumber"
               />
             </div>
@@ -81,7 +81,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               </label>
               <input
                 type="password"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
                 required
                 name="password"
               />
@@ -94,7 +94,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               </label>
               <input
                 type="password"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-200 focus:border-indigo-500"
                 required
                 name="confirmpass"
               />

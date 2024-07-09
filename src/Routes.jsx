@@ -12,6 +12,7 @@ import Dashboard from "./Layout/Dashboard";
 import MemDasboard from "./Member Dashboard/MemDasboard";
 import NewMember from "./Member Dashboard/NewMember";
 import AllMembers from "./Member Dashboard/AllMembers";
+import MemberDetails from "./Member Dashboard/MemberDetails";
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +39,12 @@ export const router = createBrowserRouter([
       {
         path:"allmembers",
         element:<AllMembers />
-      }
+      },
+      {
+        path: "allmembers/:id",
+        element: <MemberDetails />,
+      },
+      
     ]
   },
 ]);

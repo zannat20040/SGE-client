@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import SignupLayout from "../Component/SignupLayout";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import { updateProfile } from "firebase/auth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export default function Signup() {
-  const [isPassSame, setIsPassSame] = useState(true)
+  const [isPassSame, setIsPassSame] = useState(true);
   const { createWithPass, loading, setLoading } = useContext(AuthContext);
-
+  const axiosPublic = useAxiosPublic();
 
   const HandleSignup = (e) => {
     e.preventDefault();
@@ -16,8 +17,8 @@ export default function Signup() {
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
     const email = form.email.value;
-    const number = form.number.value;
-    const wpnumber = form.wpnumber.value;
+    const primaryMobileNumber = form.number.value;
+    const whatsappNumber = form.wpnumber.value;
     const password = form.password.value;
     const confirmpass = form.confirmpass.value;
 
@@ -27,40 +28,54 @@ export default function Signup() {
     }
 
     const data = {
+      
       firstName,
       lastName,
       email,
-      number,
-      wpnumber,
+      primaryMobileNumber,
+      whatsappNumber,
       password,
-      confirmpass,
     };
 
     createWithPass(email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+      .then((userCredential) => {
+        const user = userCredential.user;
         updateProfile(user, {
-        displayName: `${firstName} ${lastName}`,
-      })
-        .then(() => {
-          swal("Bingo!", "Welcome to our Shabuj Global Education!", "success");
-          console.log(user)
-          setLoading(false)
+          displayName: `${firstName} ${lastName}`,
         })
-        .catch((error) => {
-          console.log(error);
-          setLoading(false)
-        });
-    })
-    .catch((error) => {
-      setLoading(false)
-      swal("Opps!", error.message, "error");
-    });
-
-
+          .then(() => {
+            axiosPublic.post("/member/registration", data,{
+              headers: {
+                token: 'riad@gmail.com'
+              }
+            }).then((res) => {
+              swal(
+                "Bingo!",
+                "Welcome to our Shabuj Global Education!",
+                "success"
+              );
+              console.log(res.data);
+              setLoading(false);
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoading(false);
+          });
+      })
+      .catch((error) => {
+        setLoading(false);
+        swal("Opps!", error.message, "error");
+      });
 
     setIsPassSame(true);
-    console.log(data)
+    console.log(data);
   };
-  return <SignupLayout HandleSignup={HandleSignup} isPassSame={isPassSame} loading={loading} />;
+  return (
+    <SignupLayout
+      HandleSignup={HandleSignup}
+      isPassSame={isPassSame}
+      loading={loading}
+    />
+  );
 }

@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.4",
     "@material-tailwind/react": "^2.1.9",
+    "axios": "^1.7.2",
     "firebase": "^10.12.3",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",

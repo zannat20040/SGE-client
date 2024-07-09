@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import SignupLayout from "../Component/SignupLayout";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import swal from "sweetalert";
@@ -28,7 +28,6 @@ export default function Signup() {
     }
 
     const data = {
-      
       firstName,
       lastName,
       email,
@@ -44,11 +43,7 @@ export default function Signup() {
           displayName: `${firstName} ${lastName}`,
         })
           .then(() => {
-            axiosPublic.post("/member/registration", data,{
-              headers: {
-                token: 'riad@gmail.com'
-              }
-            }).then((res) => {
+            axiosPublic.post("/member/registration", data).then((res) => {
               swal(
                 "Bingo!",
                 "Welcome to our Shabuj Global Education!",

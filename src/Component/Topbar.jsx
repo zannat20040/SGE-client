@@ -1,12 +1,12 @@
 import React from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 
-export default function Topbar({handleButtonClick}) {
+export default function Topbar({ handleButtonClick }) {
   return (
-    <div className="navbar bg-base-100 shadow-md mt-5 rounded-md mb-5">
-      <div className="md:justify-end justify-between flex items-center gap-5 w-full">
-        <div className="px-2 py-0 flex md:hidden ">
-        <FaBarsStaggered onClick={handleButtonClick}/>
+    <div className="navbar bg-base-100 shadow-md  rounded-md mb-5">
+      <div className="md:justify-end justify-between flex items-center gap-5 w-full px-4 py-2">
+        <div className=" flex md:hidden ">
+          <FaBarsStaggered onClick={handleButtonClick} />
         </div>
         <div className="flex gap-5 items-center">
           <div className="form-control">
@@ -17,8 +17,8 @@ export default function Topbar({handleButtonClick}) {
             />
           </div>
           <div className="dropdown dropdown-end">
-            <div className="avatar placeholder online">
-              <div className="bg-neutral text-neutral-content w-12 rounded-full">
+            <div className="avatar av placeholder online">
+              <div className="bg-neutral text-neutral-content w-8 rounded-full">
                 <span>SY</span>
               </div>
             </div>

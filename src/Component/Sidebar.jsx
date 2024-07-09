@@ -163,13 +163,13 @@ export default function Sidebar() {
               Documentation
             </Button>
           </Drawer>
-          <div className="flex-grow w-full px-4  bg-gray-200">
-            <Topbar handleButtonClick={handleButtonClick}/>
+          <div className="flex-grow w-full px-4  bg-gray-200 min-h-screen py-4">
+            <Topbar handleButtonClick={handleButtonClick} />
             <Outlet />
           </div>
         </div>
       ) : (
-        <div className="flex px-4 bg-gray-200">
+        <div className="flex px-4 bg-gray-200 min-h-screen py-4 handleButtonClick">
           <Drawer open={true} overlay={false} className="bg-[#2f3349] ">
             <div className="mb-2 flex items-center justify-between p-4 ]">
               <Logo color={"text-white"} />

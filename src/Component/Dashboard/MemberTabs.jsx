@@ -42,15 +42,15 @@ export default function MemberTabs() {
   ];
 
   return (
-    <Tabs value="Student/Course details" className='p-0'>
+    <Tabs value="Student/Course details" className="p-0">
       <TabsHeader className="items-center rounded-none p-2">
         {data.map(({ label, value }) => (
-          <Tab key={value} value={value} >
+          <Tab key={value} value={value}>
             {label}
           </Tab>
         ))}
       </TabsHeader>
-      <TabsBody >
+      <TabsBody>
         {data.map(({ value, component }) => (
           <TabPanel key={value} value={value} className="p-0">
             {component}

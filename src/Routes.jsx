@@ -14,6 +14,7 @@ import NewMember from "./Member Dashboard/NewMember";
 import AllMembers from "./Member Dashboard/AllMembers";
 import MemberDetails from "./Member Dashboard/MemberDetails";
 import AllStudents from "./MCO Dashboard/AllStudents";
+import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
 
 export const router = createBrowserRouter([
   {
@@ -44,14 +45,16 @@ export const router = createBrowserRouter([
       {
         path: "allmembers/:id",
         element: <MemberDetails />,
+
       },
       {
         path: "allstudents",
         element: <AllStudents />,
       },
       {
-        path: "mco/allstudents/:id",
-        element: <MemberDetails />,
+        path: "allstudents/:id",
+        element: <MCOStudentDetails />,
+
       },
     ],
   },

@@ -81,18 +81,19 @@ export default function AllStudents() {
   console.log(studentsData);
 
   return (
-
-    <div className="overflow-x-auto bg-white shadow-md p-7 rounded-md">
+    <div className="overflow-x-auto bg-white shadow-md  rounded-md">
       <table className="table table-xs">
-        <thead>
+        <thead className="bg-gray-300">
           <tr>
-            <th>No.</th>
-            <th>Student ID</th>
-            <th>Student Name</th>
-            <th>University Name/ Course Details</th>
-            <th>Change Status</th>
-            <th>Date</th>
-            <th>Action</th>
+            <th className="py-5 text-center">No.</th>
+            <th className="py-5 text-center">Student ID</th>
+            <th className="py-5 text-center">Student Name</th>
+            <th className="py-5 text-center">
+              University Name/ Course Details
+            </th>
+            <th className="py-5 text-center">Change Status</th>
+            <th className="py-5 text-center">Date</th>
+            <th className="py-5 text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -110,34 +111,77 @@ export default function AllStudents() {
               index
             ) => (
               <tr key={_id} className="hover">
-                <td>{index + 1}</td>
-                <td>{_id}</td>
-                <td>{`${firstName} ${lastName}`}</td>
-                <td>
+                <td className="text-center">{index + 1}</td>
+                <td className="text-center">{_id}</td>
+                <td className="text-center">{`${firstName} ${lastName}`}</td>
+                <td className="text-center">
                   <p>{preferredUniversity}</p>
                   <p>{preferredCourse}</p>
                 </td>
-                <td>
-                  <select className="select select-primary w-full max-w-xs">
-                    <option disabled selected>
-                      Select the Status
-                    </option>
-                    {allowedStatuses?.map((selectedOption, index) => (
-                      <option key={index}>{selectedOption}</option>
-                    ))}
-                  </select>
+                <td className="text-center">
+                  {/* The button to open modal */}
+                  <label htmlFor={`my_modal_${index}`} className="btn btn-xs">
+                    Change
+                  </label>
+
+                  {/* Put this part before </body> tag */}
+                  <input
+                    type="checkbox"
+                    id={`my_modal_${index}`}
+                    className="modal-toggle "
+                  />
+                  <div className="modal " role="dialog">
+                    <div className="modal-box rounded-md ">
+                      <h3 className="text-lg font-bold mb-8">
+                        Change status for {firstName + " " + lastName}
+                      </h3>
+                      <form className="flex flex-col gap-2">
+                        <div className="form-control">
+                          <select className="select select-primary border-gray-300 focus:border-indigo-500 rounded-md focus:outline-none">
+                            <option disabled selected>
+                              Select Current Status
+                            </option>
+                            {allowedStatuses?.map((selectedOption, index) => (
+                              <option key={index}>{selectedOption}</option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div className="form-control">
+                          <input
+                            type="textarea"
+                            className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
+                            required
+                            placeholder="Write here a comment"
+                            name="comment"
+                          />
+                        </div>
+                        <div className="form-control ">
+                          <button className="btn  text-white font-medium uppercase bg-customPurple">
+                            Change
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                    <label
+                      className="modal-backdrop"
+                      htmlFor={`my_modal_${index}`}
+                    >
+                      Close
+                    </label>
+                  </div>
                 </td>
-                <td>{createdAt}</td>
-                <td>
-                  <Link to={`/dashboard/mco/allmembers/${_id}`}>
+                <td className="text-center">{createdAt}</td>
+                <td className="text-center">
+                  <Link to={`/dashboard/allstudents/${_id}`}>
                     <Tooltip content="See details">
-                      <IconButton variant="text">
+                      <IconButton variant="text" className="rounded-full">
                         <IoEyeOutline className="h-3 w-3" />
                       </IconButton>
                     </Tooltip>
                   </Link>
                   <Tooltip content="Delete member">
-                    <IconButton variant="text">
+                    <IconButton variant="text" className="rounded-full">
                       <RiDeleteBin7Line className="h-3 w-3" />
                     </IconButton>
                   </Tooltip>

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MemberDetailsLayout() {
   return (
-    <div className="w-full">
+    <div className="w-full card-body">
       <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
         <h1 className="font-semibold">Application Id</h1>
         <p className="flex justify-end">7310500008</p>

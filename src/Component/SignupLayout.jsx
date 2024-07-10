@@ -1,13 +1,24 @@
-import React from "react";
-import { FaLeaf } from "react-icons/fa6";
+import React, { useState } from "react";
+import { FaEye, FaEyeSlash, FaLeaf } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = (type) => {
+    if (type === "password") {
+      setShowPassword(!showPassword);
+    } else if (type === "confirmpass") {
+      setShowConfirmPassword(!showConfirmPassword);
+    }
+  };
+
   return (
     <div className="   bg-white ">
       <div className=" p-4 md:p-10  pb-16 card h-full  w-full  rounded-none container mx-auto">
-        <Logo color={'text-black'}/>
+        <Logo color={"text-black"} />
         <h1 className="font-bold text-4xl mt-20 text-center">
           Welcome to Shabuj Global
         </h1>
@@ -79,12 +90,25 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               <label className="label">
                 <span className="label-text text-black">Password *</span>
               </label>
-              <input
-                type="password"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
-                required
-                name="password"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="input w-full focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
+                  required
+                  name="password"
+                />
+                <button
+                  type="button"
+                  className="absolute top-0 bottom-0 my-auto right-5"
+                  onClick={() => togglePasswordVisibility("password")}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash className="text-gray-400" />
+                  ) : (
+                    <FaEye className="text-gray-400" />
+                  )}
+                </button>
+              </div>
             </div>
             <div className="form-control ">
               <label className="label">
@@ -92,12 +116,25 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
                   Confirm Password *
                 </span>
               </label>
-              <input
-                type="password"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-200 focus:border-indigo-500"
-                required
-                name="confirmpass"
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  className="input w-full focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
+                  required
+                  name="confirmpass"
+                />
+                <button
+                  type="button"
+                  className="absolute top-0 bottom-0 my-auto right-5"
+                  onClick={() => togglePasswordVisibility("confirmpass")}
+                >
+                  {showConfirmPassword ? (
+                    <FaEyeSlash className="text-gray-400" />
+                  ) : (
+                    <FaEye className="text-gray-400" />
+                  )}
+                </button>
+              </div>
             </div>
             {!isPassSame && (
               <p className="text-red-700 ">&#10060; Passowrd doesn't match</p>
@@ -118,7 +155,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
             </label>
           </div>
           <div className="form-control ">
-            <button className="btn  text-white font-medium uppercase bg-indigo-500">
+            <button className="btn  text-white font-medium uppercase bg-customPurple">
               {loading ? "Wait a Moment ... " : "Signup"}
             </button>
           </div>
@@ -126,7 +163,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
         <div className=" text-center mt-2">
           <p className="inline text-sm">
             Already Have an Account?{" "}
-            <Link className="inline text-sm text-indigo-500" to={"/"}>
+            <Link className="inline text-sm text-customPurple" to={"/"}>
               Go to your account
             </Link>{" "}
           </p>

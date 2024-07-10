@@ -3,7 +3,7 @@ import React from "react";
 
 export default function MemberStatusDetails() {
   return (
-    <div>
+    <div className="card-body">
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

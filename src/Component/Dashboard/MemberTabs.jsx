@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import MemberDetailsLayout from "./MemberDetailsLayout";
 import MemberStatusDetails from "./MemberStatusDetails";
+import Comment from "./Comment";
 
 export default function MemberTabs() {
   const data = [
@@ -19,7 +20,7 @@ export default function MemberTabs() {
     {
       label: "Upload/Download",
       value: "Upload/Download",
-      component: <div>No content</div>,
+      component: <div className="card-body">No content</div>,
     },
     {
       label: "Status",
@@ -29,8 +30,7 @@ export default function MemberTabs() {
     {
       label: "Comment",
       value: "Comment",
-      desc: `Because it's about motivating the doers. Because I'm here
-          to follow my dreams and inspire other people to follow their dreams, too.`,
+      component: <Comment />,
     },
     {
       label: "University Communication",
@@ -42,17 +42,17 @@ export default function MemberTabs() {
   ];
 
   return (
-    <Tabs value="Student/Course details">
-      <TabsHeader className="items-center">
+    <Tabs value="Student/Course details" className='p-0'>
+      <TabsHeader className="items-center rounded-none p-2">
         {data.map(({ label, value }) => (
-          <Tab key={value} value={value}>
+          <Tab key={value} value={value} >
             {label}
           </Tab>
         ))}
       </TabsHeader>
-      <TabsBody>
+      <TabsBody >
         {data.map(({ value, component }) => (
-          <TabPanel key={value} value={value}>
+          <TabPanel key={value} value={value} className="p-0">
             {component}
           </TabPanel>
         ))}

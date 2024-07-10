@@ -13,6 +13,7 @@ import MemDasboard from "./Member Dashboard/MemDasboard";
 import NewMember from "./Member Dashboard/NewMember";
 import AllMembers from "./Member Dashboard/AllMembers";
 import MemberDetails from "./Member Dashboard/MemberDetails";
+import AllStudents from "./MCO Dashboard/AllStudents";
 
 export const router = createBrowserRouter([
   {
@@ -23,22 +24,22 @@ export const router = createBrowserRouter([
     path: "signup",
     element: <Signup />,
   },
-  
+
   {
     path: "/dashboard",
     element: <Dashboard />,
-    children:[
+    children: [
       {
-        path:"member",
-        element:<MemDasboard />
-      } ,
+        path: "member",
+        element: <MemDasboard />,
+      },
       {
-        path:"newmember",
-        element:<NewMember />
-      } ,
+        path: "newmember",
+        element: <NewMember />,
+      },
       {
-        path:"allmembers",
-        element:<AllMembers />
+        path: "allmembers",
+        element: <AllMembers />,
       },
       {
         path: "allmembers/:id",
@@ -46,9 +47,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "allstudents",
+        element: <AllStudents />,
+      },
+      {
+        path: "allstudents/:id",
         element: <MemberDetails />,
       },
-      
-    ]
+    ],
   },
 ]);

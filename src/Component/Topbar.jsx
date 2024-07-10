@@ -17,29 +17,13 @@ export default function Topbar({ handleButtonClick }) {
             />
           </div>
           <div className="dropdown dropdown-end">
-            <div className="avatar av placeholder online">
+            <div className="avatar placeholder online">
               <div className="bg-neutral text-neutral-content w-8 rounded-full">
                 <span>SY</span>
               </div>
             </div>
 
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
+           
           </div>
         </div>
       </div>

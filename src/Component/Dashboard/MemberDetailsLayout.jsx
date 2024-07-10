@@ -1,10 +1,21 @@
 import React from "react";
+import useDateFormatter from "../../Hooks/useDateFormatter";
+import StatusModal from "../StatusModal";
 
-export default function MemberDetailsLayout({ studentDetails }) {
+export default function MemberDetailsLayout({ studentDetails,refetch }) {
+  const { formatDate } = useDateFormatter();
   console.log(studentDetails);
-
   return (
     <div className="w-full card-body">
+      <div className="flex justify-end gap-4 flex-wrap items-center">
+        <h1>Currrent Status : </h1>
+        <StatusModal
+          label={`${studentDetails?.status?.status}`}
+          student={studentDetails}
+          id={studentDetails?._id}
+          refetchStudents={refetch}
+        />
+      </div>
       <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
         <h1 className="font-semibold">Student ID</h1>
         <p className="flex justify-end">{studentDetails?._id}</p>
@@ -20,6 +31,16 @@ export default function MemberDetailsLayout({ studentDetails }) {
         <p className="flex justify-end">{studentDetails?.email}</p>
       </div>
       <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
+        <h1 className="font-semibold">Preferred Course</h1>
+        <p className="flex justify-end">{studentDetails?.preferredCourse}</p>
+      </div>
+      <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
+        <h1 className="font-semibold">Preferred University</h1>
+        <p className="flex justify-end">
+          {studentDetails?.preferredUniversity}
+        </p>
+      </div>
+      <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
         <h1 className="font-semibold">Student Phone No.</h1>
         <p className="flex justify-end">
           {studentDetails?.primaryMobileNumber}
@@ -31,22 +52,15 @@ export default function MemberDetailsLayout({ studentDetails }) {
       </div>
 
       <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
-        <h1 className="font-semibold">Preferred Course</h1>
-        <p className="flex justify-end">{studentDetails?.preferredCourse}</p>
-      </div>
-      <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
-        <h1 className="font-semibold">Preferred University</h1>
-        <p className="flex justify-end">
-          {studentDetails?.preferredUniversity}
-        </p>
-      </div>
-      <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
         <h1 className="font-semibold">Student By</h1>
         <p className="flex justify-end">{studentDetails?.createdBy}</p>
       </div>
       <div className="grid grid-cols-2 justify-between gap-4 flex-wrap">
-        <h1 className="font-semibold">Date Added</h1>
-        <p className="flex justify-end">{studentDetails?.createdAt}</p>
+        <h1 className="font-semibold">Date/Time</h1>
+        <p className="flex justify-end">
+          {" "}
+          {formatDate(studentDetails?.createdAt)}
+        </p>
       </div>
     </div>
   );

@@ -198,12 +198,12 @@ export default function Sidebar() {
               <MCONavlist />
             )}
             <div className="rounded font-normal px-2">
-              <Button className="w-full bg-red-400" size="md" onClick={HandleLogout} >
+              <Button className="w-full bg-red-400 font-medium" size="md" onClick={HandleLogout} >
                 Sign out
               </Button>
             </div>
           </Drawer>
-          <div className="ml-[300px] flex-grow w-full">
+          <div className="ml-[290px] flex-grow w-full">
             <Topbar />
             <Outlet />
           </div>

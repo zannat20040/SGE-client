@@ -8,7 +8,7 @@ export default function Topbar({ handleButtonClick }) {
   console.log(firstLetter);
 
   return (
-    <div className="navbar bg-base-100 shadow-md  rounded-md mb-5">
+    <div className="navbar bg-base-100 shadow-md  rounded-md mb-5 sticky top-0 z-30 ">
       <div className="md:justify-end justify-between flex items-center gap-5 w-full px-4 py-2">
         <div className=" flex md:hidden ">
           <FaBarsStaggered onClick={handleButtonClick} />

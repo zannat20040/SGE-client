@@ -68,7 +68,7 @@ export default function NewMember() {
           </label>
           <input
             type="text"
-            className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
+            className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
             required
             name="firstName"
           />
@@ -79,7 +79,7 @@ export default function NewMember() {
           </label>
           <input
             type="text"
-            className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
+            className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
             required
             name="lastName"
           />
@@ -92,7 +92,7 @@ export default function NewMember() {
           </label>
           <input
             type="email"
-            className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
+            className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
             required
             name="email"
           />
@@ -103,7 +103,7 @@ export default function NewMember() {
           </label>
           <input
             type="number"
-            className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
+            className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
             required
             name="primeNumber"
           />
@@ -114,7 +114,7 @@ export default function NewMember() {
           </label>
           <input
             type="number"
-            className="input input-bordered border focus:border-indigo-500 focus:border-2 focus:outline-0  border-gray-300 "
+            className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
             required
             name="wpnumber"
           />
@@ -126,7 +126,7 @@ export default function NewMember() {
             <span className="label-text">Preferred Courses</span>
           </label>
           <select
-            className="select select-bordered w-full "
+            className="select select-bordered w-full rounded-md focus:outline-none"
             required
             name="preferredCourses"
           >
@@ -144,7 +144,7 @@ export default function NewMember() {
             <span className="label-text">Preferred University</span>
           </label>
           <select
-            className="select select-bordered w-full "
+            className="select select-bordered w-full rounded-md focus:outline-none"
             required
             name="preferredUni"
           >
@@ -157,8 +157,8 @@ export default function NewMember() {
         </div>
       </div>
       <div className="form-control mt-6">
-        <button className="btn rounded-md bg-indigo-400 text-white">
-          {loading ? "Wait a moment" : "Add this member"}
+        <button className="btn rounded-md bg-customPurple text-white font-medium">
+          {loading ? "Wait a Moment" : "Add This Member"}
         </button>
       </div>
     </form>

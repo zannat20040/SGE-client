@@ -25,7 +25,6 @@ export default function Sidebar() {
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const navigate = useNavigate();
   const { userinfo, refetch } = useStatus();
-  console.log(userinfo);
 
   const { signOutProfile } = useContext(AuthContext);
   const HandleLogout = () => {
@@ -192,7 +191,7 @@ export default function Sidebar() {
             <div className="mb-2 flex items-center justify-between p-4 ]">
               <Logo color={"text-white"} />
             </div>
-            {userinfo && userinfo.status === "member" ? (
+            {userinfo && userinfo === "member" ? (
               <MemberNav />
             ) : (
               <MCONavlist />
@@ -203,7 +202,7 @@ export default function Sidebar() {
               </Button>
             </div>
           </Drawer>
-          <div className="ml-[290px] flex-grow w-full">
+          <div className="ml-[300px] flex-grow w-full">
             <Topbar />
             <Outlet />
           </div>

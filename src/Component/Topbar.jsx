@@ -5,7 +5,6 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 export default function Topbar({ handleButtonClick }) {
   const { user } = useContext(AuthContext);
   const firstLetter = user?.displayName.trim().charAt(0).toUpperCase();
-  console.log(firstLetter);
 
   return (
     <div className="navbar bg-base-100 shadow-md  rounded-md mb-5 sticky top-0 z-30 ">

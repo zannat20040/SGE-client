@@ -6,7 +6,7 @@ import swal from "sweetalert";
 export default function NewMember() {
   const { user, loading, setLoading } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
-  const adminEmail = "riad@gmail.com";
+  // const adminEmail = "riad@gmail.com";
 
   const HandleNewMemberAdd = (e) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ export default function NewMember() {
     axiosPublic
       .post("/member/student-registration", data, {
         headers: {
-          Authorization: `Bearer ${adminEmail}`,
+          Authorization: `Bearer ${user?.email}`,
         },
       })
       .then((res) => {
@@ -52,8 +52,6 @@ export default function NewMember() {
         swal("Opps!", error.message, "error");
         setLoading(false);
       });
-
-    console.log(data);
   };
 
   return (

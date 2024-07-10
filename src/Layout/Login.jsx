@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import Loginlayout from "../Component/Loginlayout";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosPublic = useAxiosPublic();
   const { loginWithPass, setLoading, loading } = useContext(AuthContext);
 
   const HandleLogin = (e) => {
@@ -17,7 +19,29 @@ export default function Login() {
 
     loginWithPass(email, password)
       .then((userCredential) => {
-        swal("Good job!", "Welcome back to our Shabuj Global!", "success");
+        // const loginData = {
+        //    email,
+        //   username: userCredential?.user?.displayName,
+        // }
+        // console.log(loginData)
+        // axiosPublic
+        //   .get("/login", loginData)
+        //   .then((res) => {
+        //     console.log('response==> ',res)
+        //     swal("Good job!", res.message, "success");
+        //     setLoading(false);
+        //     navigate(
+        //       location?.state?.redirectTo
+        //         ? location?.state?.redirectTo
+        //         : "/dashboard/member"
+        //     );
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //     swal("Opps!", error.message, "error");
+        //     setLoading(false);
+        //   });
+        swal("Good job!", 'Welcome to our Shabuj Global', "success");
         setLoading(false);
         navigate(
           location?.state?.redirectTo

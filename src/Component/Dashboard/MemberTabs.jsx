@@ -7,6 +7,7 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import MemberDetailsLayout from "./MemberDetailsLayout";
+import MemberStatusDetails from "./MemberStatusDetails";
 
 export default function MemberTabs() {
   const data = [
@@ -18,15 +19,12 @@ export default function MemberTabs() {
     {
       label: "Upload/Download",
       value: "Upload/Download",
-      desc: `Because it's about motivating the doers. Because I'm here
-          to follow my dreams and inspire other people to follow their dreams, too.`,
+      component: <div>No content</div>,
     },
     {
       label: "Status",
       value: "Status",
-      desc: `We're not always in the position that we want to be at.
-          We're constantly growing. We're constantly making mistakes. We're
-          constantly trying to express ourselves and actualize our dreams.`,
+      component: <MemberStatusDetails />,
     },
     {
       label: "Comment",

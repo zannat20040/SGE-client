@@ -44,6 +44,10 @@ export const router = createBrowserRouter([
         path: "allmembers/:id",
         element: <MemberDetails />,
       },
+      {
+        path: "allstudents",
+        element: <MemberDetails />,
+      },
       
     ]
   },

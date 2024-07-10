@@ -192,7 +192,11 @@ export default function Sidebar() {
             <div className="mb-2 flex items-center justify-between p-4 ]">
               <Logo color={"text-white"} />
             </div>
-            {userinfo.status == "member" ? <MemberNav /> : <MCONavlist />}
+            {userinfo && userinfo.status === "member" ? (
+              <MemberNav />
+            ) : (
+              <MCONavlist />
+            )}
             <div className="rounded font-normal px-2">
               <Button className="w-full" size="md" onClick={HandleLogout}>
                 Log out

@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import swal from "sweetalert";
 
 export default function NewMember() {
+  const { user, loading, setLoading } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+  const adminEmail = "riad@gmail.com";
+
   const HandleNewMemberAdd = (e) => {
     e.preventDefault();
 
@@ -8,20 +15,43 @@ export default function NewMember() {
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
     const email = form.email.value;
-    const primeNumber = form.primeNumber.value;
-    const wpnumber = form.wpnumber.value;
-    const preferredUni = form.preferredUni.value;
-    const preferredCourses = form.preferredCourses.value;
+    const primaryMobileNumber = form.primeNumber.value;
+    const whatsappNumber = form.wpnumber.value;
+    const preferredUniversity = form.preferredUni.value;
+    const preferredCourse = form.preferredCourses.value;
+    const createdBy = user?.email;
 
     const data = {
       firstName,
       lastName,
       email,
-      primeNumber,
-      wpnumber,
-      preferredUni,
-      preferredCourses,
+      primaryMobileNumber,
+      whatsappNumber,
+      preferredUniversity,
+      preferredCourse,
+      createdBy,
     };
+
+    axiosPublic
+      .post("/member/student-registration", data, {
+        headers: {
+          Authorization: `Bearer ${adminEmail}`,
+        },
+      })
+      .then((res) => {
+        swal(
+          "Congratulation!",
+          "One student has been added successfully!",
+          "success"
+        );
+        console.log(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Opps!", error.message, "error");
+        setLoading(false);
+      });
 
     console.log(data);
   };
@@ -128,7 +158,7 @@ export default function NewMember() {
       </div>
       <div className="form-control mt-6">
         <button className="btn rounded-md bg-indigo-400 text-white">
-          Add this member
+          {loading ? "Wait a moment" : "Add this member"}
         </button>
       </div>
     </form>

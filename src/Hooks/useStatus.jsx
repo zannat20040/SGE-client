@@ -3,10 +3,10 @@ import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const useStatus = () => {
-  const { user } = useContext(AuthContext); // Assuming AuthContext provides user object
+  const { user } = useContext(AuthContext); 
 
   const { data: userinfo, refetch } = useQuery({
-    queryKey: ['status', user.email],
+    queryKey: ['status', user],
     queryFn: async () => {
       let status = "member"; 
 

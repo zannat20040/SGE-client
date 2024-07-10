@@ -44,7 +44,7 @@ export default function MemberTabs() {
   ];
 
   return (
-    <Tabs value="html">
+    <Tabs value="Student/Course details">
       <TabsHeader className="items-center">
         {data.map(({ label, value }) => (
           <Tab key={value} value={value}>

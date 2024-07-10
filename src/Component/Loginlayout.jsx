@@ -31,7 +31,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
               </label>
               <input
                 type="email"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
                 required
                 name="email"
               />
@@ -42,7 +42,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
               </label>
               <input
                 type="password"
-                className="input focus:outline-none input-bordered rounded bg-white border border-gray-100 focus:border-indigo-500"
+                className="input focus:outline-none input-bordered rounded bg-white border border-gray-300 focus:border-indigo-500"
                 required
                 name="password"
               />

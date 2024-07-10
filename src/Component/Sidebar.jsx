@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Drawer,
   Button,
@@ -12,14 +12,28 @@ import {
 } from "@material-tailwind/react";
 import Logo from "./Logo";
 import MemberNav from "./Dashboard Navlist/MemberNav";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Topbar from "./Topbar";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 export default function Sidebar() {
   const [open, setOpen] = React.useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
+  const navigate = useNavigate();
+
+  const { signOutProfile } = useContext(AuthContext);
+  const HandleLogout = () => {
+    signOutProfile()
+      .then(() => {
+        navigate("/");
+        swal("Good job!", "Logged out successfully!", "success");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -175,9 +189,11 @@ export default function Sidebar() {
               <Logo color={"text-white"} />
             </div>
             <MemberNav />
-            <Button className="mt-3 ml-5" size="sm">
-              Documentation
+            <div className="rounded font-normal px-2">
+            <Button className="w-full" size="md" onClick={HandleLogout}>
+              Log out
             </Button>
+            </div>
           </Drawer>
           <div className="ml-[300px] flex-grow w-full">
             <Topbar />

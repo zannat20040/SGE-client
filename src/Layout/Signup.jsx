@@ -4,11 +4,14 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import swal from "sweetalert";
 import { updateProfile } from "firebase/auth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [isPassSame, setIsPassSame] = useState(true);
   const { createWithPass, loading, setLoading } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const HandleSignup = (e) => {
     e.preventDefault();
@@ -28,7 +31,6 @@ export default function Signup() {
     }
 
     const data = {
-      
       firstName,
       lastName,
       email,
@@ -44,17 +46,13 @@ export default function Signup() {
           displayName: `${firstName} ${lastName}`,
         })
           .then(() => {
-            axiosPublic.post("/member/registration", data,{
-              headers: {
-                token: 'riad@gmail.com'
-              }
-            }).then((res) => {
+            axiosPublic.post("/member/registration", data).then((res) => {
               swal(
                 "Bingo!",
                 "Welcome to our Shabuj Global Education!",
                 "success"
               );
-              console.log(res.data);
+              navigate("/");
               setLoading(false);
             });
           })

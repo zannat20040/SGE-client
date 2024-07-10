@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import MemberTabs from "../Component/Dashboard/MemberTabs";
 
 export default function MemberDetails() {
   return (
-    <div>MemberDetails</div>
-  )
+    <div className="card-body bg-white shadow-md rounded-md">
+      <MemberTabs />
+    </div>
+  );
 }

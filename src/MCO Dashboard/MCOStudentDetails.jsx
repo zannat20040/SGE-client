@@ -22,9 +22,7 @@ export default function MCOStudentDetails() {
 
   const {
     data: studentDetails,
-    isLoading,
-    isError,
-    refetch
+    refetch,
   } = useQuery({
     queryKey: ["student", id],
     queryFn: async () => {
@@ -37,12 +35,16 @@ export default function MCOStudentDetails() {
     },
   });
 
-
   const data = [
     {
       label: "Student/Course details",
       value: "Student/Course details",
-      component: <MemberDetailsLayout studentDetails={studentDetails} refetch={refetch}/>,
+      component: (
+        <MemberDetailsLayout
+          studentDetails={studentDetails}
+          refetch={refetch}
+        />
+      ),
     },
     {
       label: "Upload/Download",
@@ -52,7 +54,7 @@ export default function MCOStudentDetails() {
     {
       label: "Status",
       value: "Status",
-      component: <MemberStatusDetails />,
+      component: <MemberStatusDetails studentDetails={studentDetails} />,
     },
     {
       label: "Comment",

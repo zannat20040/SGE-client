@@ -7,7 +7,6 @@ export default function StatusModal({ id, student, refetchStudents,label }) {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
 
-  console.log(student);
   const allowedStatuses = [
     "application processing",
     "application submitted",
@@ -59,7 +58,7 @@ export default function StatusModal({ id, student, refetchStudents,label }) {
     <>
       <label
         htmlFor={`my_modal_${id}`}
-        className="btn btn-xs rounded bg-customPurple text-sm text-white font-light"
+        className="btn btn-xs rounded text-customPurple text-sm bg-[#e5e2ff] font-light"
       >
         {label}
       </label>

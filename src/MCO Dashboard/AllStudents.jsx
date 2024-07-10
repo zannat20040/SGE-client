@@ -92,13 +92,13 @@ export default function AllStudents() {
               <td className="text-center">{formatDate(student?.createdAt)}</td>
               <td className="text-center">
                 <Link to={`/dashboard/allstudents/${student?._id}`}>
-                  <Tooltip content="See details">
+                  <Tooltip content="Details" className='rounded'>
                     <IconButton variant="text" className="rounded-full">
                       <IoEyeOutline className="h-3 w-3" />
                     </IconButton>
                   </Tooltip>
                 </Link>
-                <Tooltip content="Delete member">
+                <Tooltip content="Delete" className='rounded'>
                   <IconButton variant="text" className="rounded-full">
                     <RiDeleteBin7Line className="h-3 w-3" />
                   </IconButton>

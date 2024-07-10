@@ -4,7 +4,7 @@ import StatusModal from "../StatusModal";
 
 export default function MemberDetailsLayout({ studentDetails,refetch }) {
   const { formatDate } = useDateFormatter();
-  console.log(studentDetails);
+  
   return (
     <div className="w-full card-body">
       <div className="flex justify-end gap-4 flex-wrap items-center">

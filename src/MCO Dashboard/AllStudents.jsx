@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { IoEyeOutline } from "react-icons/io5";
 import {
@@ -25,62 +25,18 @@ import {
   Option,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 
-const TABLE_HEAD = [
-  "Student Name",
-  "University Name/ Course Details",
-  "Change Status",
-  "Date",
-  "Action",
-];
-
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-];
+// const TABLE_HEAD = [
+//   "Student ID",
+//   "Student Name",
+//   "University Name/ Course Details",
+//   "Change Status",
+//   "Date",
+//   "Action",
+// ];
 
 const allowedStatuses = [
   "application processing",
@@ -101,133 +57,96 @@ const allowedStatuses = [
 ];
 
 export default function AllStudents() {
+  const { user, loading, setLoading } = useContext(AuthContext);
+
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    data: studentsData,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["students"],
+    queryFn: async () => {
+      const response = await axiosPublic.get("/mco/students", {
+        headers: {
+          Authorization: `Bearer ${user?.email}`,
+        },
+      });
+      return response.data;
+    },
+  });
+
+  console.log(studentsData);
+
   return (
-    <Card className="w-full shadow-md rounded-md">
-      <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-8 flex items-center justify-between gap-8">
-          <div>
-            <Typography variant="h5" color="blue-gray">
-              Members list
-            </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-              See information about all members
-            </Typography>
-          </div>
-          <div className="w-full md:w-72">
-            <Input
-              label="Search"
-              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-            />
-          </div>
-        </div>
-      </CardHeader>
-      <CardBody className="overflow-scroll px-0 pt-0">
-        <table className="w-full min-w-max table-auto text-left">
-          <thead>
-            <tr>
-              {TABLE_HEAD.map((head, index) => (
-                <th
-                  key={head}
-                  className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
-                >
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                  >
-                    {head}{" "}
-                    {index !== TABLE_HEAD.length - 1 && (
-                      <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
-                    )}
-                  </Typography>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {TABLE_ROWS.map(
-              ({ img, name, email, job, org, online, date }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
 
-                return (
-                  <tr key={name}>
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <div className="flex flex-col">
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
-                          >
-                            {name}
-                          </Typography>
-                        </div>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="flex flex-col">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {job}
-                        </Typography>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal opacity-70"
-                        >
-                          {org}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="">
-                        <Select label="Select Status">
-                          {allowedStatuses?.map((selectedoption, index) => (
-                            <Option className="capitalize">
-                              {selectedoption}
-                            </Option>
-                          ))}
-                        </Select>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {date}
-                      </Typography>
-                    </td>
-                    <td className={`flex flex-col ${{ classes }}`}>
-                      <Link to={`/dashboard/allmembers/${name}`}>
-                        <Tooltip content="See details">
-                          <IconButton variant="text">
-                            <IoEyeOutline className="h-3 w-3" />
-                          </IconButton>
-                        </Tooltip>
-                      </Link>
-
-                      <Tooltip content="Delete member">
-                        <IconButton variant="text">
-                          <RiDeleteBin7Line className="h-3 w-3" />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                );
-              }
-            )}
-          </tbody>
-        </table>
-      </CardBody>
-     
-    </Card>
+    <div className="overflow-x-auto bg-white shadow-md p-7 rounded-md">
+      <table className="table table-xs">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>University Name/ Course Details</th>
+            <th>Change Status</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {studentsData?.map(
+            (
+              {
+                _id,
+                firstName,
+                lastName,
+                preferredUniversity,
+                preferredCourse,
+                status,
+                createdAt,
+              },
+              index
+            ) => (
+              <tr key={_id} className="hover">
+                <td>{index + 1}</td>
+                <td>{_id}</td>
+                <td>{`${firstName} ${lastName}`}</td>
+                <td>
+                  <p>{preferredUniversity}</p>
+                  <p>{preferredCourse}</p>
+                </td>
+                <td>
+                  <select className="select select-primary w-full max-w-xs">
+                    <option disabled selected>
+                      Select the Status
+                    </option>
+                    {allowedStatuses?.map((selectedOption, index) => (
+                      <option key={index}>{selectedOption}</option>
+                    ))}
+                  </select>
+                </td>
+                <td>{createdAt}</td>
+                <td>
+                  <Link to={`/dashboard/mco/allmembers/${_id}`}>
+                    <Tooltip content="See details">
+                      <IconButton variant="text">
+                        <IoEyeOutline className="h-3 w-3" />
+                      </IconButton>
+                    </Tooltip>
+                  </Link>
+                  <Tooltip content="Delete member">
+                    <IconButton variant="text">
+                      <RiDeleteBin7Line className="h-3 w-3" />
+                    </IconButton>
+                  </Tooltip>
+                </td>
+              </tr>
+            )
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 }

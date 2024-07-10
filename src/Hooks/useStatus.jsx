@@ -1,18 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const useStatus = ({ email }) => {
-  const axiosPublic = useAxiosPublic();
+const useStatus = () => {
+  const { user } = useContext(AuthContext); // Assuming AuthContext provides user object
 
   const { data: userinfo, refetch } = useQuery({
-    queryKey: [email],
+    queryKey: ['status', user.email],
     queryFn: async () => {
-      const res = await axiosPublic.get(``);
-      const userinfo = res.data?.data;
+      let status = "member"; 
 
-      return userinfo;
+      if (user && user.email === 'mco@gmail.com') {
+        status = "mco";
+      }
+
+      return { status };
     },
   });
+
   return { userinfo, refetch };
 };
 

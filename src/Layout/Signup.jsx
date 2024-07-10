@@ -11,7 +11,6 @@ export default function Signup() {
   const { createWithPass, loading, setLoading } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const HandleSignup = (e) => {
     e.preventDefault();

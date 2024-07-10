@@ -15,6 +15,8 @@ import MemberNav from "./Dashboard Navlist/MemberNav";
 import { Outlet, useNavigate } from "react-router-dom";
 import Topbar from "./Topbar";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import useStatus from "../Hooks/useStatus";
+import MCONavlist from "./Dashboard Navlist/MCONavlist";
 
 export default function Sidebar() {
   const [open, setOpen] = React.useState(false);
@@ -22,6 +24,8 @@ export default function Sidebar() {
   const closeDrawer = () => setOpen(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const navigate = useNavigate();
+  const { userinfo, refetch } = useStatus();
+  console.log(userinfo);
 
   const { signOutProfile } = useContext(AuthContext);
   const HandleLogout = () => {
@@ -188,11 +192,11 @@ export default function Sidebar() {
             <div className="mb-2 flex items-center justify-between p-4 ]">
               <Logo color={"text-white"} />
             </div>
-            <MemberNav />
+            {userinfo.status == "member" ? <MemberNav /> : <MCONavlist />}
             <div className="rounded font-normal px-2">
-            <Button className="w-full" size="md" onClick={HandleLogout}>
-              Log out
-            </Button>
+              <Button className="w-full" size="md" onClick={HandleLogout}>
+                Log out
+              </Button>
             </div>
           </Drawer>
           <div className="ml-[300px] flex-grow w-full">

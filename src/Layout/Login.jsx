@@ -20,7 +20,9 @@ export default function Login() {
         swal("Good job!", "Welcome back to our Shabuj Global!", "success");
         setLoading(false);
         navigate(
-          location?.state?.redirectTo ? location?.state?.redirectTo : "/dashboard"
+          location?.state?.redirectTo
+            ? location?.state?.redirectTo
+            : "/dashboard/member"
         );
       })
       .catch((error) => {

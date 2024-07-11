@@ -5,7 +5,6 @@ import Signup from "./Layout/Signup";
 import Dashboard from "./Layout/Dashboard";
 import MemDasboard from "./Member Dashboard/MemDasboard";
 import NewMember from "./Member Dashboard/NewMember";
-import MemberDetails from "./Member Dashboard/MemberDetails";
 import AllStudents from "./MCO Dashboard/AllStudents";
 import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
 

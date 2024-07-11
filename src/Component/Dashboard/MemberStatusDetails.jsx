@@ -7,7 +7,7 @@ export default function MemberStatusDetails({ studentDetails }) {
 
   return (
     <div className="flex flex-col gap-3 py-5 px-1">
-      {studentDetails?.statusHistory
+      {studentDetails && studentDetails?.statusHistory
         ?.slice()
         .reverse()
         .map((history, index) => (
@@ -26,7 +26,7 @@ export default function MemberStatusDetails({ studentDetails }) {
               <div className="flex w-full flex-col gap-1">
                 <div className="flex items-center justify-between">
                   <Typography color="blue-gray" className="text-sm">
-                    {formatDate(history.createdAt)}
+                    {formatDate(history?.createdAt)}
                   </Typography>
                 </div>
                 <Typography color="blue-gray" className="text-sm capitalize">
@@ -36,7 +36,7 @@ export default function MemberStatusDetails({ studentDetails }) {
               <div className="w-full flex justify-start sm:justify-end">
                 <div className="flex items-center justify-end">
                   <label className="btn btn-xs rounded text-customPurple text-sm bg-[#e5e2ff] font-light border-0">
-                    {history.status}
+                    {history?.status}
                   </label>
                 </div>
               </div>

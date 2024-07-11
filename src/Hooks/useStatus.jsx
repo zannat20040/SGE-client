@@ -10,7 +10,7 @@ const useStatus = () => {
     queryKey: [user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/role/${user?.email}`);
-      const userinfo = res.data.role;
+      const userinfo = res?.data?.role;
       return userinfo;
     },
   });

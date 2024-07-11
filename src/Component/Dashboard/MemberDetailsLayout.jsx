@@ -9,7 +9,7 @@ export default function MemberDetailsLayout({ studentDetails, refetch }) {
 
   return (
     <div className="w-full pb-10 flex flex-col gap-1 ">
-      {userinfo === "mco" && (
+      {userinfo && userinfo === "mco" && (
         <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 pt-10 sm:gap-4 flex-wrap items-center">
           <h1 className="font-semibold">Current Status: </h1>
 
@@ -59,7 +59,7 @@ export default function MemberDetailsLayout({ studentDetails, refetch }) {
         <p className="flex justify-end">{studentDetails?.whatsappNumber}</p>
       </div>
 
-      {userinfo === "mco" && (
+      {userinfo && userinfo === "mco" && (
         <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 sm:gap-4 flex-wrap">
           <h1 className="font-semibold">Student By: </h1>
           <p className="flex justify-end">{studentDetails?.createdBy}</p>
@@ -73,7 +73,7 @@ export default function MemberDetailsLayout({ studentDetails, refetch }) {
           {formatDate(studentDetails?.createdAt)}
         </p>
       </div>
-      {userinfo === "member" && (
+      {userinfo && userinfo === "member" && (
         <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 sm:gap-4 flex-wrap">
           <h1 className="font-semibold">Current Status: </h1>
           <button className=" text-customPurple   flex justify-end">

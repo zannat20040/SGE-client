@@ -15,6 +15,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useStatus from "../Hooks/useStatus";
 import FileUpload from "../Component/Dashboard/FileUpload";
+import Loading from "../Component/Loading";
 
 export default function MCOStudentDetails() {
   const { user } = useContext(AuthContext);
@@ -24,7 +25,7 @@ export default function MCOStudentDetails() {
 
   const fetchStudentDetails = async (id) => {
     let endpoint = `/member/student/${id}`;
-    if (userinfo === "mco") {
+    if (userinfo && userinfo === "mco") {
       endpoint = `/mco/student/${id}`;
     }
     const response = await axiosPublic.get(endpoint, {
@@ -35,7 +36,11 @@ export default function MCOStudentDetails() {
     return response.data;
   };
 
-  const { data: studentDetails, refetch } = useQuery({
+  const {
+    data: studentDetails,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["student", id],
     queryFn: () => fetchStudentDetails(id),
   });
@@ -52,7 +57,7 @@ export default function MCOStudentDetails() {
       ),
     },
     {
-      label: `${userinfo === "mco" ? "Upload" : "Download"}`,
+      label: `${userinfo && userinfo === "mco" ? "Upload" : "Download"}`,
       value: "Upload/Download",
       component: (
         <FileUpload studentDetails={studentDetails} refetch={refetch} />
@@ -74,6 +79,10 @@ export default function MCOStudentDetails() {
       component: <div className="pt-5">Progressing......</div>,
     },
   ];
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="bg-white rounded-md  shadow-md p-5 ">

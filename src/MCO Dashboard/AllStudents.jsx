@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import useDateFormatter from "../Hooks/useDateFormatter";
 import StatusModal from "../Component/StatusModal";
 import useStatus from "../Hooks/useStatus";
+import Loading from "../Component/Loading";
 
 export default function AllStudents() {
   const { user } = useContext(AuthContext);
@@ -18,7 +19,7 @@ export default function AllStudents() {
 
   const fetchStudents = async () => {
     let endpoint = "/member/my-students";
-    if (userinfo === "mco") {
+    if (userinfo && userinfo === "mco") {
       endpoint = "/mco/students";
     }
     const response = await axiosPublic.get(endpoint, {
@@ -29,7 +30,11 @@ export default function AllStudents() {
     return response.data;
   };
 
-  const { data: studentsData, refetch: refetchStudents } = useQuery({
+  const {
+    data: studentsData,
+    refetch: refetchStudents,
+    isLoading,
+  } = useQuery({
     queryKey: ["students", userinfo],
     queryFn: fetchStudents,
   });
@@ -72,61 +77,70 @@ export default function AllStudents() {
                 University Name/ Course Details
               </th>
               <th className="py-5 text-center">
-                {userinfo === "mco" ? "Change Status" : "Status"}
+                {userinfo && userinfo === "mco" ? "Change Status" : "Status"}
               </th>
               <th className="py-5 text-center">Date</th>
               <th className="py-5 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
-            {studentsData
-              ?.slice()
-              .reverse()
-              .map((student, index) => (
-                <tr key={student?._id} className="hover">
-                  <td className="text-center">{index + 1}</td>
-                  <td className="text-center">{student?._id}</td>
-                  <td className="text-center">{`${student?.firstName} ${student?.lastName}`}</td>
-                  <td className="text-center">
-                    <p>{student?.preferredUniversity}</p>
-                    <p>{student?.preferredCourse}</p>
-                  </td>
-                  <td className="text-center">
-                    {userinfo === "member" ? (
-                      <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
-                        {student?.status?.status}
-                      </button>
-                    ) : (
-                      <StatusModal
-                        student={student}
-                        id={student?._id}
-                        refetchStudents={refetchStudents}
-                        label={"Change"}
-                      />
-                    )}
-                  </td>
-                  <td className="text-center">
-                    {formatDate(student?.createdAt)}
-                  </td>
-                  <td className="text-center">
-                    <Link to={`/dashboard/allstudents/${student?._id}`}>
-                      <Tooltip content="Details" className="rounded">
-                        <IconButton
-                          variant="text"
-                          className="rounded-full group"
-                        >
-                          <IoEyeOutline className="h-3 w-3 group-hover:text-customPurple" />
-                        </IconButton>
-                      </Tooltip>
-                    </Link>
-                    <Tooltip content="Delete" className="rounded">
-                      <IconButton variant="text" className="rounded-full group">
-                        <RiDeleteBin7Line className="h-3 w-3 group-hover:text-customPurple" />
-                      </IconButton>
-                    </Tooltip>
-                  </td>
-                </tr>
-              ))}
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <>
+                {studentsData
+                  ?.slice()
+                  .reverse()
+                  .map((student, index) => (
+                    <tr key={student?._id} className="hover">
+                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center">{student?._id}</td>
+                      <td className="text-center">{`${student?.firstName} ${student?.lastName}`}</td>
+                      <td className="text-center">
+                        <p>{student?.preferredUniversity}</p>
+                        <p>{student?.preferredCourse}</p>
+                      </td>
+                      <td className="text-center">
+                        {userinfo && userinfo === "member" ? (
+                          <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
+                            {student?.status?.status}
+                          </button>
+                        ) : (
+                          <StatusModal
+                            student={student}
+                            id={student?._id}
+                            refetchStudents={refetchStudents}
+                            label={"Change"}
+                          />
+                        )}
+                      </td>
+                      <td className="text-center">
+                        {formatDate(student?.createdAt)}
+                      </td>
+                      <td className="text-center">
+                        <Link to={`/dashboard/allstudents/${student?._id}`}>
+                          <Tooltip content="Details" className="rounded">
+                            <IconButton
+                              variant="text"
+                              className="rounded-full group"
+                            >
+                              <IoEyeOutline className="h-3 w-3 group-hover:text-customPurple" />
+                            </IconButton>
+                          </Tooltip>
+                        </Link>
+                        <Tooltip content="Delete" className="rounded">
+                          <IconButton
+                            variant="text"
+                            className="rounded-full group"
+                          >
+                            <RiDeleteBin7Line className="h-3 w-3 group-hover:text-customPurple" />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  ))}
+              </>
+            )}
           </tbody>
         </table>
       </div>

@@ -8,17 +8,22 @@ export default function MemberDetailsLayout({ studentDetails, refetch }) {
   const { userinfo } = useStatus();
 
   return (
-    <div className="w-full pb-10 flex flex-col gap-1">
-      <div className="flex justify-end gap-4 flex-wrap items-center">
-\        {userinfo === "mco" && (
-          <StatusModal
-            label={`${studentDetails?.status?.status}`}
-            student={studentDetails}
-            id={studentDetails?._id}
-            refetchStudents={refetch}
-          />
-        )}
-      </div>
+    <div className="w-full pb-10 flex flex-col gap-1 ">
+      {userinfo === "mco" && (
+        <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 pt-10 sm:gap-4 flex-wrap">
+          <h1 className="font-semibold">Current Status: </h1>
+
+          <div className="flex justify-end">
+            <StatusModal
+              label={`${studentDetails?.status?.status}`}
+              student={studentDetails}
+              id={studentDetails?._id}
+              refetchStudents={refetch}
+            />
+          </div>
+        </div>
+      )}
+
       <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 sm:gap-4 flex-wrap">
         <h1 className="font-semibold">Student ID: </h1>
         <p className="flex justify-end">{studentDetails?._id}</p>

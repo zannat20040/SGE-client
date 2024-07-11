@@ -42,7 +42,7 @@ export default function Comment({ studentDetails, refetch }) {
 
   return (
     <div>
-      <div className="p-5 flex flex-col gap-2">
+      <div className="py-5 px-1 flex flex-col gap-2">
         {studentDetails?.comments?.length > 0 &&
           studentDetails?.comments?.map((comment) => (
             <div
@@ -52,15 +52,15 @@ export default function Comment({ studentDetails, refetch }) {
                   : ""
               }`}
             >
-              <div className="bg-[#e5e2ff]  rounded-md w-4/6 ">
-                <div className="px-5 py-2 border-b border-[#d3d0ea]  flex justify-between">
-                  <div className="flex gap-2 items-center">
-                    <p>{comment?.commentedByEmail}</p>
+              <div className="bg-[#e5e2ff]  rounded-md w-5/6 lg:w-4/6 ">
+                <div className="px-5 py-2 border-b border-[#d3d0ea]  flex justify-between flex-wrap md:items-center items-start">
+                  <div className="flex flex-col-reverse md:flex-row gap-2 md:items-center items-start ">
+                    <p>{comment?.subject}</p>
                     <p className="text-xs">
                       ({formatDate(comment?.createdAt)})
                     </p>
                   </div>
-                  <p className="text-sm">{comment?.subject}</p>
+                  <p className="text-xs">{comment?.commentedByEmail}</p>
                 </div>
                 <div className="px-5 py-2">{comment?.comment}</div>
               </div>
@@ -69,11 +69,11 @@ export default function Comment({ studentDetails, refetch }) {
       </div>
 
       <form
-        className="flex flex-col p-5 bg-gray-100 rounded-md"
+        className="flex flex-col py-5 px-1  rounded-md"
         onSubmit={HandleComment}
       >
         <div className="">
-          <label className="p-3 bg-white rounded-t-md flex items-center gap-2 border border-gray-300 rounded-b-none outline-0">
+          <label className="p-3 bg-white rounded-t-md text-customPurple flex items-center gap-2 border border-gray-300 rounded-b-none outline-0">
             Subject
             <input
               required

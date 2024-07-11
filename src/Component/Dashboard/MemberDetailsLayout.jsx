@@ -10,10 +10,10 @@ export default function MemberDetailsLayout({ studentDetails, refetch }) {
   return (
     <div className="w-full pb-10 flex flex-col gap-1 ">
       {userinfo === "mco" && (
-        <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 pt-10 sm:gap-4 flex-wrap">
+        <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 pt-10 sm:gap-4 flex-wrap items-center">
           <h1 className="font-semibold">Current Status: </h1>
 
-          <div className="flex justify-end">
+          <div className="flex justify-end ">
             <StatusModal
               label={`${studentDetails?.status?.status}`}
               student={studentDetails}

@@ -58,12 +58,13 @@ export default function StatusModal({ id, student, refetchStudents, label }) {
     <>
       <label
         htmlFor={`my_modal_${id}`}
-        className="btn btn-xs rounded text-customPurple text-sm bg-[#e5e2ff] font-light w-fit"
+        className="p-2 rounded text-customPurple text-sm bg-[#e5e2ff] font-light w-fit"
+        style={{ zIndex: "9999" }} 
       >
         {label}
       </label>
       <input type="checkbox" id={`my_modal_${id}`} className="modal-toggle " />
-      <div className="modal " role="dialog">
+      <div className="modal  " role="dialog" style={{ zIndex: "10000" }}>
         <div className="modal-box rounded-md lg:translate-x-10 md:translate-x-32 md:w-2/4 w-3/4 ">
           <h3 className="text-lg font-bold mb-8 text-center">
             Change status for {student?.firstName + " " + student?.lastName}

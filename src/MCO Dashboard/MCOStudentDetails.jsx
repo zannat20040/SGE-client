@@ -80,7 +80,7 @@ export default function MCOStudentDetails() {
   return (
     <div className="bg-white rounded-md  shadow-md p-5 ">
       <Tabs value="Student/Course details" className="p-0 ">
-        <TabsHeader className="items-center  p-2 flex-wrap sm:flex-nowrap rounded">
+        <TabsHeader className="items-center  p-2 flex-wrap sm:flex-nowrap rounded -z-0">
           {data.map(({ label, value }) => (
             <Tab key={value} value={value} className="text-xs lg:text-base py-4 sm:p-2">
               {label}

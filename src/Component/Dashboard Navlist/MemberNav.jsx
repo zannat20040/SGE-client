@@ -45,7 +45,7 @@ export default function MemberNav() {
         <ListItemPrefix>
           <FaRegUser />
         </ListItemPrefix>
-        Add New Member
+        Student Enrollment
       </NavLink>
       <NavLink
         to="allmembers"
@@ -55,7 +55,7 @@ export default function MemberNav() {
         <ListItemPrefix>
           <MdGroups />
         </ListItemPrefix>
-        See All Members
+        My Students
       </NavLink>
     </List>
   );

@@ -3,10 +3,9 @@ import { MdOutlineSubject } from "react-icons/md";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
 import useDateFormatter from "../../Hooks/useDateFormatter";
 
-export default function Comment({ studentDetails }) {
+export default function Comment({ studentDetails ,refetch}) {
   console.log("from comments", studentDetails);
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
@@ -39,7 +38,7 @@ export default function Comment({ studentDetails }) {
       );
       console.log(response);
       toast.success("Comment sended succesfully");
-      // refetch();
+      refetch();
     } catch (error) {
       toast.error(error);
     }
@@ -51,14 +50,14 @@ export default function Comment({ studentDetails }) {
         {studentDetails?.comments?.length > 0 &&
           studentDetails?.comments?.map((comment) => (
             <div className="bg-[#e5e2ff]  rounded-md ">
-              <div className="p-5 border-b border-gray-300 flex justify-between">
+              <div className="px-5 py-2 border-b border-gray-300 flex justify-between">
                 <div className="flex gap-2 items-center">
-                  <p>{comment?.commentedByEmail}</p>
+                  <p >{comment?.commentedByEmail}</p>
                   <p className="text-xs">({formatDate(comment?.createdAt)})</p>
                 </div>
-                <p className="">{comment?.subject}</p>
+                <p className="text-sm">{comment?.subject}</p>
               </div>
-              <div className="p-5">{comment?.comment}</div>
+              <div className="px-5 py-2">{comment?.comment}</div>
             </div>
           ))}
       </div>

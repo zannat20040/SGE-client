@@ -65,7 +65,7 @@ export default function StatusModal({ id, student, refetchStudents,label }) {
       <input type="checkbox" id={`my_modal_${id}`} className="modal-toggle " />
       <div className="modal " role="dialog">
         <div className="modal-box rounded-md ">
-          <h3 className="text-lg font-bold mb-8">
+          <h3 className="text-lg font-bold mb-8 text-center">
             Change status for {student?.firstName + " " + student?.lastName}
           </h3>
           <form

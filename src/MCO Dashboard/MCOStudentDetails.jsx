@@ -55,14 +55,14 @@ export default function MCOStudentDetails() {
     {
       label: "Comment",
       value: "Comment",
-      component: <Comment studentDetails={studentDetails} />,
+      component: <Comment studentDetails={studentDetails} refetch={refetch} />,
     },
     {
       label: "University Communication",
       value: "University Communication",
       desc: `We're not always in the position that we want to be at.
           We're constantly growing. We're constantly making mistakes. We're
-          constantly trying to express ourselves and actualize our dreams.`,
+          constantly trying to express ourselves and actualize our dreams.`
     },
   ];
 

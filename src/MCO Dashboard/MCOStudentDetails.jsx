@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import MemberDetailsLayout from "../Component/Dashboard/MemberDetailsLayout";
 import MemberStatusDetails from "../Component/Dashboard/MemberStatusDetails";
 import Comment from "../Component/Dashboard/Comment";
@@ -14,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useStatus from "../Hooks/useStatus";
-import Upload from "../Component/Dashboard/Upload";
+import FileUpload from "../Component/Dashboard/FileUpload";
 
 export default function MCOStudentDetails() {
   const { user } = useContext(AuthContext);
@@ -58,7 +58,7 @@ export default function MCOStudentDetails() {
     {
       label: `${userinfo === "mco" ? "Upload" : "Download"}`,
       value: "Upload/Download",
-      component: <Upload studentDetails={studentDetails} refetch={refetch} />,
+      component: <FileUpload studentDetails={studentDetails} refetch={refetch} />,
     },
     {
       label: "Status",

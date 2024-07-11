@@ -73,7 +73,7 @@ export default function MCOStudentDetails() {
     {
       label: "University Communication",
       value: "University Communication",
-      component: <div className="card-body">No content</div>,
+      component: <div className="pt-5">Progressing......</div>,
     },
   ];
 

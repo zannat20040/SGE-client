@@ -80,49 +80,54 @@ export default function AllStudents() {
             </tr>
           </thead>
           <tbody>
-            {studentsData?.map((student, index) => (
-              <tr key={student?._id} className="hover">
-                <td className="text-center">{index + 1}</td>
-                <td className="text-center">{student?._id}</td>
-                <td className="text-center">{`${student?.firstName} ${student?.lastName}`}</td>
-                <td className="text-center">
-                  <p>{student?.preferredUniversity}</p>
-                  <p>{student?.preferredCourse}</p>
-                </td>
-                <td className="text-center">
-                  {/* The button to open modal */}
-                  {userinfo === "member" ? (
-                    <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
-                      {student?.status?.status}
-                    </button>
-                  ) : (
-                    <StatusModal
-                      student={student}
-                      id={student?._id}
-                      refetchStudents={refetchStudents}
-                      label={"Change"}
-                    />
-                  )}
-                </td>
-                <td className="text-center">
-                  {formatDate(student?.createdAt)}
-                </td>
-                <td className="text-center">
-                  <Link to={`/dashboard/allstudents/${student?._id}`}>
-                    <Tooltip content="Details" className="rounded ">
+            {studentsData
+              ?.slice()
+              .reverse()
+              .map((student, index) => (
+                <tr key={student?._id} className="hover">
+                  <td className="text-center">{index + 1}</td>
+                  <td className="text-center">{student?._id}</td>
+                  <td className="text-center">{`${student?.firstName} ${student?.lastName}`}</td>
+                  <td className="text-center">
+                    <p>{student?.preferredUniversity}</p>
+                    <p>{student?.preferredCourse}</p>
+                  </td>
+                  <td className="text-center">
+                    {userinfo === "member" ? (
+                      <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
+                        {student?.status?.status}
+                      </button>
+                    ) : (
+                      <StatusModal
+                        student={student}
+                        id={student?._id}
+                        refetchStudents={refetchStudents}
+                        label={"Change"}
+                      />
+                    )}
+                  </td>
+                  <td className="text-center">
+                    {formatDate(student?.createdAt)}
+                  </td>
+                  <td className="text-center">
+                    <Link to={`/dashboard/allstudents/${student?._id}`}>
+                      <Tooltip content="Details" className="rounded">
+                        <IconButton
+                          variant="text"
+                          className="rounded-full group"
+                        >
+                          <IoEyeOutline className="h-3 w-3 group-hover:text-customPurple" />
+                        </IconButton>
+                      </Tooltip>
+                    </Link>
+                    <Tooltip content="Delete" className="rounded">
                       <IconButton variant="text" className="rounded-full group">
-                        <IoEyeOutline className="h-3 w-3 group-hover:text-customPurple" />
+                        <RiDeleteBin7Line className="h-3 w-3 group-hover:text-customPurple" />
                       </IconButton>
                     </Tooltip>
-                  </Link>
-                  <Tooltip content="Delete" className="rounded ">
-                    <IconButton variant="text" className="rounded-full group">
-                      <RiDeleteBin7Line className="h-3 w-3 group-hover:text-customPurple" />
-                    </IconButton>
-                  </Tooltip>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

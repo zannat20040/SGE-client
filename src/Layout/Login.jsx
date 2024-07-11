@@ -19,11 +19,11 @@ export default function Login() {
 
     loginWithPass(email, password)
       .then((userCredential) => {
-        // const loginData = {
-        //    email,
-        //   username: userCredential?.user?.displayName,
-        // }
-        // console.log(loginData)
+        const loginData = {
+           email,
+          username: userCredential?.user?.displayName,
+        }
+        console.log(loginData)
         // axiosPublic
         //   .get("/login", loginData)
         //   .then((res) => {

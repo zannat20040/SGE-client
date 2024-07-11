@@ -45,7 +45,13 @@ export default function Comment({ studentDetails, refetch }) {
       <div className="p-5 flex flex-col gap-2">
         {studentDetails?.comments?.length > 0 &&
           studentDetails?.comments?.map((comment) => (
-            <div className={`flex ${user?.displayName===comment?.commentedByEmail? 'justify-end': ''}`}>
+            <div
+              className={`flex ${
+                user?.displayName === comment?.commentedByEmail
+                  ? "justify-end"
+                  : ""
+              }`}
+            >
               <div className="bg-[#e5e2ff]  rounded-md w-4/6 ">
                 <div className="px-5 py-2 border-b border-[#d3d0ea]  flex justify-between">
                   <div className="flex gap-2 items-center">
@@ -70,6 +76,7 @@ export default function Comment({ studentDetails, refetch }) {
           <label className="p-3 bg-white rounded-t-md flex items-center gap-2 border border-gray-300 rounded-b-none outline-0">
             Subject
             <input
+              required
               type="text"
               className="grow outline-none w-full"
               placeholder="example"
@@ -77,6 +84,7 @@ export default function Comment({ studentDetails, refetch }) {
             />
           </label>
           <textarea
+            required
             name="comment"
             className="textarea border border-gray-300 focus:outline-none rounded-t-none border-t-0 w-full"
             placeholder="Write here your comment........."

@@ -11,12 +11,11 @@ import useDateFormatter from "../../Hooks/useDateFormatter";
 
 export default function MemberStatusDetails({ studentDetails }) {
   const { formatDate } = useDateFormatter();
-  console.log(studentDetails?.statusHistory);
 
   return (
     <div className="flex flex-col gap-2 p-5">
-      {studentDetails?.statusHistory?.slice().reverse().map((history) => (
-        <Card
+      {studentDetails?.statusHistory?.slice().reverse().map((history,index) => (
+        <Card key={index}
           color="transparent"
           shadow={false}
           className="w-full bg-gray-200 rounded border border-gray-300 p-5"

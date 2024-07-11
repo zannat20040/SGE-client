@@ -16,14 +16,10 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export default function MCOStudentDetails() {
   const { user } = useContext(AuthContext);
-
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
 
-  const {
-    data: studentDetails,
-    refetch,
-  } = useQuery({
+  const { data: studentDetails, refetch } = useQuery({
     queryKey: ["student", id],
     queryFn: async () => {
       const response = await axiosPublic.get(`/mco/student/${id}`, {
@@ -59,7 +55,7 @@ export default function MCOStudentDetails() {
     {
       label: "Comment",
       value: "Comment",
-      component: <Comment />,
+      component: <Comment studentDetails={studentDetails} />,
     },
     {
       label: "University Communication",

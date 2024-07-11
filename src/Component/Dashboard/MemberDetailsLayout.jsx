@@ -2,9 +2,9 @@ import React from "react";
 import useDateFormatter from "../../Hooks/useDateFormatter";
 import StatusModal from "../StatusModal";
 
-export default function MemberDetailsLayout({ studentDetails,refetch }) {
+export default function MemberDetailsLayout({ studentDetails, refetch }) {
   const { formatDate } = useDateFormatter();
-  
+
   return (
     <div className="w-full card-body">
       <div className="flex justify-end gap-4 flex-wrap items-center">

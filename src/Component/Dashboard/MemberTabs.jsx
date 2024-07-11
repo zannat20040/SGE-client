@@ -35,9 +35,8 @@ export default function MemberTabs() {
     {
       label: "University Communication",
       value: "University Communication",
-      desc: `We're not always in the position that we want to be at.
-          We're constantly growing. We're constantly making mistakes. We're
-          constantly trying to express ourselves and actualize our dreams.`,
+      component: <div className="card-body">No content</div>,
+
     },
   ];
 

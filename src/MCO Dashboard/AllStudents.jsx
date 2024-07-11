@@ -2,11 +2,6 @@ import React, { useContext, useState } from "react";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { IoEyeOutline } from "react-icons/io5";
 import {
-  MagnifyingGlassIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
-import {
   Card,
   CardHeader,
   Input,
@@ -28,7 +23,6 @@ import { Link } from "react-router-dom";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import useDateFormatter from "../Hooks/useDateFormatter";
 import StatusModal from "../Component/StatusModal";
 
@@ -39,8 +33,6 @@ export default function AllStudents() {
 
   const {
     data: studentsData,
-    isLoading,
-    isError,
     refetch: refetchStudents,
   } = useQuery({
     queryKey: ["students"],

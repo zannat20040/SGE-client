@@ -15,7 +15,6 @@ export default function AllStudents() {
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
   const { userinfo } = useStatus();
-  console.log(userinfo);
 
   const fetchStudents = async () => {
     let endpoint = "/member/my-students";

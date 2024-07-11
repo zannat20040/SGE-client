@@ -17,7 +17,7 @@ export default function Sidebar() {
   const closeDrawer = () => setOpen(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const navigate = useNavigate();
-  const { userinfo, refetch } = useStatus();
+  const { userinfo,isLoading, refetch } = useStatus();
 
   const { signOutProfile } = useContext(AuthContext);
   const HandleLogout = () => {
@@ -27,7 +27,7 @@ export default function Sidebar() {
         swal("Good job!", "Logged out successfully!", "success");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

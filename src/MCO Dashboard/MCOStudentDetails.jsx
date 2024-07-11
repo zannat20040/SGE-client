@@ -40,8 +40,6 @@ export default function MCOStudentDetails() {
     queryFn: () => fetchStudentDetails(id),
   });
 
-  console.log(studentDetails);
-
   const data = [
     {
       label: "Student/Course details",
@@ -82,7 +80,11 @@ export default function MCOStudentDetails() {
       <Tabs value="Student/Course details" className="p-0 ">
         <TabsHeader className="items-center  p-2 flex-wrap sm:flex-nowrap rounded -z-0">
           {data.map(({ label, value }) => (
-            <Tab key={value} value={value} className="text-xs lg:text-base py-4 sm:p-2">
+            <Tab
+              key={value}
+              value={value}
+              className="text-xs lg:text-base py-4 sm:p-2"
+            >
               {label}
             </Tab>
           ))}

@@ -58,7 +58,7 @@ export default function StatusModal({ id, student, refetchStudents, label }) {
     <>
       <label
         htmlFor={`my_modal_${id}`}
-        className="p-2 rounded text-customPurple text-sm bg-[#e5e2ff] font-light w-fit"
+        className="p-2 rounded text-customPurple text-sm bg-[#e5e2ff] font-light w-fit cursor-pointer"
         style={{ zIndex: "9999" }} 
       >
         {label}

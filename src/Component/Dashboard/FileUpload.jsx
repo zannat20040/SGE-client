@@ -35,9 +35,22 @@ function FileUpload({ studentDetails }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} />
-        <button type="submit" className="btn btn-primary">Upload</button>
+      <form
+        onSubmit={handleSubmit}
+        className="flex sm:flex-row flex-col justify-between items-center gap-2 pt-10"
+      >
+        <input
+          type="file"
+          className="file-input file-input-bordered w-full rounded-md"
+          onChange={handleFileChange}
+        />
+
+        <button
+          type="submit"
+          className="btn bg-black rounded-md font-normal text-white sm:w-fit w-full"
+        >
+          Upload
+        </button>
       </form>
     </div>
   );

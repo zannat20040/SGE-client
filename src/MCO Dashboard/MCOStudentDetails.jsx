@@ -14,6 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useStatus from "../Hooks/useStatus";
+import Upload from "../Component/Dashboard/Upload";
 
 export default function MCOStudentDetails() {
   const { user } = useContext(AuthContext);
@@ -55,9 +56,9 @@ export default function MCOStudentDetails() {
       ),
     },
     {
-      label: "Upload/Download",
+      label: `${userinfo === "mco" ? "Upload" : "Download"}`,
       value: "Upload/Download",
-      component: <div className="card-body">No content</div>,
+      component: <Upload studentDetails={studentDetails} refetch={refetch} />,
     },
     {
       label: "Status",

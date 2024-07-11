@@ -4,7 +4,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import swal from "sweetalert";
 import { updateProfile } from "firebase/auth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [isPassSame, setIsPassSame] = useState(true);

@@ -3,6 +3,7 @@ import Loginlayout from "../Component/Loginlayout";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import swal from "sweetalert";
 
 export default function Login() {
   const navigate = useNavigate();

@@ -67,7 +67,6 @@ export default function Signup() {
       });
 
     setIsPassSame(true);
-    console.log(data);
   };
   return (
     <SignupLayout

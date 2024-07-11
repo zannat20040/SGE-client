@@ -13,23 +13,36 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useStatus from "../Hooks/useStatus";
 
 export default function MCOStudentDetails() {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
+  const { userinfo } = useStatus();
 
+  // Define the query function
+  const fetchStudentDetails = async (id) => {
+    let endpoint = `/member/student/${id}`;
+    if (userinfo === "mco") {
+      endpoint = `/mco/students/${id}`;
+    }
+    const response = await axiosPublic.get(endpoint, {
+      headers: {
+        Authorization: `Bearer ${user?.email}`,
+      },
+    });
+    return response.data;
+  };
+
+  // Use the useQuery hook correctly with an object argument
   const { data: studentDetails, refetch } = useQuery({
     queryKey: ["student", id],
-    queryFn: async () => {
-      const response = await axiosPublic.get(`/mco/student/${id}`, {
-        headers: {
-          Authorization: `Bearer ${user?.email}`,
-        },
-      });
-      return response.data;
-    },
+    queryFn: () => fetchStudentDetails(id),
   });
+
+
+  console.log(studentDetails)
 
   const data = [
     {
@@ -62,7 +75,7 @@ export default function MCOStudentDetails() {
       value: "University Communication",
       desc: `We're not always in the position that we want to be at.
           We're constantly growing. We're constantly making mistakes. We're
-          constantly trying to express ourselves and actualize our dreams.`
+          constantly trying to express ourselves and actualize our dreams.`,
     },
   ];
 

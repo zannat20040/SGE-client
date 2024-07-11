@@ -6,12 +6,10 @@ import toast from "react-hot-toast";
 import useDateFormatter from "../../Hooks/useDateFormatter";
 
 export default function Comment({ studentDetails ,refetch}) {
-  console.log("from comments", studentDetails);
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
 
-  // console.log(allComments);
   const HandleComment = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -24,7 +22,6 @@ export default function Comment({ studentDetails ,refetch}) {
       comment,
       commentedByEmail,
     };
-    console.log(sendedComment);
 
     try {
       const response = await axiosPublic.post(
@@ -36,7 +33,6 @@ export default function Comment({ studentDetails ,refetch}) {
           },
         }
       );
-      console.log(response);
       toast.success("Comment sended succesfully");
       refetch();
     } catch (error) {

@@ -44,11 +44,9 @@ export default function NewMember() {
           "One student has been added successfully!",
           "success"
         );
-        console.log(res.data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         swal("Opps!", error.message, "error");
         setLoading(false);
       });

@@ -25,26 +25,35 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useDateFormatter from "../Hooks/useDateFormatter";
 import StatusModal from "../Component/StatusModal";
+import useStatus from "../Hooks/useStatus";
 
 export default function AllStudents() {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
+  const { userinfo } = useStatus();
+  console.log(userinfo);
 
-  const {
-    data: studentsData,
-    refetch: refetchStudents,
-  } = useQuery({
-    queryKey: ["students"],
-    queryFn: async () => {
-      const response = await axiosPublic.get("/mco/students", {
-        headers: {
-          Authorization: `Bearer ${user?.email}`,
-        },
-      });
-      return response.data;
-    },
+  const fetchStudents = async () => {
+    let endpoint = "/member/my-students";
+    if (userinfo === "mco") {
+      endpoint = "/mco/students";
+    }
+    const response = await axiosPublic.get(endpoint, {
+      headers: {
+        Authorization: `Bearer ${user?.email}`,
+      },
+    });
+    return response.data;
+  };
+
+  // Use the useQuery hook correctly with an object argument
+  const { data: studentsData, refetch: refetchStudents } = useQuery({
+    queryKey: ["students", userinfo],
+    queryFn: fetchStudents,
   });
+
+  console.log(studentsData);
 
   return (
     <div className="overflow-x-auto bg-white shadow-md  rounded-md">
@@ -57,7 +66,9 @@ export default function AllStudents() {
             <th className="py-5 text-center">
               University Name/ Course Details
             </th>
-            <th className="py-5 text-center">Change Status</th>
+            <th className="py-5 text-center">
+              {userinfo === "mco" ? "Change Status" : "Status"}
+            </th>
             <th className="py-5 text-center">Date</th>
             <th className="py-5 text-center">Action</th>
           </tr>
@@ -74,23 +85,27 @@ export default function AllStudents() {
               </td>
               <td className="text-center">
                 {/* The button to open modal */}
-                <StatusModal
-                  student={student}
-                  id={student?._id}
-                  refetchStudents={refetchStudents}
-                  label={'Change'}
-                />
+                {userinfo === "member" ? (
+                  <button className="btn  rounded text-customPurple text-sm bg-[#e5e2ff] font-light">{student?.status?.status}</button>
+                ) : (
+                  <StatusModal
+                    student={student}
+                    id={student?._id}
+                    refetchStudents={refetchStudents}
+                    label={"Change"}
+                  />
+                )}
               </td>
               <td className="text-center">{formatDate(student?.createdAt)}</td>
               <td className="text-center">
                 <Link to={`/dashboard/allstudents/${student?._id}`}>
-                  <Tooltip content="Details" className='rounded'>
+                  <Tooltip content="Details" className="rounded">
                     <IconButton variant="text" className="rounded-full">
                       <IoEyeOutline className="h-3 w-3" />
                     </IconButton>
                   </Tooltip>
                 </Link>
-                <Tooltip content="Delete" className='rounded'>
+                <Tooltip content="Delete" className="rounded">
                   <IconButton variant="text" className="rounded-full">
                     <RiDeleteBin7Line className="h-3 w-3" />
                   </IconButton>

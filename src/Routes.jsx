@@ -1,17 +1,11 @@
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Login from "./Layout/Login";
 import Signup from "./Layout/Signup";
 import Dashboard from "./Layout/Dashboard";
 import MemDasboard from "./Member Dashboard/MemDasboard";
 import NewMember from "./Member Dashboard/NewMember";
-import AllMembers from "./Member Dashboard/AllMembers";
 import MemberDetails from "./Member Dashboard/MemberDetails";
 import AllStudents from "./MCO Dashboard/AllStudents";
 import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
@@ -40,12 +34,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "allmembers",
-        element: <AllMembers />,
+        element: <AllStudents />,
       },
       {
         path: "allmembers/:id",
         element: <MemberDetails />,
-
       },
       {
         path: "allstudents",
@@ -54,7 +47,6 @@ export const router = createBrowserRouter([
       {
         path: "allstudents/:id",
         element: <MCOStudentDetails />,
-
       },
     ],
   },

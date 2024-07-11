@@ -59,7 +59,7 @@ export default function Sidebar() {
               <MCONavlist />
             )}
             <div className="rounded font-normal px-2">
-              <Button className="w-full bg-red-400 font-medium" size="md" onClick={HandleLogout} >
+              <Button className="w-full bg-red-400 font-medium  rounded" size="md" onClick={HandleLogout} >
                 Sign out
               </Button>
             </div>
@@ -81,7 +81,7 @@ export default function Sidebar() {
               <MCONavlist />
             )}
             <div className="rounded font-normal px-2">
-              <Button className="w-full bg-red-400 font-medium" size="md" onClick={HandleLogout} >
+              <Button className="w-full bg-red-400 font-medium rounded" size="md" onClick={HandleLogout} >
                 Sign out
               </Button>
             </div>

@@ -18,7 +18,7 @@ export default function Topbar({ handleButtonClick }) {
           </div>
           <div className="dropdown dropdown-end">
             <div className="avatar placeholder online">
-              <div className="bg-neutral text-neutral-content w-8 rounded-full">
+              <div className="bg-customPurple text-neutral-content w-8 rounded-full">
                 <span>{firstLetter}</span>
               </div>
             </div>

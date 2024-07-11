@@ -22,7 +22,6 @@ export default function MCOStudentDetails() {
   const { id } = useParams();
   const { userinfo } = useStatus();
 
-  // Define the query function
   const fetchStudentDetails = async (id) => {
     let endpoint = `/member/student/${id}`;
     if (userinfo === "mco") {
@@ -36,7 +35,6 @@ export default function MCOStudentDetails() {
     return response.data;
   };
 
-  // Use the useQuery hook correctly with an object argument
   const { data: studentDetails, refetch } = useQuery({
     queryKey: ["student", id],
     queryFn: () => fetchStudentDetails(id),
@@ -58,7 +56,9 @@ export default function MCOStudentDetails() {
     {
       label: `${userinfo === "mco" ? "Upload" : "Download"}`,
       value: "Upload/Download",
-      component: <FileUpload studentDetails={studentDetails} refetch={refetch} />,
+      component: (
+        <FileUpload studentDetails={studentDetails} refetch={refetch} />
+      ),
     },
     {
       label: "Status",
@@ -78,11 +78,15 @@ export default function MCOStudentDetails() {
   ];
 
   return (
-    <div className="bg-white rounded-md  shadow-md">
-      <Tabs value="Student/Course details" className="p-0">
-        <TabsHeader className="items-center rounded-none p-2">
+    <div className="bg-white rounded-md  shadow-md p-5 ">
+      <Tabs value="Student/Course details" className="p-0 ">
+        <TabsHeader className="items-center  p-2 flex-wrap sm:flex-nowrap rounded">
           {data.map(({ label, value }) => (
-            <Tab key={value} value={value}>
+            <Tab
+              key={value}
+              value={value}
+              className="text-xs lg:text-base py-4 sm:p-2"
+            >
               {label}
             </Tab>
           ))}

@@ -7,7 +7,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="  md:bg-[#f6f6f6] bg-white ">
+    <div className="  md:bg-[#f6f6f6] bg-white min-h-screen">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-between  gap-0 md:gap-10">
         <div className="p-4 md:p-10  lg:col-span-2 ">
           <Logo color={"text-black"} />
@@ -18,7 +18,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
             />
           </div>
         </div>
-        <div className=" p-4 md:p-10  pb-16 card h-full bg-white w-full  rounded-none">
+        <div className=" p-4 md:p-10  pb-16 card h-screen bg-white w-full  rounded-none">
           <h1 className="font-semibold text-2xl md:mt-20">
             Welcome to Shabuj Global
           </h1>

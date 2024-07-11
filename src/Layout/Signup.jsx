@@ -47,8 +47,8 @@ export default function Signup() {
           .then(() => {
             axiosPublic.post("/member/registration", data).then((res) => {
               swal(
-                "Bingo!",
-                "Welcome to our Shabuj Global Education!",
+                "Congratulations!",
+                "Get ready to unlock new educational opportunities with us.",
                 "success"
               );
               navigate("/");

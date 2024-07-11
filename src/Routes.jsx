@@ -36,10 +36,10 @@ export const router = createBrowserRouter([
         path: "allmembers",
         element: <AllStudents />,
       },
-      {
-        path: "allmembers/:id",
-        element: <MemberDetails />,
-      },
+      // {
+      //   path: "allmembers/:id",
+      //   element: <MemberDetails />,
+      // },
       {
         path: "allstudents",
         element: <AllStudents />,

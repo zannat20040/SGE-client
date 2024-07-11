@@ -5,7 +5,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import useDateFormatter from "../../Hooks/useDateFormatter";
 
-export default function Comment({ studentDetails ,refetch}) {
+export default function Comment({ studentDetails, refetch }) {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
@@ -42,18 +42,22 @@ export default function Comment({ studentDetails ,refetch}) {
 
   return (
     <div>
-      <div className=" p-5 flex flex-col gap-2">
+      <div className="p-5 flex flex-col gap-2">
         {studentDetails?.comments?.length > 0 &&
           studentDetails?.comments?.map((comment) => (
-            <div className="bg-[#e5e2ff]  rounded-md ">
-              <div className="px-5 py-2 border-b border-gray-300 flex justify-between">
-                <div className="flex gap-2 items-center">
-                  <p >{comment?.commentedByEmail}</p>
-                  <p className="text-xs">({formatDate(comment?.createdAt)})</p>
+            <div className={`flex ${user?.displayName===comment?.commentedByEmail? 'justify-end': ''}`}>
+              <div className="bg-[#e5e2ff]  rounded-md w-4/6 ">
+                <div className="px-5 py-2 border-b border-[#d3d0ea]  flex justify-between">
+                  <div className="flex gap-2 items-center">
+                    <p>{comment?.commentedByEmail}</p>
+                    <p className="text-xs">
+                      ({formatDate(comment?.createdAt)})
+                    </p>
+                  </div>
+                  <p className="text-sm">{comment?.subject}</p>
                 </div>
-                <p className="text-sm">{comment?.subject}</p>
+                <div className="px-5 py-2">{comment?.comment}</div>
               </div>
-              <div className="px-5 py-2">{comment?.comment}</div>
             </div>
           ))}
       </div>

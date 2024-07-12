@@ -26,7 +26,11 @@ export default function MemberStatusDetails({ studentDetails }) {
               <div className="flex w-full flex-col gap-1">
                 <div className="flex items-center justify-between">
                   <Typography color="blue-gray" className="text-sm">
-                    {formatDate(history?.createdAt)}
+
+                  {`${formatDate(history?.createdAt)?.date} ${
+                        formatDate(history?.createdAt)?.time
+                      }`}
+                    {/* {formatDate(history?.createdAt)} */}
                   </Typography>
                 </div>
                 <Typography color="blue-gray" className="text-sm capitalize">

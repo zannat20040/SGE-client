@@ -67,10 +67,15 @@ export default function MemberDetailsLayout({ studentDetails, refetch }) {
       )}
 
       <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 sm:gap-4 flex-wrap">
-        <h1 className="font-semibold">Date/Time: </h1>
+        <h1 className="font-semibold">Application Date: </h1>
         <p className="flex justify-end">
-          {" "}
-          {formatDate(studentDetails?.createdAt)}
+          {formatDate(studentDetails?.createdAt)?.date}
+        </p>
+      </div>
+      <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 sm:gap-4 flex-wrap">
+        <h1 className="font-semibold">Application Time: </h1>
+        <p className="flex justify-end">
+          {formatDate(studentDetails?.createdAt)?.time}
         </p>
       </div>
       {userinfo && userinfo === "member" && (

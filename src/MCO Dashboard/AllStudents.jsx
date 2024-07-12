@@ -10,6 +10,7 @@ import useDateFormatter from "../Hooks/useDateFormatter";
 import StatusModal from "../Component/StatusModal";
 import useStatus from "../Hooks/useStatus";
 import Loading from "../Component/Loading";
+import CountDown from "../Component/CountDown";
 
 export default function AllStudents() {
   const { user } = useContext(AuthContext);
@@ -74,12 +75,13 @@ export default function AllStudents() {
               <th className="py-5 text-center">Student ID</th>
               <th className="py-5 text-center">Student Name</th>
               <th className="py-5 text-center">
-                University Name/ Course Details
+                University Name/ <br /> Course Details
               </th>
               <th className="py-5 text-center">
                 {userinfo && userinfo === "mco" ? "Change Status" : "Status"}
               </th>
               <th className="py-5 text-center">Date</th>
+              <th className="py-5 text-center">Days Left</th>
               <th className="py-5 text-center">Action</th>
             </tr>
           </thead>
@@ -94,7 +96,7 @@ export default function AllStudents() {
                   .map((student, index) => (
                     <tr key={student?._id} className="hover">
                       <td className="text-center">{index + 1}</td>
-                      <td className="text-center">{student?._id}</td>
+                      <td className="text-center">...{student?._id && student?._id.slice(-4)}</td>
                       <td className="text-center">{`${student?.firstName} ${student?.lastName}`}</td>
                       <td className="text-center">
                         <p>{student?.preferredUniversity}</p>
@@ -115,7 +117,11 @@ export default function AllStudents() {
                         )}
                       </td>
                       <td className="text-center">
-                        {formatDate(student?.createdAt)}
+                        <p>{formatDate(student?.createdAt)?.date}</p>
+                        <p>{formatDate(student?.createdAt)?.time}</p>
+                     </td>
+                      <td className="text-center">
+                        <CountDown />
                       </td>
                       <td className="text-center">
                         <Link to={`/dashboard/allstudents/${student?._id}`}>

@@ -57,7 +57,9 @@ export default function Comment({ studentDetails, refetch }) {
                   <div className="flex flex-col-reverse md:flex-row gap-2 md:items-center items-start ">
                     <p>{comment?.subject}</p>
                     <p className="text-xs">
-                      ({formatDate(comment?.createdAt)})
+                      {`${formatDate(comment?.createdAt)?.date} ${
+                        formatDate(comment?.createdAt)?.time
+                      }`}
                     </p>
                   </div>
                   <p className="text-xs">{comment?.commentedByEmail}</p>

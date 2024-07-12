@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 export default function StatusModal({ id, student, refetchStudents, label }) {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const allowedStatuses = [
     "application processing",
@@ -59,7 +60,7 @@ export default function StatusModal({ id, student, refetchStudents, label }) {
       <label
         htmlFor={`my_modal_${id}`}
         className="p-2 rounded text-customPurple text-sm bg-[#e5e2ff] font-light w-fit cursor-pointer"
-        style={{ zIndex: "9999" }} 
+        style={{ zIndex: "9999" }}
       >
         {label}
       </label>

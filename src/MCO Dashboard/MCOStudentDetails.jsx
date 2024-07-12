@@ -16,6 +16,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useStatus from "../Hooks/useStatus";
 import FileUpload from "../Component/Dashboard/FileUpload";
 import Loading from "../Component/Loading";
+import Updown from "../Component/Updown";
 
 export default function MCOStudentDetails() {
   const { user } = useContext(AuthContext);
@@ -60,7 +61,8 @@ export default function MCOStudentDetails() {
       label: `${userinfo && userinfo === "mco" ? "Upload" : "Download"}`,
       value: "Upload/Download",
       component: (
-        <FileUpload studentDetails={studentDetails} refetch={refetch} />
+
+        <Updown studentDetails={studentDetails} refetch={refetch} />
       ),
     },
     {

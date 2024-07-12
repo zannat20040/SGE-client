@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 
-function FileUpload({ studentDetails }) {
+function FileUpload({ studentDetails, refetch }) {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {

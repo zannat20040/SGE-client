@@ -52,8 +52,8 @@ export default function Comment({ studentDetails, refetch }) {
                   : ""
               }`}
             >
-              <div className="bg-[#e5e2ff]  rounded-md w-5/6 lg:w-4/6 ">
-                <div className="px-5 py-2 border-b border-[#d3d0ea]  flex justify-between flex-wrap md:items-center items-start">
+              <div className="bg-gray-100  rounded-md w-5/6 lg:w-4/6 ">
+                <div className="px-5 py-2 border-b-2 border-gray-200  flex justify-between flex-wrap md:items-center items-start">
                   <div className="flex flex-col-reverse md:flex-row gap-2 md:items-center items-start ">
                     <p>{comment?.subject}</p>
                     <p className="text-xs">

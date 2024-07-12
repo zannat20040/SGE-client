@@ -10,7 +10,7 @@ import useDateFormatter from "../Hooks/useDateFormatter";
 import StatusModal from "../Component/StatusModal";
 import useStatus from "../Hooks/useStatus";
 import Loading from "../Component/Loading";
-import CountDown from "../Component/CountDown";
+import CountDown from "../Component/Dashboard/CountDown";
 
 export default function AllStudents() {
   const { user } = useContext(AuthContext);

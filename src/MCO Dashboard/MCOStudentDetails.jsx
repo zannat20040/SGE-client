@@ -14,9 +14,9 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useStatus from "../Hooks/useStatus";
-import FileUpload from "../Component/Dashboard/FileUpload";
 import Loading from "../Component/Loading";
-import Updown from "../Component/Updown";
+import Updown from "../Component/Dashboard/Updown";
+import UniCommunication from "../Component/Dashboard/UniCommunication";
 
 export default function MCOStudentDetails() {
   const { user } = useContext(AuthContext);
@@ -60,10 +60,7 @@ export default function MCOStudentDetails() {
     {
       label: `${userinfo && userinfo === "mco" ? "Upload" : "Download"}`,
       value: "Upload/Download",
-      component: (
-
-        <Updown studentDetails={studentDetails} refetch={refetch} />
-      ),
+      component: <Updown studentDetails={studentDetails} refetch={refetch} />,
     },
     {
       label: "Status",
@@ -78,7 +75,7 @@ export default function MCOStudentDetails() {
     {
       label: "University Communication",
       value: "University Communication",
-      component: <div className="pt-5">Progressing......</div>,
+      component: <UniCommunication studentDetails={studentDetails} refetch={refetch} />,
     },
   ];
 

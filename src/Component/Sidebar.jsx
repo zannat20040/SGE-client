@@ -49,7 +49,7 @@ export default function Sidebar() {
     <React.Fragment>
       {isSmallScreen ? (
         <div>
-          <Drawer open={open} onClose={closeDrawer} className="bg-[#2f3349] ">
+          <Drawer open={open} onClose={closeDrawer} className="bg-[#2f3349] min-w-[250px] w-[250px] ">
           <div className="mb-2 flex items-center justify-between p-4 ]">
               <Logo color={"text-white"} />
             </div>
@@ -64,7 +64,7 @@ export default function Sidebar() {
               </Button>
             </div>
           </Drawer>
-          <div className="flex-grow w-full  bg-gray-200 min-h-screen p-4 pt-0">
+          <div className="flex-grow w-full  bg-gray-200 min-h-screen p-4 ">
             <Topbar handleButtonClick={handleButtonClick} />
             <Outlet />
           </div>
@@ -86,7 +86,7 @@ export default function Sidebar() {
               </Button>
             </div>
           </Drawer>
-          <div className="w-full sm:w-8/12  lg:w-9/12 xl:w-full p-4 pt-0 main-outlet">
+          <div className="w-full sm:w-8/12  lg:w-9/12 xl:w-full p-4 pt-2  main-outlet">
             <Topbar />
             <Outlet />
           </div>

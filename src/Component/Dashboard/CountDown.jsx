@@ -5,24 +5,32 @@ const CountDown = ({ enrollmentStartDate, refetch }) => {
   const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
+    let intervalId;
+
     const calculateTimeLeft = () => {
       const now = new Date();
       const enrollmentDate = new Date(enrollmentStartDate);
-      // const timeDiff = 90 * 24 * 60 * 60 * 1000 - (now - enrollmentDate); // 90 days in milliseconds
-      const timeDiff = 15 * 1000 - (now - enrollmentDate); // 15 seconds in milliseconds
+      const timeDiff = enrollmentDate.getTime() + 15 * 1000 - now.getTime(); // 15 seconds in milliseconds
 
       if (timeDiff > 0) {
         setTimeLeft(timeDiff);
       } else {
-        refetch();
-        setTimeLeft(null);
+        clearInterval(intervalId); // Stop interval when timeLeft is null or negative
+        refetch(); // Fetch updated payment status
       }
     };
 
-    calculateTimeLeft();
-    const intervalId = setInterval(calculateTimeLeft, 1000); // Update every second
+    // Clear previous interval if enrollmentStartDate changes
+    clearInterval(intervalId);
 
-    return () => clearInterval(intervalId);
+    if (enrollmentStartDate) {
+      calculateTimeLeft(); // Calculate initially
+
+      // Start interval only if enrollmentStartDate is valid and status is enrolled
+      intervalId = setInterval(calculateTimeLeft, 1000); // Update every second
+    }
+
+    return () => clearInterval(intervalId); // Cleanup interval on unmount or when enrollmentStartDate changes
   }, [enrollmentStartDate, refetch]);
 
   if (!timeLeft) {

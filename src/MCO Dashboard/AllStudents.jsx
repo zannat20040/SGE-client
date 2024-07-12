@@ -67,89 +67,103 @@ export default function AllStudents() {
           </svg>
         </label>
       </div>
-      <div className="overflow-x-scroll ">
-        <table className="table table-sm">
-          <thead className="bg-gray-300">
-            <tr>
-              <th className="py-5 text-center">No.</th>
-              <th className="py-5 text-center">Student ID</th>
-              <th className="py-5 text-center">Student Name</th>
-              <th className="py-5 text-center">
-                University Name/ <br /> Course Details
-              </th>
-              <th className="py-5 text-center">
-                {userinfo && userinfo === "mco" ? "Change Status" : "Status"}
-              </th>
-              <th className="py-5 text-center">Date</th>
-              <th className="py-5 text-center">Days Left</th>
-              <th className="py-5 text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading ? (
-              <Loading />
+
+      <>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            {studentsData.length == 0 ? (
+              <tr className="flex justify-center w-full pt-8">
+                <td>You don't have any student. Please create first</td>
+              </tr>
             ) : (
-              <>
-                {studentsData
-                  ?.slice()
-                  .reverse()
-                  .map((student, index) => (
-                    <tr key={student?._id} className="hover">
-                      <td className="text-center">{index + 1}</td>
-                      <td className="text-center">...{student?._id && student?._id.slice(-4)}</td>
-                      <td className="text-center">{`${student?.firstName} ${student?.lastName}`}</td>
-                      <td className="text-center">
-                        <p>{student?.preferredUniversity}</p>
-                        <p>{student?.preferredCourse}</p>
-                      </td>
-                      <td className="text-center">
-                        {userinfo && userinfo === "member" ? (
-                          <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
-                            {student?.status?.status}
-                          </button>
-                        ) : (
-                          <StatusModal
-                            student={student}
-                            id={student?._id}
-                            refetchStudents={refetchStudents}
-                            label={"Change"}
-                          />
-                        )}
-                      </td>
-                      <td className="text-center">
-                        <p>{formatDate(student?.createdAt)?.date}</p>
-                        <p>{formatDate(student?.createdAt)?.time}</p>
-                     </td>
-                      <td className="text-center">
-                        <CountDown />
-                      </td>
-                      <td className="text-center">
-                        <Link to={`/dashboard/allstudents/${student?._id}`}>
-                          <Tooltip content="Details" className="rounded">
-                            <IconButton
-                              variant="text"
-                              className="rounded-full group"
-                            >
-                              <IoEyeOutline className="h-3 w-3 group-hover:text-customPurple" />
-                            </IconButton>
-                          </Tooltip>
-                        </Link>
-                        <Tooltip content="Delete" className="rounded">
-                          <IconButton
-                            variant="text"
-                            className="rounded-full group"
-                          >
-                            <RiDeleteBin7Line className="h-3 w-3 group-hover:text-customPurple" />
-                          </IconButton>
-                        </Tooltip>
-                      </td>
+              <div className="overflow-x-auto ">
+                <table className="table table-sm">
+                  <thead className="bg-gray-300">
+                    <tr>
+                      <th className="py-5 text-center">No.</th>
+                      <th className="py-5 text-center">Student ID</th>
+                      <th className="py-5 text-center">Student Name</th>
+                      <th className="py-5 text-center">
+                        University Name/ <br /> Course Details
+                      </th>
+                      <th className="py-5 text-center">
+                        {userinfo && userinfo === "mco"
+                          ? "Change Status"
+                          : "Status"}
+                      </th>
+                      <th className="py-5 text-center">Date</th>
+                      <th className="py-5 text-center">Days Left</th>
+                      <th className="py-5 text-center">Action</th>
                     </tr>
-                  ))}
-              </>
+                  </thead>
+                  <tbody>
+                    {studentsData
+                      ?.slice()
+                      .reverse()
+                      .map((student, index) => (
+                        <tr key={student?._id} className="hover">
+                          <td className="text-center">{index + 1}</td>
+                          <td className="text-center">
+                            ...{student?._id && student?._id.slice(-4)}
+                          </td>
+                          <td className="text-center">{`${student?.firstName} ${student?.lastName}`}</td>
+                          <td className="text-center">
+                            <p>{student?.preferredUniversity}</p>
+                            <p>{student?.preferredCourse}</p>
+                          </td>
+                          <td className="text-center">
+                            {userinfo && userinfo === "member" ? (
+                              <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
+                                {student?.status?.status}
+                              </button>
+                            ) : (
+                              <StatusModal
+                                student={student}
+                                id={student?._id}
+                                refetchStudents={refetchStudents}
+                                label={"Change"}
+                              />
+                            )}
+                          </td>
+                          <td className="text-center">
+                            <p>{formatDate(student?.createdAt)?.date}</p>
+                            <p>{formatDate(student?.createdAt)?.time}</p>
+                          </td>
+                          <td className="text-center">
+                            <CountDown />
+                          </td>
+                          <td className="text-center">
+                            <Link to={`/dashboard/allstudents/${student?._id}`}>
+                              <Tooltip content="Details" className="rounded">
+                                <IconButton
+                                  variant="text"
+                                  className="rounded-full group"
+                                >
+                                  <IoEyeOutline className="h-3 w-3 group-hover:text-customPurple" />
+                                </IconButton>
+                              </Tooltip>
+                            </Link>
+                            <Tooltip content="Delete" className="rounded">
+                              <IconButton
+                                variant="text"
+                                className="rounded-full group"
+                              >
+                                <RiDeleteBin7Line className="h-3 w-3 group-hover:text-customPurple" />
+                              </IconButton>
+                            </Tooltip>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
             )}
-          </tbody>
-        </table>
-      </div>
+          </>
+        )}
+      </>
+ 
     </div>
   );
 }

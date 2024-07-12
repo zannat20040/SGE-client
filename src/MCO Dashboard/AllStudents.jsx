@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { IoEyeOutline } from "react-icons/io5";
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
@@ -42,11 +42,10 @@ export default function AllStudents() {
   });
 
   let filteredStudents = studentsData;
-  console.log(searchQuery);
+  console.log(filteredStudents);
   if (searchQuery) {
     filteredStudents = studentsData.filter((student) => {
       const studentId = student?._id;
-      console.log(studentId);
       return (
         studentId && studentId.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -93,7 +92,7 @@ export default function AllStudents() {
           <>
             {studentsData.length == 0 ? (
               <tr className="flex justify-center w-full pt-8">
-                <td>You don't have any student. Please create first</td>
+                <td>You dont have any student. Please create first</td>
               </tr>
             ) : (
               <div className="overflow-x-auto ">
@@ -150,7 +149,16 @@ export default function AllStudents() {
                             <p>{formatDate(student?.createdAt)?.time}</p>
                           </td>
                           <td className="text-center">
-                            <CountDown />
+                            {student?.status?.status === "enrollment" ? (
+                              <CountDown
+                                enrollmentStartDate={
+                                  student.enrollmentStartDate
+                                }
+                                refetch={refetchStudents}
+                              />
+                            ) : (
+                              <span>{student?.paymentStatus}</span>
+                            )}
                           </td>
                           <td className="text-center">
                             <Link to={`/dashboard/allstudents/${student?._id}`}>

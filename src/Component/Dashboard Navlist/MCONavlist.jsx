@@ -10,7 +10,7 @@ export default function MCONavlist() {
   };
 
   const inactiveStyle = {
-    color: "white", 
+    color: "white",
   };
 
   return (

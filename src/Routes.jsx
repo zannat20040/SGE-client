@@ -43,14 +43,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "allmembers",
-        element: (
-          <PrivateRoute>
-            <AllStudents />
-          </PrivateRoute>
-        ),
-      },
+      // {
+      //   path: "allmembers",
+      //   element: (
+      //     <PrivateRoute>
+      //       <AllStudents />
+      //     </PrivateRoute>
+      //   ),
+      // },
       {
         path: "allstudents",
         element: (

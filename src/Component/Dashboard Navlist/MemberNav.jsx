@@ -48,7 +48,7 @@ export default function MemberNav() {
         Student Enrollment
       </NavLink>
       <NavLink
-        to="allmembers"
+        to="allstudents"
         className="flex items-center  p-3 rounded-md text-white hover:bg-gray-900/30 transition hover:text-white"
         style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
       >

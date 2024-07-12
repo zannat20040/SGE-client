@@ -154,8 +154,9 @@ export default function AllStudents() {
                             {student?.status?.status === "enrollment" ? (
                               <CountDown
                                 enrollmentStartDate={
-                                  student.enrollmentStartDate
+                                  student?.enrollmentStartDate
                                 }
+                                createdBy={student?.createdBy}
                                 refetch={refetchStudents}
                               />
                             ) : (

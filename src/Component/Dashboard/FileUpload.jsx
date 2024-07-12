@@ -3,10 +3,13 @@ import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import { FaCloudDownloadAlt } from "react-icons/fa";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 <FaCloudDownloadAlt />;
 function FileUpload({ studentDetails, refetch }) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const axiosPublic = useAxiosPublic();
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -19,8 +22,8 @@ function FileUpload({ studentDetails, refetch }) {
     setLoading(true); // Set loading to true when upload starts
 
     try {
-      const res = await axios.post(
-        `http://localhost:5000/mco/upload/${studentDetails?._id}`,
+      const res = await axiosPublic.post(
+        `/mco/upload/${studentDetails?._id}`,
         formData,
         {
           headers: {
@@ -110,7 +113,6 @@ function FileUpload({ studentDetails, refetch }) {
           <p>No files uploaded yet.</p>
         )}
       </div>
-    
     </div>
   );
 }

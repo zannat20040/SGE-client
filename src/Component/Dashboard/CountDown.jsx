@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
-const CountDown = ({ enrollmentStartDate, refetch }) => {
+const CountDown = ({ enrollmentStartDate, refetch, createdBy }) => {
   const [timeLeft, setTimeLeft] = useState(null);
+  const { user } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+  const [willBePaid, setWillBePaid] = useState(0);
 
   useEffect(() => {
     let intervalId;
@@ -17,6 +22,22 @@ const CountDown = ({ enrollmentStartDate, refetch }) => {
       } else {
         clearInterval(intervalId); // Stop interval when timeLeft is null or negative
         refetch(); // Fetch updated payment status
+
+        axiosPublic
+          .get(`/member/enrolled/${createdBy}`, {
+            headers: {
+              Authorization: `Bearer ${user?.email}`,
+            },
+          })
+          .then((response) => {
+            console.log("GET request response:", response.data);
+            setWillBePaid(response?.data?.length);
+            // Handle response data as needed
+          })
+          .catch((error) => {
+            console.error("Error making GET request:", error);
+            // Handle error if needed
+          });
       }
     };
 
@@ -34,8 +55,10 @@ const CountDown = ({ enrollmentStartDate, refetch }) => {
   }, [enrollmentStartDate, refetch]);
 
   if (!timeLeft) {
-    return <span>To be paid</span>;
+    return <span>{willBePaid >= 5 ? "400$" : "300$"}</span>;
   }
+
+  console.log(willBePaid);
 
   const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
   const hours = Math.floor(

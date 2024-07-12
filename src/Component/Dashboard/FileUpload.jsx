@@ -35,23 +35,27 @@ function FileUpload({ studentDetails }) {
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex sm:flex-row flex-col justify-between items-center gap-2 pt-10"
-      >
-        <input
-          type="file"
-          className="file-input file-input-bordered w-full rounded-md"
-          onChange={handleFileChange}
-        />
-
-        <button
-          type="submit"
-          className="btn bg-black rounded-md font-normal text-white sm:w-fit w-full"
+      {studentDetails && studentDetails?.canUpload ? (
+        <form
+          onSubmit={handleSubmit}
+          className="flex sm:flex-row flex-col justify-between items-center gap-2 pt-10"
         >
-          Upload
-        </button>
-      </form>
+          <input
+            type="file"
+            className="file-input file-input-bordered w-full rounded-md"
+            onChange={handleFileChange}
+          />
+
+          <button
+            type="submit"
+            className="btn bg-black rounded-md font-normal text-white sm:w-fit w-full"
+          >
+            Upload
+          </button>
+        </form>
+      ) : (
+        <p className="pt-8">You can not upload any file right now</p>
+      )}
     </div>
   );
 }

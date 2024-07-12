@@ -59,6 +59,7 @@ export default function NewMember() {
     } finally {
       setLoading(false);
     }
+    form.reset();
   };
 
   return (

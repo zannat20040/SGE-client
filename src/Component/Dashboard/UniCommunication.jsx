@@ -57,7 +57,6 @@ export default function UniCommunication({ studentDetails, refetch }) {
       from,
     };
 
-    console.log(data);
 
     try {
       const response = await axiosPublic.post(
@@ -73,7 +72,7 @@ export default function UniCommunication({ studentDetails, refetch }) {
       toast.success(response?.data?.message);
       refetch();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
 
     form.reset();

@@ -7,6 +7,7 @@ import MemDasboard from "./Member Dashboard/MemDasboard";
 import NewMember from "./Member Dashboard/NewMember";
 import AllStudents from "./MCO Dashboard/AllStudents";
 import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
+import PrivateRoute from "./Hooks/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -20,27 +21,51 @@ export const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "member",
-        element: <MemDasboard />,
+        element: (
+          <PrivateRoute>
+            <MemDasboard />
+          </PrivateRoute>
+        ),
       },
       {
         path: "newmember",
-        element: <NewMember />,
+        element: (
+          <PrivateRoute>
+            <NewMember />
+          </PrivateRoute>
+        ),
       },
       {
         path: "allmembers",
-        element: <AllStudents />,
+        element: (
+          <PrivateRoute>
+            <AllStudents />
+          </PrivateRoute>
+        ),
       },
       {
         path: "allstudents",
-        element: <AllStudents />,
+        element: (
+          <PrivateRoute>
+            <AllStudents />
+          </PrivateRoute>
+        ),
       },
       {
         path: "allstudents/:id",
-        element: <MCOStudentDetails />,
+        element: (
+          <PrivateRoute>
+            <MCOStudentDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },

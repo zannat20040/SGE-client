@@ -85,7 +85,7 @@ export default function UniCommunication({ studentDetails, refetch }) {
         <form
           onSubmit={HandleUniCommunication}
           action=""
-          className="grid grid-cols-6 gap-3 justify-between items-center mb-6"
+          className="grid grid-cols-2 lg:grid-cols-6 gap-3 justify-between items-center mb-6"
         >
           {/* <div className="form-control col-span-2">
             <select

@@ -14,8 +14,8 @@ export default function CommunicationDetails({ studentDetails }) {
             ?.slice()
             .reverse()
             .map((communication) => (
-              <div className="  rounded-md w-full  border-2 border-gray-200">
-                <div className="px-5 py-4 border-b border-gray-200  flex justify-between flex-wrap md:items-center items-start">
+              <div className="f  rounded-md w-full  border-2 border-gray-200">
+                <div className="px-5 py-4 border-b border-gray-200  flex justify-between flex-wrap items-center">
                   <p>{communication?.from}</p>
 
                   <p className="text-xs">{communication?.date}</p>

@@ -77,7 +77,7 @@ function FileUpload({ studentDetails, refetch }) {
 
             <button
               type="submit"
-              className="btn bg-black rounded-md font-normal text-white sm:w-fit w-full"
+              className="btn bg-[#2b3440] rounded-md font-normal text-white sm:w-fit w-full"
               disabled={loading} // Disable the button when loading
             >
               {loading ? "Uploading..." : "Upload"}

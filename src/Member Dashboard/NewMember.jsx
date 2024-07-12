@@ -48,11 +48,8 @@ export default function NewMember() {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         if (error.response.data.message) {
-          // Specific error message from backend
           swal("Oops!", error.response.data.message, "info");
         } else if (error.response.data.errors) {
-          // Validation errors
-          console.log(error.response.data.errors);
         } else {
           swal("Oops!", "Something went wrong. Please try again.", "error");
         }

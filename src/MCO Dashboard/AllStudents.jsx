@@ -43,7 +43,7 @@ export default function AllStudents() {
   });
 
   let filteredStudents = studentsData;
-  console.log(filteredStudents);
+  // console.log(filteredStudents);
   if (searchQuery) {
     filteredStudents = studentsData.filter((student) => {
       const studentId = student?._id;
@@ -169,18 +169,18 @@ export default function AllStudents() {
                                   variant="text"
                                   className="rounded-full group"
                                 >
-                                  <IoEyeOutline className="h-3 w-3 group-hover:text-customPurple" />
+                                  <IoEyeOutline className="text-base group-hover:text-customPurple" />
                                 </IconButton>
                               </Tooltip>
                             </Link>
-                            <Tooltip content="Delete" className="rounded">
+                            {/* <Tooltip content="Delete" className="rounded">
                               <IconButton
                                 variant="text"
                                 className="rounded-full group"
                               >
                                 <RiDeleteBin7Line className="h-3 w-3 group-hover:text-customPurple" />
                               </IconButton>
-                            </Tooltip>
+                            </Tooltip> */}
                           </td>
                         </tr>
                       ))}

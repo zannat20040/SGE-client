@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import CommunicationDetails from "./CommunicationDetails";
 import useStatus from "../../Hooks/useStatus";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 export default function UniCommunication({ studentDetails, refetch }) {
   const { userinfo } = useStatus();
+  const { user, loading, setLoading } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
 
-  const ourUniversity = [
-    "University of Cambridge",
-    "Massachusetts Institute of Technology (MIT)",
-    "University of Oxford",
-    "Stanford University",
-    "Harvard University",
-  ];
+  // const ourUniversity = [
+  //   "University of Cambridge",
+  //   "Massachusetts Institute of Technology (MIT)",
+  //   "University of Oxford",
+  //   "Stanford University",
+  //   "Harvard University",
+  // ];
 
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
@@ -40,12 +45,12 @@ export default function UniCommunication({ studentDetails, refetch }) {
     return formattedDate;
   };
 
-  const HandleUniCommunication = (e) => {
+  const HandleUniCommunication = async (e) => {
     e.preventDefault();
     const form = e.target;
     const date = formatDate(form.date.value);
     const subject = form.subject.value;
-    const from = form.selectedValue.value;
+    const from = form.from.value;
     const data = {
       date,
       subject,
@@ -53,6 +58,23 @@ export default function UniCommunication({ studentDetails, refetch }) {
     };
 
     console.log(data);
+
+    try {
+      const response = await axiosPublic.post(
+        `/mco/university-communication/${studentDetails?._id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${user?.email}`,
+          },
+        }
+      );
+      refetch
+      toast.success(response?.data?.message);
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
 
     form.reset();
   };
@@ -65,7 +87,7 @@ export default function UniCommunication({ studentDetails, refetch }) {
           action=""
           className="grid grid-cols-6 gap-3 justify-between items-center mb-6"
         >
-          <div className="form-control col-span-2">
+          {/* <div className="form-control col-span-2">
             <select
               name="selectedValue"
               required
@@ -81,7 +103,16 @@ export default function UniCommunication({ studentDetails, refetch }) {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
+          <input
+            type="text"
+            name="from"
+            required
+            value={studentDetails?.preferredUniversity}
+            disabled
+            className="input border col-span-2 rounded border-gray-300 focus:outline-none focus:border-customPurple"
+            placeholder="From"
+          />
           <input
             type="text"
             name="subject"
@@ -97,7 +128,7 @@ export default function UniCommunication({ studentDetails, refetch }) {
             placeholder="date"
           />
           <button className="btn border-0 bg-customPurple rounded focus:outline-none text-white font-normal">
-            Add this
+            {loading ? "Adding.." : "Add this"}
           </button>
         </form>
       )}

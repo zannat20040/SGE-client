@@ -100,20 +100,20 @@ export default function AllStudents() {
                 <table className="table table-sm">
                   <thead className="bg-gray-300">
                     <tr>
-                      <th className="py-5 text-center text-base">No.</th>
-                      <th className="py-5 text-center text-base">Student ID</th>
-                      <th className="py-5 text-center text-base">Student Name</th>
-                      <th className="py-5 text-center text-base">
+                      <th className="py-5 text-center">No.</th>
+                      <th className="py-5 text-center">Student ID</th>
+                      <th className="py-5 text-center">Student Name</th>
+                      <th className="py-5 text-center">
                         University Name/ <br /> Course Details
                       </th>
-                      <th className="py-5 text-center text-base">
+                      <th className="py-5 text-center">
                         {userinfo && userinfo === "mco"
                           ? "Change Status"
                           : "Status"}
                       </th>
-                      <th className="py-5 text-center text-base">Date</th>
-                      <th className="py-5 text-center text-base">Days Left</th>
-                      <th className="py-5 text-center text-base">Action</th>
+                      <th className="py-5 text-center">Date</th>
+                      <th className="py-5 text-center">Days Left</th>
+                      <th className="py-5 text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>

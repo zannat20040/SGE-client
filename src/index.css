@@ -2,28 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    font-family: "Montserrat", sans-serif;
+* {
+  font-family: "Montserrat", sans-serif;
 }
 
 @media screen and (min-width: 927px) and (max-width: 975px) {
-    .main-outlet{
-        width: 73%!important;
-    }
+  .main-outlet {
+    width: 73% !important;
+  }
 }
-  @media screen and (min-width: 880px) and (max-width: 928px) {
-    .main-outlet{
-        width: 72%!important;
-    }
+@media screen and (min-width: 880px) and (max-width: 928px) {
+  .main-outlet {
+    width: 72% !important;
+  }
 }
-    @media screen and (min-width: 786px) and (max-width: 889px) {
-    .main-outlet{
-        width: 68%!important;
-    }
+@media screen and (min-width: 786px) and (max-width: 889px) {
+  .main-outlet {
+    width: 68% !important;
+  }
 }
-  @media screen and (min-width: 704px) and (max-width: 787px) {
-    .main-outlet{
-        width: 65.5555%!important;
-    }
+@media screen and (min-width: 704px) and (max-width: 787px) {
+  .main-outlet {
+    width: 65.5555% !important;
+  }
 }
-  
+@media screen and (min-width: 704px) and (max-width: 787px) {
+  .custom-modal-css {
+  }
+}
+
+

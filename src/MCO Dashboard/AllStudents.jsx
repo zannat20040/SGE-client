@@ -11,6 +11,7 @@ import StatusModal from "../Component/StatusModal";
 import useStatus from "../Hooks/useStatus";
 import Loading from "../Component/Loading";
 import CountDown from "../Component/Dashboard/CountDown";
+import Modal from "../Component/Modal";
 
 export default function AllStudents() {
   const { user } = useContext(AuthContext);
@@ -90,7 +91,7 @@ export default function AllStudents() {
           <Loading />
         ) : (
           <>
-            {studentsData.length == 0 ? (
+            {studentsData?.length == 0 ? (
               <tr className="flex justify-center w-full pt-8">
                 <td>You dont have any student. Please create first</td>
               </tr>
@@ -136,12 +137,13 @@ export default function AllStudents() {
                                 {student?.status?.status}
                               </button>
                             ) : (
-                              <StatusModal
-                                student={student}
-                                id={student?._id}
-                                refetchStudents={refetchStudents}
-                                label={"Change"}
-                              />
+                              <>
+                                <Modal
+                                  student={student}
+                                  id={student?._id}
+                                  refetchStudents={refetchStudents}
+                                />
+                              </>
                             )}
                           </td>
                           <td className="text-center">

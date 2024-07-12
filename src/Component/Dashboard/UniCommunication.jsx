@@ -1,7 +1,10 @@
 import React from "react";
 import CommunicationDetails from "./CommunicationDetails";
+import useStatus from "../../Hooks/useStatus";
 
 export default function UniCommunication({ studentDetails, refetch }) {
+  const { userinfo } = useStatus();
+
   const ourUniversity = [
     "University of Cambridge",
     "Massachusetts Institute of Technology (MIT)",
@@ -53,48 +56,52 @@ export default function UniCommunication({ studentDetails, refetch }) {
 
     form.reset();
   };
+
   return (
     <div className="pt-8">
-      <form
-        onSubmit={HandleUniCommunication}
-        action=""
-        className="grid grid-cols-6 gap-3 justify-between items-center mb-6"
-      >
-        <div className="form-control col-span-2">
-          <select
-            name="selectedValue"
-            required
-            className="select select-primary border-gray-300 focus:border-indigo-500 rounded-md focus:outline-none"
-            defaultValue=""
-          >
-            <option value="" disabled>
-              From
-            </option>
-            {ourUniversity?.map((selectedOption, index) => (
-              <option key={index} value={selectedOption}>
-                {selectedOption}
+      {userinfo && userinfo === "mco" && (
+        <form
+          onSubmit={HandleUniCommunication}
+          action=""
+          className="grid grid-cols-6 gap-3 justify-between items-center mb-6"
+        >
+          <div className="form-control col-span-2">
+            <select
+              name="selectedValue"
+              required
+              className="select select-primary border-gray-300 focus:border-indigo-500 rounded-md focus:outline-none"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                From
               </option>
-            ))}
-          </select>
-        </div>
-        <input
-          type="text"
-          name="subject"
-          required
-          className="input border col-span-2 rounded border-gray-300 focus:outline-none focus:border-customPurple"
-          placeholder="Subject"
-        />
-        <input
-          type="date"
-          name="date"
-          required
-          className="input border border-gray-300 rounded focus:outline-none focus:border-customPurple"
-          placeholder="date"
-        />
-        <button className="btn border-0 bg-customPurple rounded focus:outline-none text-white font-normal">
-          Add this
-        </button>
-      </form>
+              {ourUniversity?.map((selectedOption, index) => (
+                <option key={index} value={selectedOption}>
+                  {selectedOption}
+                </option>
+              ))}
+            </select>
+          </div>
+          <input
+            type="text"
+            name="subject"
+            required
+            className="input border col-span-2 rounded border-gray-300 focus:outline-none focus:border-customPurple"
+            placeholder="Subject"
+          />
+          <input
+            type="date"
+            name="date"
+            required
+            className="input border border-gray-300 rounded focus:outline-none focus:border-customPurple"
+            placeholder="date"
+          />
+          <button className="btn border-0 bg-customPurple rounded focus:outline-none text-white font-normal">
+            Add this
+          </button>
+        </form>
+      )}
+
       <div>
         <CommunicationDetails
           studentDetails={studentDetails}

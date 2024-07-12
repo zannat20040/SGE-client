@@ -2,6 +2,7 @@ import React from "react";
 import useDateFormatter from "../../Hooks/useDateFormatter";
 import StatusModal from "../StatusModal";
 import useStatus from "../../Hooks/useStatus";
+import Modal from "../Modal";
 
 export default function MemberDetailsLayout({ studentDetails, refetch }) {
   const { formatDate } = useDateFormatter();
@@ -14,8 +15,7 @@ export default function MemberDetailsLayout({ studentDetails, refetch }) {
           <h1 className="font-semibold">Current Status: </h1>
 
           <div className="flex justify-end ">
-            <StatusModal
-              label={`${studentDetails?.status?.status}`}
+            <Modal
               student={studentDetails}
               id={studentDetails?._id}
               refetchStudents={refetch}

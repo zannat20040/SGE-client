@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { IoEyeOutline } from "react-icons/io5";
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
@@ -17,6 +17,7 @@ export default function AllStudents() {
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
   const { userinfo } = useStatus();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchStudents = async () => {
     let endpoint = "/member/my-students";
@@ -40,6 +41,18 @@ export default function AllStudents() {
     queryFn: fetchStudents,
   });
 
+
+
+  let filteredStudents = studentsData;
+console.log(searchQuery)
+  if (searchQuery) {
+    filteredStudents = studentsData.filter((student) => {
+      const studentId = student?._id;
+      console.log(studentId)
+      return studentId && studentId.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+  }
+
   return (
     <div className="bg-white shadow-md  rounded-md pb-5">
       <div className="card-body border-b border-gray-200 flex justify-between items-center gap-5 flex-wrap flex-row">
@@ -51,8 +64,8 @@ export default function AllStudents() {
             Explore Detailed Histories of Every Student
           </Typography>
         </div>
-        <label className="input input-bordered flex items-center gap-2 rounded-md border-gray-300">
-          <input type="text" className="grow " placeholder="Search" />
+        <label className="input input-bordered flex items-center gap-2 rounded border-gray-300">
+          <input type="text" className="grow " placeholder="Search" onChange={(e) => setSearchQuery(e.target.value)} />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -99,7 +112,7 @@ export default function AllStudents() {
                     </tr>
                   </thead>
                   <tbody>
-                    {studentsData
+                    {filteredStudents
                       ?.slice()
                       .reverse()
                       .map((student, index) => (

@@ -7,7 +7,8 @@ export default function Topbar({ handleButtonClick }) {
   const firstLetter = user?.displayName.trim().charAt(0).toUpperCase();
 
   return (
-    <div className="navbar bg-base-100 shadow-md  rounded-md mb-5 sticky top-0 z-[3] ">
+    <div className="bg-gray-200 sticky top-0 z-[3] pt-1 ">
+<div className="navbar bg-base-100 shadow-md  rounded-md mb-5   mt-4 ">
       <div className="md:justify-end justify-between flex items-center gap-5 w-full px-4 py-2">
         <div className=" flex md:hidden ">
           <FaBarsStaggered onClick={handleButtonClick} />
@@ -26,5 +27,7 @@ export default function Topbar({ handleButtonClick }) {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 }

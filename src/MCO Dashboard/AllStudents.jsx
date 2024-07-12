@@ -41,15 +41,15 @@ export default function AllStudents() {
     queryFn: fetchStudents,
   });
 
-
-
   let filteredStudents = studentsData;
-console.log(searchQuery)
+  console.log(searchQuery);
   if (searchQuery) {
     filteredStudents = studentsData.filter((student) => {
       const studentId = student?._id;
-      console.log(studentId)
-      return studentId && studentId.toLowerCase().includes(searchQuery.toLowerCase());
+      console.log(studentId);
+      return (
+        studentId && studentId.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     });
   }
 
@@ -64,8 +64,13 @@ console.log(searchQuery)
             Explore Detailed Histories of Every Student
           </Typography>
         </div>
-        <label className="input input-bordered flex items-center gap-2 rounded border-gray-300">
-          <input type="text" className="grow " placeholder="Search" onChange={(e) => setSearchQuery(e.target.value)} />
+        <label className="input input-bordered flex items-center gap-2 rounded border-gray-300 lg:w-auto w-full">
+          <input
+            type="text"
+            className="grow "
+            placeholder="Search"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -176,7 +181,6 @@ console.log(searchQuery)
           </>
         )}
       </>
- 
     </div>
   );
 }

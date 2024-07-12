@@ -64,14 +64,14 @@ export default function Sidebar() {
               </Button>
             </div>
           </Drawer>
-          <div className="flex-grow w-full px-4  bg-gray-200 min-h-screen py-4">
+          <div className="flex-grow w-full  bg-gray-200 min-h-screen p-4 pt-0">
             <Topbar handleButtonClick={handleButtonClick} />
             <Outlet />
           </div>
         </div>
       ) : (
         <div className="flex  bg-gray-200 h-auto  w-full">
-          <Drawer open={true} overlay={false} className="bg-[#2f3349] sticky left-0 min-h-screen" >
+          <Drawer open={true} overlay={false} className="bg-[#2f3349] sticky left-0 min-h-screen min-w-[250px] w-[250px]" >
             <div className="mb-2 flex items-center justify-between p-4 ]">
               <Logo color={"text-white"} />
             </div>
@@ -86,7 +86,7 @@ export default function Sidebar() {
               </Button>
             </div>
           </Drawer>
-          <div className="w-full sm:w-8/12 lg:w-9/12 xl:w-full p-4">
+          <div className="w-full sm:w-8/12  lg:w-9/12 xl:w-full p-4 pt-0 main-outlet">
             <Topbar />
             <Outlet />
           </div>

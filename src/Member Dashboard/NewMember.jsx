@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import swal from "sweetalert";
@@ -8,8 +8,9 @@ export default function NewMember() {
   const { user, loading, setLoading } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
 
-  const HandleNewMemberAdd = (e) => {
+  const HandleNewMemberAdd = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = e.target;
     const firstName = form.firstName.value;
@@ -32,24 +33,35 @@ export default function NewMember() {
       createdBy,
     };
 
-    axiosPublic
-      .post("/member/student-registration", data, {
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const res = await axiosPublic.post("/member/student-registration", data, {
         headers: {
           Authorization: `Bearer ${user?.email}`,
         },
-      })
-      .then((res) => {
-        swal(
-          "Congratulation!",
-          "One student has been added successfully!",
-          "success"
-        );
-        setLoading(false);
-      })
-      .catch((error) => {
-        swal("Opps!", error.message, "error");
-        setLoading(false);
       });
+      swal(
+        "Congratulation!",
+        "One student has been added successfully!",
+        "success"
+      );
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        if (error.response.data.message) {
+          // Specific error message from backend
+          swal("Oops!", error.response.data.message, "info");
+        } else if (error.response.data.errors) {
+          // Validation errors
+          console.log(error.response.data.errors);
+        } else {
+          swal("Oops!", "Something went wrong. Please try again.", "error");
+        }
+      } else {
+        swal("Oops!", error.message, "error");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

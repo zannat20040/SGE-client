@@ -2,7 +2,8 @@
 import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-
+import { FaCloudDownloadAlt } from "react-icons/fa";
+<FaCloudDownloadAlt />;
 function FileUpload({ studentDetails, refetch }) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ function FileUpload({ studentDetails, refetch }) {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/mco/upload/${studentDetails._id}`,
+        `http://localhost:5000/mco/upload/${studentDetails?._id}`,
         formData,
         {
           headers: {
@@ -88,19 +89,19 @@ function FileUpload({ studentDetails, refetch }) {
       )}
       <div className="mt-5">
         <h2 className="text-lg font-semibold">Uploaded Files:</h2>
-        {studentDetails.files.length > 0 ? (
+        {studentDetails?.files?.length > 0 ? (
           <ul className="mt-2">
-            {studentDetails.files.map((file) => (
+            {studentDetails?.files?.map((file) => (
               <li
-                key={file.public_id}
-                className="flex justify-between items-center mb-2 p-2 border rounded-md bg-gray-200"
+                key={file?.public_id}
+                className="flex justify-between items-center mb-2 p-2 pl-4 border rounded-md bg-gray-200 drop-shadow-sm  "
               >
-                <span>{file.filename}</span>
+                <span className="text-black">{file?.filename}</span>
                 <a
-                  onClick={() => handleDownload(file.url, file.filename)}
-                  className="btn bg-blue-500 text-white rounded-md px-4 py-2"
+                  onClick={() => handleDownload(file?.url, file?.filename)}
+                  className="btn bg-customPurple border-0 hover:text-customPurple rounded"
                 >
-                  Download
+                  <FaCloudDownloadAlt className="text-white  text-lg" />
                 </a>
               </li>
             ))}
@@ -109,6 +110,7 @@ function FileUpload({ studentDetails, refetch }) {
           <p>No files uploaded yet.</p>
         )}
       </div>
+    
     </div>
   );
 }

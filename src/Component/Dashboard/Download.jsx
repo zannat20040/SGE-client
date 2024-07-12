@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
+import { FaCloudDownloadAlt } from "react-icons/fa";
 import swal from "sweetalert";
 
 export default function Download({ studentDetails, refetch }) {
@@ -32,14 +33,14 @@ export default function Download({ studentDetails, refetch }) {
           {studentDetails.files.map((file) => (
             <li
               key={file.public_id}
-              className="flex justify-between items-center mb-2 p-2 border rounded-md bg-gray-200"
+              className="flex justify-between items-center mb-2 p-2 pl-4 border rounded-md bg-gray-200 drop-shadow-sm  "
             >
               <span>{file.filename}</span>
               <a
                 onClick={() => handleDownload(file.url, file.filename)}
-                className="btn bg-blue-500 text-white rounded-md px-4 py-2"
+                className="btn bg-customPurple border-0 hover:text-customPurple rounded"
               >
-                Download
+                <FaCloudDownloadAlt className="text-white  text-lg" />
               </a>
             </li>
           ))}

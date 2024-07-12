@@ -62,12 +62,6 @@ function FileUpload({ studentDetails, refetch }) {
 
   return (
     <div>
-      <a
-        href="https://www.w3schools.com/images/myw3schoolsimage.jpg"
-        download="w3logo"
-      >
-        ddd
-      </a>
       {studentDetails && studentDetails?.canUpload ? (
         <>
           <form

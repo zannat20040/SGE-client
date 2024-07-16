@@ -13,7 +13,6 @@ export default function AllStudentsForAdmin() {
   const [searchQuery, setSearchQuery] = useState("");
   const { allMcoList, isLoading: mcoListLoading } = useAllMcoList();
   const [selectedMco, setSelectedMco] = useState("");
-  console.log(selectedMco);
 
   const {
     data: allStudents,
@@ -45,6 +44,11 @@ export default function AllStudentsForAdmin() {
   const HandleMCOAssign = (e, id) => {
     setSelectedMco(e.target.value);
     console.log(id);
+    const data = {
+      assignedTo: selectedMco,
+    };
+
+    console.log(data);
 
     swal({
       title: "Do you really want to assign this MCO?",
@@ -55,16 +59,17 @@ export default function AllStudentsForAdmin() {
     }).then((willDelete) => {
       if (willDelete) {
         axiosPublic
-          .post(`/admin/assign-student/${id}`, {
+          .post(`/admin/assign-student/${id}`, data, {
             headers: {
               Authorization: `Bearer admin@gmail.com`,
             },
           })
           .then((res) => {
             console.log(res.data);
-            
+            swal(res.data.message);
+            refetch();
           })
-          .catch(err=>console.log(err))
+          .catch((err) => swal(err.res.data.message));
       } else {
         swal("You didn't assign any MCO to this student");
       }

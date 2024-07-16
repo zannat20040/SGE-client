@@ -96,4 +96,11 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  // {
+  //   path: "/admin",
+  //   element: (
+  //     <Dashboard />
+  //   ),
+  // }
 ]);

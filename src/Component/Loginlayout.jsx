@@ -19,9 +19,12 @@ export default function Loginlayout({ HandleLogin, loading }) {
           </div>
         </div>
         <div className=" p-4 pt-36 md:p-10 md:pt-0  pb-16 card h-screen bg-white w-full  rounded-none">
-          <h1 className="font-semibold text-2xl md:mt-20">
-            Welcome to Shabuj Global
-          </h1>
+          <div className=" md:mt-20 mt-0 mb-6 flex justify-end">
+            {/* <Link to={"/admin"}>
+              <button>Log in as Admin</button>
+            </Link> */}
+          </div>
+          <h1 className="font-semibold text-2xl">Welcome to Shabuj Global</h1>
           <p className="text-sm mt-2">
             {" "}
             Please sign-in to your account and start the adventure{" "}

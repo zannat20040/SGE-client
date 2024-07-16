@@ -75,48 +75,40 @@ export default function StudentOfMember() {
       <div className="grid justify-between gap-2 items-center grid-cols-2">
         <div className="bg-white rounded-md drop-shadow-md p-3 flex gap-5 items-center">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <PiStudent className="text-3xl" />
+            <PiStudent className="text-2xl" />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-customPurple">
-              Total Students
-            </h1>
-            <h1 className="text-xl text-gray-700">
+            <h1 className="text-xl  text-customPurple">Total Students</h1>
+            <h1 className=" text-gray-700">
               {allStudentofMember?.length} student
             </h1>
           </div>
         </div>
         <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <FaCheck className="text-3xl" />
+            <FaCheck className="text-2xl" />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-customPurple">
-              Enrolled Students
-            </h1>
-            <h1 className="text-xl text-gray-700">{enrollmentCount} student</h1>
+            <h1 className="text-xl  text-customPurple">Enrolled Students</h1>
+            <h1 className=" text-gray-700">{enrollmentCount} student</h1>
           </div>
         </div>
         <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <TbLocationBroken className="text-3xl" />
+            <TbLocationBroken className="text-2xl" />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-customPurple">
-              Dropout Students
-            </h1>
-            <h1 className="text-xl text-gray-700">{dropoutCount} student</h1>
+            <h1 className="text-xl  text-customPurple">Dropout Students</h1>
+            <h1 className=" text-gray-700">{dropoutCount} student</h1>
           </div>
         </div>
         <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <TbLocationBroken className="text-3xl" />
+            <TbLocationBroken className="text-2xl" />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-customPurple">
-              Total Earned
-            </h1>
-            <h1 className="text-xl text-gray-700">${totalEarned}</h1>
+            <h1 className="text-xl  text-customPurple">Total Earned</h1>
+            <h1 className="text-gray-700">${totalEarned}</h1>
           </div>
         </div>
       </div>

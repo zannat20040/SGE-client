@@ -48,7 +48,7 @@ export default function StudentOfMco() {
       <div className="grid justify-between gap-2 items-center grid-cols-3">
         <div className="bg-white rounded-md drop-shadow-md p-3 flex gap-5 items-center">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <PiStudent className="text-4xl" />
+            <PiStudent className="text-3xl" />
           </div>
           <div>
             <h1 className="text-xl font-semibold text-customPurple">
@@ -59,7 +59,7 @@ export default function StudentOfMco() {
         </div>
         <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <FaCheck className="text-4xl" />
+            <FaCheck className="text-3xl" />
           </div>
           <div>
             <h1 className="text-xl font-semibold text-customPurple">
@@ -70,7 +70,7 @@ export default function StudentOfMco() {
         </div>
         <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <TbLocationBroken className="text-4xl" />
+            <TbLocationBroken className="text-3xl" />
           </div>
           <div>
             <h1 className="text-xl font-semibold text-customPurple">

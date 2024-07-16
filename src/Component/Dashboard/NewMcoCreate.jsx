@@ -90,7 +90,7 @@ export default function NewMcoCreate() {
         </Typography>
       </div>
       <form className="card-body" onSubmit={HandleMCO}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 justify-between items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-between items-center">
           <div className="form-control">
             <label className="label">
               <span className="label-text">First Name</span>
@@ -114,7 +114,7 @@ export default function NewMcoCreate() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1  gap-5 justify-between items-center">
+        <div className="grid grid-cols-1  gap-3 justify-between items-center">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -127,7 +127,7 @@ export default function NewMcoCreate() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 justify-between items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-between items-center">
           <div className="form-control ">
             <label className="label">
               <span className="label-text text-black">Password *</span>

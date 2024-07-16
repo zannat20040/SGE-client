@@ -12,6 +12,7 @@ import AdminLogin from "./Layout/AdminLogin";
 import NewMcoCreate from "./Component/Dashboard/NewMcoCreate";
 import AllMCOList from "./Component/Dashboard/AllMCOList";
 import StudentOfMco from "./Component/Dashboard/StudentOfMco";
+import MemberListForAdmin from "./Component/Dashboard/MemberListForAdmin";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,14 @@ export const router = createBrowserRouter([
       {
         path: "admin/allMcoList/students/:email",
         element: <StudentOfMco />,
+      },
+      {
+        path: "admin/allMemberList",
+        element: <MemberListForAdmin />,
+      }, 
+      {
+        path: "admin/allMemberList/:email",
+        element: <MemberListForAdmin />,
       },
     ],
   },

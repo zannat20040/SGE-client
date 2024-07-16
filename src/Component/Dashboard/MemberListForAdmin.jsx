@@ -1,25 +1,25 @@
-import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { IoEyeOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import Loading from "../Loading";
 import useDateFormatter from "../../Hooks/useDateFormatter";
+import { useQuery } from "@tanstack/react-query";
+import { IconButton, Typography } from "@material-tailwind/react";
+import Loading from "../Loading";
+import { Link } from "react-router-dom";
+import { IoEyeOutline } from "react-icons/io5";
 
-export default function AllMCOList() {
+export default function MemberListForAdmin() {
   const axiosPublic = useAxiosPublic();
   const [searchQuery, setSearchQuery] = useState("");
   const { formatDate } = useDateFormatter();
 
   const {
-    data: allMcoList,
+    data: allMemberList,
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["allMco"],
+    queryKey: ["allMember"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/admin/all-mco`, {
+      const res = await axiosPublic.get(`/admin/all-member`, {
         headers: {
           Authorization: `Bearer admin@gmail.com`,
         },
@@ -28,15 +28,16 @@ export default function AllMCOList() {
     },
   });
 
+  console.log(allMemberList);
 
-  let filteredMco = allMcoList;
+  let filteredMember = allMemberList;
   if (searchQuery) {
-    filteredMco = allMcoList.filter((mco) => {
-      const firstNameMatches = mco.firstName
+    filteredMember = allMemberList.filter((member) => {
+      const firstNameMatches = member.firstName
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
 
-      const lastNameMatches = mco.lastName
+      const lastNameMatches = member.lastName
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
 
@@ -81,9 +82,9 @@ export default function AllMCOList() {
           <Loading />
         ) : (
           <>
-            {allMcoList?.length == 0 ? (
+            {allMemberList?.length == 0 ? (
               <tr className="flex justify-center w-full pt-8">
-                <td>You dont have any MCO. Please Assign first</td>
+                <td>Currenty no members are available</td>
               </tr>
             ) : (
               <div className="overflow-x-auto ">
@@ -91,34 +92,38 @@ export default function AllMCOList() {
                   <thead className="bg-gray-300">
                     <tr>
                       <th className="py-5 text-center">No.</th>
-                      <th className="py-5 text-center">MCO ID</th>
-                      <th className="py-5 text-center">MCO Name</th>
-                      <th className="py-5 text-center">MCO Email</th>
+                      <th className="py-5 text-center">Member ID</th>
+                      <th className="py-5 text-center">Member Name</th>
+                      <th className="py-5 text-center">Email</th>
+                      <th className="py-5 text-center">Phone Number</th>
 
                       <th className="py-5 text-center">Date</th>
-                      <th className="py-5 text-center">Assigned Student</th>
+                      <th className="py-5 text-center">Member's Student</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredMco
+                    {filteredMember
                       ?.slice()
                       .reverse()
-                      .map((mco, index) => (
-                        <tr key={mco?._id} className="hover">
+                      .map((member, index) => (
+                        <tr key={member?._id} className="hover">
                           <td className="text-center">{index + 1}</td>
                           <td className="text-center">
-                            ...{mco?._id && mco?._id.slice(-4)}
+                            ...{member?._id && member?._id.slice(-4)}
                           </td>
-                          <td className="text-center">{`${mco?.firstName} ${mco?.lastName}`}</td>
-                          <td className="text-center">{mco?.email}</td>
-
+                          <td className="text-center">{`${member?.firstName} ${member?.lastName}`}</td>
+                          <td className="text-center">{member?.email}</td>
                           <td className="text-center">
-                            <p>{formatDate(mco?.createdAt)?.date}</p>
-                            <p>{formatDate(mco?.createdAt)?.time}</p>
+                            {member?.primaryMobileNumber}
                           </td>
 
                           <td className="text-center">
-                            <Link to={`students/${mco?.email}`}>
+                            <p>{formatDate(member?.createdAt)?.date}</p>
+                            <p>{formatDate(member?.createdAt)?.time}</p>
+                          </td>
+
+                          <td className="text-center">
+                            <Link to={`students/${member?.email}`}>
                               <IconButton
                                 variant="text"
                                 className="rounded-full group"

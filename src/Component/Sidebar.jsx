@@ -81,7 +81,7 @@ export default function Sidebar() {
           </Drawer>
           <div className="flex-grow w-full  bg-gray-200 min-h-screen p-4 ">
             {isMemberDashboard ? (
-              <AdminTopbar />
+              <AdminTopbar handleButtonClick={handleButtonClick} />
             ) : (
               <Topbar handleButtonClick={handleButtonClick} />
             )}
@@ -122,7 +122,7 @@ export default function Sidebar() {
           </Drawer>
           <div className="w-full sm:w-8/12  lg:w-9/12 xl:w-full p-4 pt-2  main-outlet">
             {isMemberDashboard ? (
-              <AdminTopbar />
+              <AdminTopbar handleButtonClick={handleButtonClick} />
             ) : (
               <Topbar handleButtonClick={handleButtonClick} />
             )}

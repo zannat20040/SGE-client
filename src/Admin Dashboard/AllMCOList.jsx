@@ -16,15 +16,10 @@ export default function AllMCOList() {
   let filteredMco = allMcoList;
   if (searchQuery) {
     filteredMco = allMcoList.filter((mco) => {
-      const firstNameMatches = mco.firstName
+      const emailMatches = mco.email
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
-
-      const lastNameMatches = mco.lastName
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
-
-      return firstNameMatches || lastNameMatches;
+      return emailMatches;
     });
   }
 
@@ -44,7 +39,7 @@ export default function AllMCOList() {
           <input
             type="text"
             className="grow "
-            placeholder="Search by MCO name"
+            placeholder="Search by MCO email"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <svg

@@ -19,7 +19,6 @@ export default function StudentOfMember() {
   const {
     data: allStudentofMember,
     isLoading,
-    refetch,
   } = useQuery({
     queryKey: ["allStudentofMco", email],
     queryFn: async () => {

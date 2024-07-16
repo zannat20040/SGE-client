@@ -34,15 +34,10 @@ export default function MemberListForAdmin() {
   let filteredMember = allMemberList;
   if (searchQuery) {
     filteredMember = allMemberList.filter((member) => {
-      const firstNameMatches = member.firstName
+      const emailMatches = member.email
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
-
-      const lastNameMatches = member.lastName
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
-
-      return firstNameMatches || lastNameMatches;
+      return emailMatches;
     });
   }
 
@@ -62,7 +57,7 @@ export default function MemberListForAdmin() {
           <input
             type="text"
             className="grow "
-            placeholder="Search by member name"
+            placeholder="Search by member email"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <svg

@@ -38,14 +38,14 @@ export default function CountdownForMember({
             let totalEarned = 0;
             for (let i = 0; i < reversedEnrollments.length; i++) {
               if (i < 4) {
-                console.log(i);
                 totalEarned = 300;
+                setWillBePaid(totalEarned);
               } else {
                 totalEarned = 400;
+                setWillBePaid(totalEarned);
               }
             }
-
-            setWillBePaid(totalEarned); // Set total earnings
+            setWillBePaid(totalEarned);
           })
           .catch((error) => {
             console.error("Error making GET request:", error);

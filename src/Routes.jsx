@@ -68,6 +68,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+       {
+        path: "mcoStudents",
+        element: (
+          <PrivateRoute>
+            <AllStudents />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "membersStudent/:id",
         element: (

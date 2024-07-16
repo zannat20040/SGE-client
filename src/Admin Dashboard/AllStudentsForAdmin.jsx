@@ -6,14 +6,18 @@ import { Typography } from "@material-tailwind/react";
 import Loading from "../Component/Loading";
 import useAllMcoList from "../Hooks/useAllMcoList";
 import swal from "sweetalert";
+import toast from "react-hot-toast";
+import { FaCheck } from "react-icons/fa6";
 
 export default function AllStudentsForAdmin() {
+  // states
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
   const [searchQuery, setSearchQuery] = useState("");
   const { allMcoList, isLoading: mcoListLoading } = useAllMcoList();
   const [selectedMco, setSelectedMco] = useState("");
 
+  // student fetch
   const {
     data: allStudents,
     isLoading,
@@ -30,6 +34,7 @@ export default function AllStudentsForAdmin() {
     },
   });
 
+  // student filter by id
   let filteredStudents = allStudents;
 
   if (searchQuery) {
@@ -41,12 +46,18 @@ export default function AllStudentsForAdmin() {
     });
   }
 
+  // assign to
   const HandleMCOAssign = (e, id) => {
-    setSelectedMco(e.target.value);
+    e.preventDefault();
+
+    const form = e.target;
+    const mcoselect = form.mcoselect.value;
+
     const data = {
-      assignedTo: selectedMco,
+      assignedTo: mcoselect,
     };
 
+    console.log("mco-=======> ", data);
 
     swal({
       title: "Do you really want to assign this MCO?",
@@ -158,31 +169,41 @@ export default function AllStudentsForAdmin() {
                             </button>
                           </td>
                           <td className="text-center">
-                            {student?.assignedTo === "Not Assigned" ? (
-                              <>
+                            {student.assignedTo === "Not Assigned" ? (
+                              <form
+                                onSubmit={(e) =>
+                                  HandleMCOAssign(e, student._id)
+                                }
+                                className="input input-sm  rounded flex justify-between p-0  items-center focus:outline-0  outline-none text-gray-700  bg-white  border border-gray-300"
+                              >
                                 <select
-                                  className="input input-sm border border-gray-200 rounded bg-white text-gray-700 hover:text-gray-900  focus:outline-0"
-                                  value={selectedMco}
+                                  required
+                                  className="w-full border-gray-200 rounded bg-white focus:outline-0"
+                                  name="mcoselect"
                                   onChange={(e) =>
-                                    HandleMCOAssign(e, student?._id)
+                                    setSelectedMco(e.target.value)
                                   }
                                 >
-                                  <option value="" disabled>
-                                    Select MCO
-                                  </option>
+                                  <option value="">Select MCO</option>
                                   {allMcoList.map((mco) => (
                                     <option
-                                      key={mco?._id}
-                                      value={mco?.email}
+                                      key={mco._id}
+                                      value={mco.email}
                                       className="capitalize"
                                     >
-                                      {mco?.firstName} {mco?.lastName}
+                                      {mco.firstName} {mco.lastName}
                                     </option>
                                   ))}
-                                </select>{" "}
-                              </>
+                                </select>
+                                <button
+                                  className="btn btn-sm rounded  bg-customPurple text-white"
+                                  // disabled={!selectedMco}
+                                >
+                                  <FaCheck className="text-xs" />
+                                </button>
+                              </form>
                             ) : (
-                              <> {student?.assignedTo}</>
+                              <> {student.assignedTo}</>
                             )}
                           </td>
                         </tr>

@@ -30,7 +30,6 @@ export default function AllStudents() {
     return response.data;
   };
 
-
   const {
     data: studentsData,
     isLoading,
@@ -39,7 +38,6 @@ export default function AllStudents() {
     queryKey: ["students", userinfo],
     queryFn: fetchStudents,
   });
-
 
   // student filter
   let filteredStudents = studentsData;
@@ -92,7 +90,7 @@ export default function AllStudents() {
           <>
             {studentsData?.length == 0 ? (
               <tr className="flex justify-center w-full pt-8">
-                <td>You dont have any student. Please create first</td>
+                <td>You dont have any student</td>
               </tr>
             ) : (
               <>
@@ -102,7 +100,10 @@ export default function AllStudents() {
                     refetchStudents={refetch}
                   />
                 ) : (
-                  <AllStudentsForMCO />
+                  <AllStudentsForMCO
+                    filteredStudents={filteredStudents}
+                    refetchStudents={refetch}
+                  />
                 )}
               </>
             )}

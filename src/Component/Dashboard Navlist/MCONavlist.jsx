@@ -37,7 +37,7 @@ export default function MCONavlist() {
         Dashboard
       </NavLink>
       <NavLink
-        to="allstudents"
+        to="mcoStudents"
         className="flex items-center  p-3 rounded-md text-white hover:bg-gray-900/30 transition hover:text-white"
         style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
       >

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { IconButton, Tooltip } from "@material-tailwind/react";
 import { IoEyeOutline } from "react-icons/io5";
 import Modal from "../Component/Modal";
+import CountdownForMCO from "./CountdownForMCO";
 
 export default function AllStudentsForMCO({
   filteredStudents,
@@ -57,13 +58,15 @@ export default function AllStudentsForMCO({
                 </td>
                 <td className="text-center">
                   {student?.status?.status === "enrollment" ? (
-                    <CountDown
+                    <CountdownForMCO
                       enrollmentStartDate={student?.enrollmentStartDate}
                       createdBy={student?.createdBy}
                       refetch={refetchStudents}
                     />
                   ) : (
-                    <span>{student?.paymentStatus}</span>
+                    <span className="text-green-800 font-bold">
+                      {student?.paymentStatus}
+                    </span>
                   )}
                 </td>
                 <td className="text-center">

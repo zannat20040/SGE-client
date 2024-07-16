@@ -5,7 +5,6 @@ import Signup from "./Layout/Signup";
 import Dashboard from "./Layout/Dashboard";
 import MemDasboard from "./Member Dashboard/MemDasboard";
 import NewMember from "./Member Dashboard/NewMember";
-import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
 import PrivateRoute from "./Hooks/PrivateRoute";
 import NewMcoCreate from "./Admin Dashboard/NewMcoCreate";
 import AllMCOList from "./Admin Dashboard/AllMCOList";
@@ -15,8 +14,8 @@ import StudentOfMember from "./Admin Dashboard/StudentOfMember";
 import AllStudentsForAdmin from "./Admin Dashboard/AllStudentsForAdmin";
 import AdminDashboard from "./Admin Dashboard/AdminDashboard";
 import MCODashboard from "./MCO Dashboard/MCODashboard";
-import StudentDetails from "./Component/Dashboard/StudentDetails";
 import AllStudents from "./Component/Dashboard/AllStudents";
+import DetailsTab from "./Component/Dashboard/DetailsTab";
 
 export const router = createBrowserRouter([
   {
@@ -68,7 +67,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-       {
+      {
         path: "mcoStudents",
         element: (
           <PrivateRoute>
@@ -80,7 +79,7 @@ export const router = createBrowserRouter([
         path: "student/:id",
         element: (
           <PrivateRoute>
-            <StudentDetails />
+            <DetailsTab />
           </PrivateRoute>
         ),
       },

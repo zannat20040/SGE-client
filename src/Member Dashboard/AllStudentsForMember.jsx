@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { IconButton, Tooltip } from "@material-tailwind/react";
 import { IoEyeOutline } from "react-icons/io5";
 import CountDown from "../Component/Dashboard/CountDown";
+import CountdownForMember from "./CountdownForMember";
 
 export default function AllStudentsForMember({ filteredStudents , refetchStudents}) {
   const { formatDate } = useDateFormatter();
@@ -52,13 +53,13 @@ export default function AllStudentsForMember({ filteredStudents , refetchStudent
                 </td>
                 <td className="text-center">
                   {student?.status?.status === "enrollment" ? (
-                    <CountDown
+                    <CountdownForMember
                       enrollmentStartDate={student?.enrollmentStartDate}
                       createdBy={student?.createdBy}
                       refetch={refetchStudents}
                     />
                   ) : (
-                    <span>{student?.paymentStatus}</span>
+                    <span className="text-green-800 font-bold">{student?.paymentStatus}</span>
                   )}
                 </td>
                 <td className="text-center">

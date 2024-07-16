@@ -12,13 +12,13 @@ import {
   TabsBody,
   TabsHeader,
 } from "@material-tailwind/react";
-import MemberDetailsLayout from "./MemberDetailsLayout";
 import Updown from "./Updown";
-import MemberStatusDetails from "./MemberStatusDetails";
 import Comment from "./Comment";
 import UniCommunication from "./UniCommunication";
+import StudentDetailsLayout from "./StudentDetailsLayout";
+import StudentStatusDetails from "./StudentStatusDetails";
 
-export default function StudentDetails() {
+export default function DetailsTab() {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
@@ -53,7 +53,7 @@ export default function StudentDetails() {
       label: "Student/Course details",
       value: "Student/Course details",
       component: (
-        <MemberDetailsLayout
+        <StudentDetailsLayout
           studentDetails={studentDetails}
           refetch={refetch}
         />
@@ -67,7 +67,7 @@ export default function StudentDetails() {
     {
       label: "Status",
       value: "Status",
-      component: <MemberStatusDetails studentDetails={studentDetails} />,
+      component: <StudentStatusDetails studentDetails={studentDetails} />,
     },
     {
       label: "Comment",

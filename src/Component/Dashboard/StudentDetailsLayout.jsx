@@ -4,7 +4,7 @@ import StatusModal from "../StatusModal";
 import useStatus from "../../Hooks/useStatus";
 import Modal from "../Modal";
 
-export default function MemberDetailsLayout({ studentDetails, refetch }) {
+export default function StudentDetailsLayout({ studentDetails, refetch }) {
   // states
   const { formatDate } = useDateFormatter();
   const { userinfo } = useStatus();

@@ -13,8 +13,11 @@ export default function CommunicationDetails({ studentDetails }) {
           {studentDetails?.universityCommunication
             ?.slice()
             .reverse()
-            .map((communication) => (
-              <div className="f  rounded-md w-full  border-2 border-gray-200">
+            .map((communication, index) => (
+              <div
+                className="  rounded-md w-full  border-2 border-gray-200"
+                key={index}
+              >
                 <div className="px-5 py-4 border-b border-gray-200  flex justify-between flex-wrap items-center">
                   <p>{communication?.from}</p>
 

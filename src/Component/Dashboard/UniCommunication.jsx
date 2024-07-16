@@ -10,14 +10,6 @@ export default function UniCommunication({ studentDetails, refetch }) {
   const { user, loading, setLoading } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
 
-  // const ourUniversity = [
-  //   "University of Cambridge",
-  //   "Massachusetts Institute of Technology (MIT)",
-  //   "University of Oxford",
-  //   "Stanford University",
-  //   "Harvard University",
-  // ];
-
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
 
@@ -57,7 +49,6 @@ export default function UniCommunication({ studentDetails, refetch }) {
       from,
     };
 
-
     try {
       const response = await axiosPublic.post(
         `/mco/university-communication/${studentDetails?._id}`,
@@ -68,11 +59,11 @@ export default function UniCommunication({ studentDetails, refetch }) {
           },
         }
       );
-      refetch
+      refetch;
       toast.success(response?.data?.message);
       refetch();
     } catch (error) {
-      // console.log(error);
+      toast.success(err.response?.data);
     }
 
     form.reset();
@@ -86,23 +77,6 @@ export default function UniCommunication({ studentDetails, refetch }) {
           action=""
           className="grid grid-cols-2 lg:grid-cols-6 gap-3 justify-between items-center mb-6"
         >
-          {/* <div className="form-control col-span-2">
-            <select
-              name="selectedValue"
-              required
-              className="select select-primary border-gray-300 focus:border-indigo-500 rounded-md focus:outline-none"
-              defaultValue=""
-            >
-              <option value="" disabled>
-                From
-              </option>
-              {ourUniversity?.map((selectedOption, index) => (
-                <option key={index} value={selectedOption}>
-                  {selectedOption}
-                </option>
-              ))}
-            </select>
-          </div> */}
           <input
             type="text"
             name="from"

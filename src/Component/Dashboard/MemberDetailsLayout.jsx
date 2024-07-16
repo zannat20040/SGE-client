@@ -5,11 +5,13 @@ import useStatus from "../../Hooks/useStatus";
 import Modal from "../Modal";
 
 export default function MemberDetailsLayout({ studentDetails, refetch }) {
+  // states
   const { formatDate } = useDateFormatter();
   const { userinfo } = useStatus();
 
   return (
     <div className="w-full pb-10 flex flex-col gap-1 ">
+      {/* status change for mco only */}
       {userinfo && userinfo === "mco" && (
         <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 pt-10 sm:gap-4 flex-wrap items-center">
           <h1 className="font-semibold">Current Status: </h1>
@@ -18,12 +20,13 @@ export default function MemberDetailsLayout({ studentDetails, refetch }) {
             <Modal
               student={studentDetails}
               id={studentDetails?._id}
-              refetchStudents={refetch}
+              refetch={refetch}
             />
           </div>
         </div>
       )}
 
+      {/* student details */}
       <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 p-5 sm:gap-4 flex-wrap">
         <h1 className="font-semibold">Student ID: </h1>
         <p className="flex justify-end">{studentDetails?._id}</p>

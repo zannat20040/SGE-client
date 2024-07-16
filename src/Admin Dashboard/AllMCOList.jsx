@@ -2,16 +2,15 @@ import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import Loading from "../Loading";
-import useDateFormatter from "../../Hooks/useDateFormatter";
-import useAllMcoList from "../../Hooks/useAllMcoList";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import Loading from "../Component/Loading";
+import useDateFormatter from "../Hooks/useDateFormatter";
+import useAllMcoList from "../Hooks/useAllMcoList";
 
 export default function AllMCOList() {
   const [searchQuery, setSearchQuery] = useState("");
   const { formatDate } = useDateFormatter();
   const { allMcoList, isLoading, refetch } = useAllMcoList();
-
 
   let filteredMco = allMcoList;
   if (searchQuery) {
@@ -43,7 +42,7 @@ export default function AllMCOList() {
           <input
             type="text"
             className="grow "
-            placeholder="Search"
+            placeholder="Search by MCO name"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <svg

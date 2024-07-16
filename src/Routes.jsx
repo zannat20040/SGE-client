@@ -10,7 +10,7 @@ import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
 import PrivateRoute from "./Hooks/PrivateRoute";
 import AdminLogin from "./Layout/AdminLogin";
 import NewMcoCreate from "./Admin Dashboard/NewMcoCreate";
-import AllMCOList from "./Component/Dashboard/AllMCOList";
+import AllMCOList from "./Admin Dashboard/AllMCOList";
 import StudentOfMco from "./Component/Dashboard/StudentOfMco";
 import MemberListForAdmin from "./Component/Dashboard/MemberListForAdmin";
 import StudentOfMember from "./Component/Dashboard/StudentOfMember";
@@ -74,14 +74,7 @@ export const router = createBrowserRouter([
       //   path: "admin/assignMCO",
       //   element: <NewMcoCreate />,
       // },
-      {
-        path: "admin/allMcoList",
-        element: <AllMCOList />,
-      },
-      {
-        path: "admin/allMcoList/students/:email",
-        element: <StudentOfMco />,
-      },
+
       {
         path: "admin/allMemberList",
         element: <MemberListForAdmin />,
@@ -108,6 +101,14 @@ export const router = createBrowserRouter([
       {
         path: "assignMCO",
         element: <NewMcoCreate />,
+      },
+      {
+        path: "allMcoList",
+        element: <AllMCOList />,
+      },
+      {
+        path: "allMcoList/students/:email",
+        element: <StudentOfMco />,
       },
     ],
   },

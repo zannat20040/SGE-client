@@ -30,7 +30,6 @@ const CountDown = ({ enrollmentStartDate, refetch, createdBy }) => {
             },
           })
           .then((response) => {
-            console.log("GET request response:", response.data);
             setWillBePaid(response?.data?.length);
             // Handle response data as needed
           })
@@ -58,7 +57,6 @@ const CountDown = ({ enrollmentStartDate, refetch, createdBy }) => {
     return <span>{willBePaid >= 5 ? "400$" : "300$"}</span>;
   }
 
-  console.log(willBePaid);
 
   const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
   const hours = Math.floor(

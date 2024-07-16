@@ -45,12 +45,11 @@ export default function StudentOfMco() {
     ).length;
   }, [allStudentofMco]);
 
-  console.log(allStudentofMco);
 
   return (
     <div>
-      <div className="grid justify-between gap-2 items-center grid-cols-3">
-        <div className="bg-white rounded-md drop-shadow-md p-3 flex gap-5 items-center">
+      <div className="grid justify-between gap-2 items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:items-stretch">
+        <div className="md:col-span-2 lg:col-auto bg-white rounded-md drop-shadow-md p-3 flex gap-5 items-center h-full">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
             <PiStudent className="text-2xl" />
           </div>
@@ -63,7 +62,7 @@ export default function StudentOfMco() {
             </h1>
           </div>
         </div>
-        <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
+        <div className=" bg-white rounded drop-shadow-md p-3 flex gap-5 items-center h-full">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
             <FaCheck className="text-2xl" />
           </div>
@@ -74,7 +73,7 @@ export default function StudentOfMco() {
             <h1 className=" text-gray-700">{enrollmentCount} student</h1>
           </div>
         </div>
-        <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
+        <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center h-full">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
             <TbLocationBroken className="text-2xl" />
           </div>
@@ -86,6 +85,7 @@ export default function StudentOfMco() {
           </div>
         </div>
       </div>
+
       <div>
         {isLoading ? (
           <Loading />

@@ -68,11 +68,10 @@ export default function StudentOfMember() {
     return amountForFirstFour + amountForRemaining;
   }, [allStudentofMember]);
 
-  console.log(getEnrolledStudent);
 
   return (
     <div>
-      <div className="grid justify-between gap-2 items-center grid-cols-2">
+      <div className="grid justify-between gap-2 items-center grid-cols-2 ">
         <div className="bg-white rounded-md drop-shadow-md p-3 flex gap-5 items-center">
           <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
             <PiStudent className="text-2xl" />

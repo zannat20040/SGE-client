@@ -43,12 +43,10 @@ export default function AllStudentsForAdmin() {
 
   const HandleMCOAssign = (e, id) => {
     setSelectedMco(e.target.value);
-    console.log(id);
     const data = {
       assignedTo: selectedMco,
     };
 
-    console.log(data);
 
     swal({
       title: "Do you really want to assign this MCO?",
@@ -65,7 +63,6 @@ export default function AllStudentsForAdmin() {
             },
           })
           .then((res) => {
-            console.log(res.data);
             swal(res.data.message);
             refetch();
           })

@@ -22,7 +22,7 @@ export default function AllStudentsForMember({ filteredStudents , refetchStudent
             </th>
             <th className="py-5 text-center">Status</th>
             <th className="py-5 text-center">Date</th>
-            <th className="py-5 text-center">Days Left</th>
+            <th className="py-5 text-center">Payment</th>
             <th className="py-5 text-center">Action</th>
           </tr>
         </thead>
@@ -42,19 +42,6 @@ export default function AllStudentsForMember({ filteredStudents , refetchStudent
                   <p>{student?.preferredCourse}</p>
                 </td>
                 <td className="text-center">
-                  {/* {userinfo && userinfo === "member" ? (
-                    <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
-                      {student?.status?.status}
-                    </button>
-                  ) : (
-                    <>
-                      <Modal
-                        student={student}
-                        id={student?._id}
-                        refetchStudents={refetchStudents}
-                      />
-                    </>
-                  )} */}
                   <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
                     {student?.status?.status}
                   </button>
@@ -75,7 +62,7 @@ export default function AllStudentsForMember({ filteredStudents , refetchStudent
                   )}
                 </td>
                 <td className="text-center">
-                  <Link to={`/dashboard/membersStudent/${student?._id}`}>
+                  <Link to={`/dashboard/student/${student?._id}`}>
                     <Tooltip content="Details" className="rounded">
                       <IconButton variant="text" className="rounded-full group">
                         <IoEyeOutline className="text-base group-hover:text-customPurple" />

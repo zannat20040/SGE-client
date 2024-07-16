@@ -3,7 +3,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 
-export default function Modal({ id, student, refetchStudents }) {
+export default function Modal({ id, student, refetch }) {
   const [openModal, setOpenModal] = useState(false);
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
@@ -37,61 +37,25 @@ export default function Modal({ id, student, refetchStudents }) {
       comment,
     };
 
-    try {
-      const response = await axiosPublic.post(
-        `/mco/change-status/${id}`,
-        statusData,
-        {
-          headers: {
-            Authorization: `Bearer ${user?.email}`,
-          },
-        }
-      );
-      toast.success("Status updated successfully");
-      setOpenModal(false);
-      refetchStudents();
-    } catch (error) {
-      toast.error(error.response.data);
-    }
-  };
+    console.log(user?.email);
 
-//   const getStatusButtonColor = () => {
-//     const status = student?.status?.status.toLowerCase();
-//     switch (status) {
-//       case "application processing":
-//         return `bg-[#C9E9FA] text-[#00A6FF]`;
-//       case "application submitted":
-//         return `bg-[#C4DCB4] text-[#489711]`;
-//       case "pending doc's":
-//         return `bg-[#FFC0B2] text-[#D32F0B]`;
-//       case "offer issue conditional":
-//         return `bg-[#FCEE97] text-[#D3B600]`;
-//       case "offer issue unconditional":
-//         return `bg-[#C3FEE0] text-[#00BB5E]`;
-//       case "need payment":
-//         return `bg-[#DDC3FE] text-[#5A09C2]`;
-//       case "case Issued":
-//         return `bg-[] text-[]`;
-//       case "additional doc needed":
-//         return `bg-[] text-[]`;
-//       case "refund required":
-//         return `bg-[] text-[]`;
-//       case "application rejected":
-//       case "dropout":
-//         return `bg-[] text-[]`;
-//       case "enrollment":
-//         return `bg-[] text-[]`;
-//       case "partial payment":
-//         return `bg-[] text-[]`;
-//         return `bg-[] text-[]`;
-//       case "session expired":
-//         return `bg-[] text-[]`;
-//       case "doc received":
-//         return `bg-[] text-[]`;
-//       default:
-//         return `bg-[] text-[]`;
-//     }
-//   };
+    axiosPublic
+      .post(`/mco/change-status/${id}`, statusData, {
+        headers: {
+          Authorization: `Bearer ${user?.email}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        toast.success("Status updated successfully");
+        setOpenModal(false);
+        refetch();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err?.response?.data);
+      });
+  };
 
   return (
     <div className="">

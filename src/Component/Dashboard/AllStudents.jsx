@@ -26,14 +26,13 @@ export default function AllStudents() {
         Authorization: `Bearer ${user?.email}`,
       },
     });
-    refetch();
     return response.data;
   };
 
   const {
     data: studentsData,
+    refetch: refetchStudents,
     isLoading,
-    refetch,
   } = useQuery({
     queryKey: ["students", userinfo],
     queryFn: fetchStudents,
@@ -97,12 +96,12 @@ export default function AllStudents() {
                 {userinfo && userinfo === "member" ? (
                   <AllStudentsForMember
                     filteredStudents={filteredStudents}
-                    refetchStudents={refetch}
+                    refetchStudents={refetchStudents}
                   />
                 ) : (
                   <AllStudentsForMCO
                     filteredStudents={filteredStudents}
-                    refetchStudents={refetch}
+                    refetchStudents={refetchStudents}
                   />
                 )}
               </>

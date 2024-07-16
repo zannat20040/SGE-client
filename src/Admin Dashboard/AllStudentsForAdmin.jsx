@@ -184,7 +184,7 @@ export default function AllStudentsForAdmin() {
                                     setSelectedMco(e.target.value)
                                   }
                                 >
-                                  <option value="">Select MCO</option>
+                                  <option value="" disabled>Select MCO</option>
                                   {allMcoList.map((mco) => (
                                     <option
                                       key={mco._id}

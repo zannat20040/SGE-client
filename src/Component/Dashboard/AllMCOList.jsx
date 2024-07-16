@@ -28,7 +28,6 @@ export default function AllMCOList() {
     },
   });
 
-  console.log(allMcoList);
 
   let filteredMco = allMcoList;
   if (searchQuery) {
@@ -45,7 +44,6 @@ export default function AllMCOList() {
     });
   }
 
-  console.log(filteredMco);
 
   return (
     <div className="bg-white shadow-md  rounded-md pb-5">

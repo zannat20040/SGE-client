@@ -42,8 +42,6 @@ export default function NewMcoCreate() {
       password,
     };
 
-    console.log(data);
-
     createWithPass(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -58,12 +56,10 @@ export default function NewMcoCreate() {
                 },
               })
               .then((res) => {
-                console.log(res.data);
                 swal("Congratulations!", res.data.message, "success");
                 setLoading(false);
               })
               .catch((error) => {
-                console.log(error);
                 swal("Opps!", error.response.data.message, "error");
                 setLoading(false);
               });

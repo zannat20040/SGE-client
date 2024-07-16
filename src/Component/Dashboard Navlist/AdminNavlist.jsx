@@ -38,7 +38,7 @@ export default function AdminNavlist() {
         Dashboard
       </NavLink>
       <NavLink
-        to="newmember"
+        to="admin/assignMCO"
         className="flex items-center  p-3 rounded-md text-white hover:bg-gray-900/30 transition hover:text-white"
         style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
       >

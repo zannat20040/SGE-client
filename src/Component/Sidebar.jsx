@@ -43,9 +43,7 @@ export default function Sidebar() {
     }
   };
 
-  console.log(pathname)
   const isMemberDashboard = pathname.startsWith("/dashboard/admin");
-  console.log(isMemberDashboard)
 
   return (
     <React.Fragment>

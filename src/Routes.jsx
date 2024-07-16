@@ -9,6 +9,7 @@ import AllStudents from "./MCO Dashboard/AllStudents";
 import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
 import PrivateRoute from "./Hooks/PrivateRoute";
 import AdminLogin from "./Layout/AdminLogin";
+import NewMcoCreate from "./Component/Dashboard/NewMcoCreate";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "admin",
         element: <AdminLogin />,
+      },
+      {
+        path: "admin/assignMCO",
+        element: <NewMcoCreate/>,
       },
     ],
   },

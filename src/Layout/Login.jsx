@@ -1,15 +1,28 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Loginlayout from "../Component/Loginlayout";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import swal from "sweetalert";
+import useStatus from "../Hooks/useStatus";
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
   const { loginWithPass, setLoading, loading } = useContext(AuthContext);
+  const { userinfo, refetch } = useStatus();
+
+
+  useEffect(() => {
+    if (userinfo) {
+      navigate(
+        userinfo === "member"
+          ? location?.state?.redirectTo || "/dashboard/member"
+          : location?.state?.redirectTo || "/dashboard/admin"
+      );
+    }
+  }, [userinfo, navigate, location]);
 
   const HandleLogin = (e) => {
     e.preventDefault();
@@ -20,6 +33,7 @@ export default function Login() {
 
     loginWithPass(email, password)
       .then((userCredential) => {
+        refetch();
         const loginData = {
           email,
           username: userCredential?.user?.displayName,
@@ -41,13 +55,12 @@ export default function Login() {
         //     swal("Opps!", error.message, "error");
         //     setLoading(false);
         //   });
-        swal("Welcome back!", "You're now logged in and ready to explore.", "success");
-        setLoading(false);
-        navigate(
-          location?.state?.redirectTo
-            ? location?.state?.redirectTo
-            : "/dashboard/member"
+        swal(
+          "Welcome back!",
+          "You're now logged in and ready to explore.",
+          "success"
         );
+        setLoading(false);
       })
       .catch((error) => {
         swal("Opps!", error.message, "error");

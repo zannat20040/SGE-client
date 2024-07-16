@@ -5,10 +5,12 @@ import swal from "sweetalert";
 import { Typography } from "@material-tailwind/react";
 
 export default function NewMember() {
+  // states
   const { user, loading, setLoading } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
 
-  const HandleNewMemberAdd = async (e) => {
+  // member add funciton
+  const HandleNewMemberAdd = (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -33,37 +35,48 @@ export default function NewMember() {
       createdBy,
     };
 
-    try {
-      // eslint-disable-next-line no-unused-vars
-      const res = await axiosPublic.post("/member/student-registration", data, {
+    axiosPublic
+      .post("/member/student-registration", data, {
         headers: {
           Authorization: `Bearer ${user?.email}`,
         },
+      })
+      .then((res) => {
+        swal(
+          "Congratulation!",
+          "One student has been added successfully!",
+          "success"
+        );
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err)
+        swal("Oops!", err.response.data.message, "error");
+        setLoading(false);
       });
-      swal(
-        "Congratulation!",
-        "One student has been added successfully!",
-        "success"
-      );
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        if (error.response.data.message) {
-          swal("Oops!", error.response.data.message, "info");
-        } else if (error.response.data.errors) {
-        } else {
-          swal("Oops!", "Something went wrong. Please try again.", "error");
-        }
-      } else {
-        swal("Oops!", error.message, "error");
-      }
-    } finally {
-      setLoading(false);
-    }
+
+    // try {
+    //   // eslint-disable-next-line no-unused-vars
+    //   const res = await a
+
+    // } catch (error) {
+    //   if (error.response && error.response.status === 400) {
+    //     if (error.response.data.message) {
+    //       swal("Oops!", error.response.data.message, "info");
+    //     } else if (error.response.data.errors) {
+    //     } else {
+    //     }
+    //   } else {
+    //     swal("Oops!", error.message, "error");
+    //   }
+    // } finally {
+    // }
     form.reset();
   };
 
   return (
     <div className=" bg-white shadow-md rounded-md ">
+      {/* header */}
       <div className="card-body border-b border-gray-200">
         <Typography variant="h5" color="blue-gray">
           Proceed to Add Student
@@ -72,6 +85,7 @@ export default function NewMember() {
           Enter Details to Enroll a New Student
         </Typography>
       </div>
+      {/* member add form */}
       <form onSubmit={HandleNewMemberAdd} className="card-body">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 justify-between items-center">
           <div className="form-control">

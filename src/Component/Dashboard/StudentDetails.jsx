@@ -1,7 +1,10 @@
-import { useContext } from "react";
-import MemberDetailsLayout from "../Component/Dashboard/MemberDetailsLayout";
-import MemberStatusDetails from "../Component/Dashboard/MemberStatusDetails";
-import Comment from "../Component/Dashboard/Comment";
+import React, { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useParams } from "react-router-dom";
+import useStatus from "../../Hooks/useStatus";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../Loading";
 import {
   Tab,
   TabPanel,
@@ -9,17 +12,13 @@ import {
   TabsBody,
   TabsHeader,
 } from "@material-tailwind/react";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { AuthContext } from "../AuthProvider/AuthProvider";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
-import useStatus from "../Hooks/useStatus";
-import Loading from "../Component/Loading";
-import Updown from "../Component/Dashboard/Updown";
-import UniCommunication from "../Component/Dashboard/UniCommunication";
+import MemberDetailsLayout from "./MemberDetailsLayout";
+import Updown from "./Updown";
+import MemberStatusDetails from "./MemberStatusDetails";
+import Comment from "./Comment";
+import UniCommunication from "./UniCommunication";
 
-export default function MCOStudentDetails() {
-  // states
+export default function StudentDetails() {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();

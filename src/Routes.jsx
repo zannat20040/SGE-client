@@ -5,7 +5,6 @@ import Signup from "./Layout/Signup";
 import Dashboard from "./Layout/Dashboard";
 import MemDasboard from "./Member Dashboard/MemDasboard";
 import NewMember from "./Member Dashboard/NewMember";
-import AllStudents from "./MCO Dashboard/AllStudents";
 import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
 import PrivateRoute from "./Hooks/PrivateRoute";
 import NewMcoCreate from "./Admin Dashboard/NewMcoCreate";
@@ -15,6 +14,9 @@ import MemberListForAdmin from "./Admin Dashboard/MemberListForAdmin";
 import StudentOfMember from "./Admin Dashboard/StudentOfMember";
 import AllStudentsForAdmin from "./Admin Dashboard/AllStudentsForAdmin";
 import AdminDashboard from "./Admin Dashboard/AdminDashboard";
+import MCODashboard from "./MCO Dashboard/MCODashboard";
+import StudentDetails from "./Component/Dashboard/StudentDetails";
+import AllStudents from "./Component/Dashboard/AllStudents";
 
 export const router = createBrowserRouter([
   {
@@ -29,9 +31,9 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
-      // <PrivateRoute>
-      <Dashboard />
-      // </PrivateRoute>
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
     ),
     children: [
       {
@@ -39,6 +41,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MemDasboard />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "admin",
+        element: (
+          <PrivateRoute>
+            <MCODashboard />
           </PrivateRoute>
         ),
       },
@@ -51,7 +61,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "allstudents",
+        path: "membersStudent",
         element: (
           <PrivateRoute>
             <AllStudents />
@@ -59,14 +69,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "allstudents/:id",
+        path: "membersStudent/:id",
         element: (
           <PrivateRoute>
-            <MCOStudentDetails />
+            {/* <MCOStudentDetails /> */}
+            <StudentDetails />
           </PrivateRoute>
         ),
       },
-     
     ],
   },
 

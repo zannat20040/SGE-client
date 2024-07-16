@@ -44,8 +44,8 @@ export default function Comment({ studentDetails, refetch }) {
     <div>
       <div className="py-5 px-1 flex flex-col gap-2">
         {studentDetails?.comments?.length > 0 &&
-          studentDetails?.comments?.map((comment) => (
-            <div
+          studentDetails?.comments?.map((comment,index) => (
+            <div key={index}
               className={`flex ${
                 user?.displayName === comment?.commentedByEmail
                   ? "justify-end"

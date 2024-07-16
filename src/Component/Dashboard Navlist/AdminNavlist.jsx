@@ -48,14 +48,14 @@ export default function AdminNavlist() {
         Assign New MCO
       </NavLink>
       <NavLink
-        to="allstudents"
+        to="admin/allMcoList"
         className="flex items-center  p-3 rounded-md text-white hover:bg-gray-900/30 transition hover:text-white"
         style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
       >
         <ListItemPrefix>
           <MdGroups />
         </ListItemPrefix>
-        Our All MCO
+        Manage All MCO
       </NavLink>
       <NavLink
         to="allstudents"

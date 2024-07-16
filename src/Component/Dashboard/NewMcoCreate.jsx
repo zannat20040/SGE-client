@@ -25,6 +25,7 @@ export default function NewMcoCreate() {
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
     const email = form.email.value;
+    const location = form.location.value;
     const password = form.password.value;
     const confirmpass = form.confirmpass.value;
 
@@ -37,6 +38,7 @@ export default function NewMcoCreate() {
       firstName,
       lastName,
       email,
+      location,
       password,
     };
 
@@ -45,7 +47,7 @@ export default function NewMcoCreate() {
     axiosPublic
       .post("/admin/create-mco", data)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         // swal(
         //   "Congratulations!",
         //   res.data.message,
@@ -98,7 +100,7 @@ export default function NewMcoCreate() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 justify-between items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 justify-between items-center">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -110,6 +112,19 @@ export default function NewMcoCreate() {
               name="email"
             />
           </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Location</span>
+            </label>
+            <input
+              type="test"
+              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              required
+              name="location"
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 justify-between items-center">
           <div className="form-control ">
             <label className="label">
               <span className="label-text text-black">Password *</span>

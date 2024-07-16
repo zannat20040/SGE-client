@@ -16,9 +16,10 @@ export default function Sidebar() {
   const closeDrawer = () => setOpen(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const navigate = useNavigate();
-  const { userinfo, isLoading, refetch } = useStatus();
+  const { userinfo, isLoading, refetch, isError } = useStatus();
   const { pathname } = useLocation();
   const { signOutProfile } = useContext(AuthContext);
+
 
   // logout function
   const HandleLogout = () => {

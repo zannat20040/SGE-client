@@ -6,15 +6,19 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 const useStatus = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
-  const { data: userinfo, isLoading, refetch } = useQuery({
-    queryKey: [user?.email],
+  const { data: userinfo, isLoading, refetch, isError } = useQuery({
+    queryKey: [user?.email],  
     queryFn: async () => {
-      const res = await axiosPublic.get(`/role/${user?.email}`);
-      const userinfo = res?.data?.role;
-      return userinfo;
+      if (user?.email) {  
+        const res = await axiosPublic.get(`/role/${user.email}`);
+        const userinfo = res?.data?.role;
+        return userinfo;
+      }
+      return null; 
     },
   });
-  return { userinfo, refetch };
+
+  return { userinfo, refetch, isError, isLoading };
 };
 
 export default useStatus;

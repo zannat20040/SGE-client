@@ -2,16 +2,17 @@ import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import Loading from "../Component/Loading";
 import useDateFormatter from "../Hooks/useDateFormatter";
 import useAllMcoList from "../Hooks/useAllMcoList";
 
 export default function AllMCOList() {
+  // state
   const [searchQuery, setSearchQuery] = useState("");
   const { formatDate } = useDateFormatter();
-  const { allMcoList, isLoading, refetch } = useAllMcoList();
+  const { allMcoList, isLoading } = useAllMcoList();
 
+  // search filter
   let filteredMco = allMcoList;
   if (searchQuery) {
     filteredMco = allMcoList.filter((mco) => {
@@ -29,6 +30,7 @@ export default function AllMCOList() {
 
   return (
     <div className="bg-white shadow-md  rounded-md pb-5">
+      {/* header */}
       <div className="card-body border-b border-gray-200 flex justify-between items-center gap-5 flex-wrap flex-row">
         <div>
           <Typography variant="h5" color="blue-gray">
@@ -59,6 +61,8 @@ export default function AllMCOList() {
           </svg>
         </label>
       </div>
+
+      {/* list */}
       <>
         {isLoading ? (
           <Loading />

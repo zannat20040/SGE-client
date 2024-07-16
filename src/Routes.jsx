@@ -8,13 +8,13 @@ import NewMember from "./Member Dashboard/NewMember";
 import AllStudents from "./MCO Dashboard/AllStudents";
 import MCOStudentDetails from "./MCO Dashboard/MCOStudentDetails";
 import PrivateRoute from "./Hooks/PrivateRoute";
-import AdminLogin from "./Layout/AdminLogin";
 import NewMcoCreate from "./Admin Dashboard/NewMcoCreate";
 import AllMCOList from "./Admin Dashboard/AllMCOList";
-import StudentOfMco from "./Component/Dashboard/StudentOfMco";
-import MemberListForAdmin from "./Component/Dashboard/MemberListForAdmin";
-import StudentOfMember from "./Component/Dashboard/StudentOfMember";
-import AllStudentsForAdmin from "./Component/Dashboard/AllStudentsForAdmin";
+import StudentOfMco from "./Admin Dashboard/StudentOfMco";
+import MemberListForAdmin from "./Admin Dashboard/MemberListForAdmin";
+import StudentOfMember from "./Admin Dashboard/StudentOfMember";
+import AllStudentsForAdmin from "./Admin Dashboard/AllStudentsForAdmin";
+import AdminDashboard from "./Admin Dashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -66,27 +66,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: "admin",
-      //   element: <AdminLogin />,
-      // },
-      // {
-      //   path: "admin/assignMCO",
-      //   element: <NewMcoCreate />,
-      // },
-
-      {
-        path: "admin/allMemberList",
-        element: <MemberListForAdmin />,
-      },
-      {
-        path: "admin/allMemberList/students/:email",
-        element: <StudentOfMember />,
-      },
-      {
-        path: "admin/allStudents",
-        element: <AllStudentsForAdmin />,
-      },
+     
     ],
   },
 
@@ -96,7 +76,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <AdminLogin />,
+        element: <AdminDashboard />,
       },
       {
         path: "assignMCO",
@@ -109,6 +89,18 @@ export const router = createBrowserRouter([
       {
         path: "allMcoList/students/:email",
         element: <StudentOfMco />,
+      },
+      {
+        path: "allMemberList",
+        element: <MemberListForAdmin />,
+      },
+      {
+        path: "allMemberList/students/:email",
+        element: <StudentOfMember />,
+      },
+      {
+        path: "allStudents",
+        element: <AllStudentsForAdmin />,
       },
     ],
   },

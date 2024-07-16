@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import useDateFormatter from "../../Hooks/useDateFormatter";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useDateFormatter from "../Hooks/useDateFormatter";
 import { useQuery } from "@tanstack/react-query";
 import { IconButton, Typography } from "@material-tailwind/react";
-import Loading from "../Loading";
+import Loading from "../Component/Loading";
 import { Link } from "react-router-dom";
 import { IoEyeOutline } from "react-icons/io5";
 
 export default function MemberListForAdmin() {
+  // states
   const axiosPublic = useAxiosPublic();
   const [searchQuery, setSearchQuery] = useState("");
   const { formatDate } = useDateFormatter();
 
+  // member list fetch
   const {
     data: allMemberList,
     isLoading,
@@ -27,9 +29,8 @@ export default function MemberListForAdmin() {
       return res?.data;
     },
   });
-  
 
-
+  // search filter
   let filteredMember = allMemberList;
   if (searchQuery) {
     filteredMember = allMemberList.filter((member) => {
@@ -47,6 +48,7 @@ export default function MemberListForAdmin() {
 
   return (
     <div className="bg-white shadow-md  rounded-md pb-5">
+      {/* header */}
       <div className="card-body border-b border-gray-200 flex justify-between items-center gap-5 flex-wrap flex-row">
         <div>
           <Typography variant="h5" color="blue-gray">
@@ -60,7 +62,7 @@ export default function MemberListForAdmin() {
           <input
             type="text"
             className="grow "
-            placeholder="Search"
+            placeholder="Search by member name"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <svg
@@ -77,6 +79,8 @@ export default function MemberListForAdmin() {
           </svg>
         </label>
       </div>
+
+      {/* member list */}
       <>
         {isLoading ? (
           <Loading />
@@ -94,7 +98,7 @@ export default function MemberListForAdmin() {
                       <th className="py-5 text-center">No.</th>
                       <th className="py-5 text-center">Member ID</th>
                       <th className="py-5 text-center">Member Name</th>
-                      <th className="py-5 text-center">Email</th>
+                      <th className="py-5 text-center">Member Email</th>
                       <th className="py-5 text-center">Phone Number</th>
 
                       <th className="py-5 text-center">Date</th>
@@ -123,7 +127,9 @@ export default function MemberListForAdmin() {
                           </td>
 
                           <td className="text-center">
-                            <Link  to={`/dashboard/admin/allMemberList/students/${member?.email}`} >
+                            <Link
+                              to={`/admin/allMemberList/students/${member?.email}`}
+                            >
                               <IconButton
                                 variant="text"
                                 className="rounded-full group"

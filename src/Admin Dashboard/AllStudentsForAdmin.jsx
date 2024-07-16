@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import useDateFormatter from "../../Hooks/useDateFormatter";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useDateFormatter from "../Hooks/useDateFormatter";
 import { useQuery } from "@tanstack/react-query";
 import { Typography } from "@material-tailwind/react";
-import Loading from "../Loading";
-import useAllMcoList from "../../Hooks/useAllMcoList";
+import Loading from "../Component/Loading";
+import useAllMcoList from "../Hooks/useAllMcoList";
 import swal from "sweetalert";
 
 export default function AllStudentsForAdmin() {

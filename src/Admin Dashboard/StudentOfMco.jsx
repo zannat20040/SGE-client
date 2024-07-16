@@ -2,19 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useMemo } from "react";
 import { PiStudent } from "react-icons/pi";
 import { useParams } from "react-router-dom";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { FaCheck } from "react-icons/fa6";
 import { TbLocationBroken } from "react-icons/tb";
-import useDateFormatter from "../../Hooks/useDateFormatter";
-import { IconButton } from "@material-tailwind/react";
-import { IoEyeOutline } from "react-icons/io5";
-import Loading from "../Loading";
+import useDateFormatter from "../Hooks/useDateFormatter";
+import Loading from "../Component/Loading";
 
 export default function StudentOfMco() {
+  // states
   const { email } = useParams();
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
 
+  // all studet fetch for mco
   const {
     data: allStudentofMco,
     isLoading,
@@ -31,6 +31,8 @@ export default function StudentOfMco() {
     },
   });
 
+  // insight counting
+
   const enrollmentCount = useMemo(() => {
     if (!allStudentofMco) return 0;
     return allStudentofMco.filter(
@@ -45,47 +47,41 @@ export default function StudentOfMco() {
     ).length;
   }, [allStudentofMco]);
 
-
   return (
     <div>
+      {/* insight */}
       <div className="grid justify-between gap-2 items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:items-stretch">
-        <div className="md:col-span-2 lg:col-auto bg-white rounded-md drop-shadow-md p-3 flex gap-5 items-center h-full">
-          <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <PiStudent className="text-2xl" />
+        <div className="md:col-span-2 lg:col-auto bg-white rounded-md drop-shadow-md p-3 flex gap-3 items-center h-full">
+          <div className="flex justify-center items-center bg-customPurple p-3 text-white rounded-md">
+            <PiStudent className="text-xl" />
           </div>
           <div>
-            <h1 className="text-xl  text-customPurple">
-              Total Students
-            </h1>
+            <h1 className="  text-customPurple">Total Students</h1>
             <h1 className=" text-gray-700">
               {allStudentofMco?.length} student
             </h1>
           </div>
         </div>
-        <div className=" bg-white rounded drop-shadow-md p-3 flex gap-5 items-center h-full">
-          <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <FaCheck className="text-2xl" />
+        <div className=" bg-white rounded drop-shadow-md p-3 flex gap-3 items-center h-full">
+          <div className="flex justify-center items-center bg-customPurple p-3 text-white rounded-md">
+            <FaCheck className="text-xl" />
           </div>
           <div>
-            <h1 className="text-xl  text-customPurple">
-              Enrolled Students
-            </h1>
+            <h1 className=" text-customPurple">Enrolled Students</h1>
             <h1 className=" text-gray-700">{enrollmentCount} student</h1>
           </div>
         </div>
-        <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center h-full">
-          <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <TbLocationBroken className="text-2xl" />
+        <div className="bg-white rounded drop-shadow-md p-3 flex gap-3 items-center h-full">
+          <div className="flex justify-center items-center bg-customPurple p-3 text-white rounded-md">
+            <TbLocationBroken className="text-xl" />
           </div>
           <div>
-            <h1 className="text-xl text-customPurple">
-              Dropout Students
-            </h1>
+            <h1 className=" text-customPurple">Dropout Students</h1>
             <h1 className=" text-gray-700">{dropoutCount} student</h1>
           </div>
         </div>
       </div>
-
+      {/* student list */}
       <div>
         {isLoading ? (
           <Loading />

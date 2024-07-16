@@ -58,7 +58,7 @@ export default function AdminNavlist() {
         Manage All MCO
       </NavLink>
       <NavLink
-        to="admin/allMemberList"
+        to="allMemberList"
         className="flex items-center  p-3 rounded-md text-white hover:bg-gray-900/30 transition hover:text-white"
         style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
       >
@@ -68,7 +68,7 @@ export default function AdminNavlist() {
         Manage All Member
       </NavLink>
       <NavLink
-        to="admin/allStudents"
+        to="allStudents"
         className="flex items-center  p-3 rounded-md text-white hover:bg-gray-900/30 transition hover:text-white"
         style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
       >

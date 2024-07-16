@@ -1,18 +1,21 @@
 import React, { useMemo } from "react";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useLocation, useParams } from "react-router-dom";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { TbLocationBroken } from "react-icons/tb";
 import { FaCheck } from "react-icons/fa6";
 import { PiStudent } from "react-icons/pi";
-import Loading from "../Loading";
-import useDateFormatter from "../../Hooks/useDateFormatter";
+import Loading from "../Component/Loading";
+import useDateFormatter from "../Hooks/useDateFormatter";
+import { CiDollar } from "react-icons/ci";
 
 export default function StudentOfMember() {
+  // states
   const { email } = useParams();
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
 
+  // all student fetch for member
   const {
     data: allStudentofMember,
     isLoading,
@@ -29,6 +32,7 @@ export default function StudentOfMember() {
     },
   });
 
+  // insight counting
   const enrollmentCount = useMemo(() => {
     if (!allStudentofMember) return 0;
     return allStudentofMember.filter(
@@ -43,7 +47,8 @@ export default function StudentOfMember() {
     ).length;
   }, [allStudentofMember]);
 
-  const { data: getEnrolledStudent, isLoading: enrolledLoading } = useQuery({
+  // enrolled student fetch
+  const { data: getEnrolledStudent } = useQuery({
     queryKey: ["allEnrolledStudent", email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/member/enrolled/${email}`, {
@@ -55,6 +60,7 @@ export default function StudentOfMember() {
     },
   });
 
+  // member earning count
   const totalEarned = useMemo(() => {
     if (!getEnrolledStudent) return 0;
 
@@ -68,49 +74,51 @@ export default function StudentOfMember() {
     return amountForFirstFour + amountForRemaining;
   }, [allStudentofMember]);
 
-
   return (
     <div>
-      <div className="grid justify-between gap-2 items-center grid-cols-2 ">
-        <div className="bg-white rounded-md drop-shadow-md p-3 flex gap-5 items-center">
-          <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <PiStudent className="text-2xl" />
+      {/* insight */}
+      <div className="grid justify-between gap-2 items-center sm:grid-cols-2 grid-cols-1 ">
+        <div className="bg-white rounded-md drop-shadow-md p-3 flex gap-3 items-center">
+          <div className="flex justify-center items-center bg-customPurple p-3 text-white rounded-md">
+            <PiStudent className="text-xl" />
           </div>
           <div>
-            <h1 className="text-xl  text-customPurple">Total Students</h1>
+            <h1 className="text-customPurple">Total Students</h1>
             <h1 className=" text-gray-700">
               {allStudentofMember?.length} student
             </h1>
           </div>
         </div>
-        <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
-          <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <FaCheck className="text-2xl" />
+        <div className="bg-white rounded drop-shadow-md p-3 flex gap-3 items-center">
+          <div className="flex justify-center items-center bg-customPurple p-3 text-white rounded-md">
+            <FaCheck className="text-xl" />
           </div>
           <div>
-            <h1 className="text-xl  text-customPurple">Enrolled Students</h1>
+            <h1 className="text-customPurple">Enrolled Students</h1>
             <h1 className=" text-gray-700">{enrollmentCount} student</h1>
           </div>
         </div>
-        <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
-          <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <TbLocationBroken className="text-2xl" />
+        <div className="bg-white rounded drop-shadow-md p-3 flex gap-3 items-center">
+          <div className="flex justify-center items-center bg-customPurple p-3 text-white rounded-md">
+            <TbLocationBroken className="text-xl" />
           </div>
           <div>
-            <h1 className="text-xl  text-customPurple">Dropout Students</h1>
+            <h1 className="text-customPurple">Dropout Students</h1>
             <h1 className=" text-gray-700">{dropoutCount} student</h1>
           </div>
         </div>
-        <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
-          <div className="flex justify-center items-center bg-customPurple p-4 text-white rounded-md">
-            <TbLocationBroken className="text-2xl" />
+        <div className="bg-white rounded drop-shadow-md p-3 flex gap-3 items-center">
+          <div className="flex justify-center items-center bg-customPurple p-3 text-white rounded-md">
+            <CiDollar className="text-xl" />
           </div>
           <div>
-            <h1 className="text-xl  text-customPurple">Total Earned</h1>
+            <h1 className="text-customPurple">Total Earned</h1>
             <h1 className="text-gray-700">${totalEarned}</h1>
           </div>
         </div>
       </div>
+
+      {/* list */}
       <div>
         {isLoading ? (
           <Loading />

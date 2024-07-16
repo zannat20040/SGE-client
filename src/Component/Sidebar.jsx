@@ -1,23 +1,21 @@
 import React, { useContext } from "react";
-import {
-  Drawer,
-  Button,
-} from "@material-tailwind/react";
+import { Drawer, Button } from "@material-tailwind/react";
 import Logo from "./Logo";
 import MemberNav from "./Dashboard Navlist/MemberNav";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Topbar from "./Topbar";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useStatus from "../Hooks/useStatus";
 import MCONavlist from "./Dashboard Navlist/MCONavlist";
+import AdminNavlist from "./Dashboard Navlist/AdminNavlist";
 
 export default function Sidebar() {
   const [open, setOpen] = React.useState(false);
-  const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const navigate = useNavigate();
-  const { userinfo,isLoading, refetch } = useStatus();
+  const { userinfo, isLoading, refetch } = useStatus();
+  const { pathname } = useLocation();
 
   const { signOutProfile } = useContext(AuthContext);
   const HandleLogout = () => {
@@ -45,21 +43,39 @@ export default function Sidebar() {
     }
   };
 
+  console.log(pathname)
+  const isMemberDashboard = pathname.startsWith("/dashboard/admin");
+  console.log(isMemberDashboard)
+
   return (
     <React.Fragment>
       {isSmallScreen ? (
         <div>
-          <Drawer open={open} onClose={closeDrawer} className="bg-[#2f3349] min-w-[250px] w-[250px] ">
-          <div className="mb-2 flex items-center justify-between p-4 ]">
+          <Drawer
+            open={open}
+            onClose={closeDrawer}
+            className="bg-[#2f3349] min-w-[250px] w-[250px] "
+          >
+            <div className="mb-2 flex items-center justify-between p-4 ]">
               <Logo color={"text-white"} />
             </div>
-            {userinfo && userinfo === "member" ? (
-              <MemberNav />
+            {isMemberDashboard ? (
+              <AdminNavlist />
             ) : (
-              <MCONavlist />
+              <>
+                {userinfo && userinfo === "member" ? (
+                  <MemberNav />
+                ) : (
+                  <MCONavlist />
+                )}
+              </>
             )}
             <div className="rounded font-normal px-2">
-              <Button className="w-full bg-red-400 font-medium  rounded" size="md" onClick={HandleLogout} >
+              <Button
+                className="w-full bg-red-400 font-medium  rounded"
+                size="md"
+                onClick={HandleLogout}
+              >
                 Sign out
               </Button>
             </div>
@@ -71,17 +87,32 @@ export default function Sidebar() {
         </div>
       ) : (
         <div className="flex  bg-gray-200 h-auto  w-full">
-          <Drawer open={true} overlay={false} className="bg-[#2f3349] sticky left-0 min-h-screen min-w-[250px] w-[250px]" >
+          <Drawer
+            open={true}
+            overlay={false}
+            className="bg-[#2f3349] sticky left-0 min-h-screen min-w-[250px] w-[250px]"
+          >
             <div className="mb-2 flex items-center justify-between p-4 ]">
               <Logo color={"text-white"} />
             </div>
-            {userinfo && userinfo === "member" ? (
-              <MemberNav />
+            {isMemberDashboard ? (
+              <AdminNavlist />
             ) : (
-              <MCONavlist />
+              <>
+                {userinfo && userinfo === "member" ? (
+                  <MemberNav />
+                ) : (
+                  <MCONavlist />
+                )}
+              </>
             )}
+            {/* {userinfo && userinfo === "member" ? <MemberNav /> : <MCONavlist />} */}
             <div className="rounded font-normal px-2">
-              <Button className="w-full bg-red-400 font-medium rounded" size="md" onClick={HandleLogout} >
+              <Button
+                className="w-full bg-red-400 font-medium rounded"
+                size="md"
+                onClick={HandleLogout}
+              >
                 Sign out
               </Button>
             </div>

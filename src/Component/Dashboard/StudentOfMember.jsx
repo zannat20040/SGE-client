@@ -12,7 +12,6 @@ export default function StudentOfMember() {
   const { email } = useParams();
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
-//   const enrolledStudents = location?.state?.enrolledStudents;
 
   const {
     data: allStudentofMember,
@@ -44,8 +43,32 @@ export default function StudentOfMember() {
     ).length;
   }, [allStudentofMember]);
 
-  console.log(allStudentofMember)
+  const { data: getEnrolledStudent, isLoading: enrolledLoading } = useQuery({
+    queryKey: ["allEnrolledStudent", email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/member/enrolled/${email}`, {
+        headers: {
+          Authorization: `Bearer admin@gmail.com`,
+        },
+      });
+      return res?.data;
+    },
+  });
 
+  const totalEarned = useMemo(() => {
+    if (!getEnrolledStudent) return 0;
+
+    const totalStudents = getEnrolledStudent.length;
+    const firstFourCount = Math.min(totalStudents, 4);
+    const remainingCount = Math.max(0, totalStudents - 4);
+
+    const amountForFirstFour = 300 * firstFourCount;
+    const amountForRemaining = 400 * remainingCount;
+
+    return amountForFirstFour + amountForRemaining;
+  }, [allStudentofMember]);
+
+  console.log(getEnrolledStudent);
 
   return (
     <div>
@@ -59,7 +82,7 @@ export default function StudentOfMember() {
               Total Students
             </h1>
             <h1 className="text-xl text-gray-700">
-              {allStudentofMember?.length}
+              {allStudentofMember?.length} student
             </h1>
           </div>
         </div>
@@ -71,7 +94,7 @@ export default function StudentOfMember() {
             <h1 className="text-xl font-semibold text-customPurple">
               Enrolled Students
             </h1>
-            <h1 className="text-xl text-gray-700">{enrollmentCount}</h1>
+            <h1 className="text-xl text-gray-700">{enrollmentCount} student</h1>
           </div>
         </div>
         <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
@@ -82,7 +105,7 @@ export default function StudentOfMember() {
             <h1 className="text-xl font-semibold text-customPurple">
               Dropout Students
             </h1>
-            <h1 className="text-xl text-gray-700">{dropoutCount}</h1>
+            <h1 className="text-xl text-gray-700">{dropoutCount} student</h1>
           </div>
         </div>
         <div className="bg-white rounded drop-shadow-md p-3 flex gap-5 items-center">
@@ -93,7 +116,7 @@ export default function StudentOfMember() {
             <h1 className="text-xl font-semibold text-customPurple">
               Total Earned
             </h1>
-            <h1 className="text-xl text-gray-700">{dropoutCount}</h1>
+            <h1 className="text-xl text-gray-700">${totalEarned}</h1>
           </div>
         </div>
       </div>

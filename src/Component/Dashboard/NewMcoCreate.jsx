@@ -1,14 +1,17 @@
 import { Typography } from "@material-tailwind/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 export default function NewMcoCreate() {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  //   const [loading, setLoading] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPassSame, setIsPassSame] = useState(true);
   const axiosPublic = useAxiosPublic();
+  const { createWithPass, loading, setLoading } = useContext(AuthContext);
 
   const togglePasswordVisibility = (type) => {
     if (type === "password") {
@@ -25,7 +28,6 @@ export default function NewMcoCreate() {
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
     const email = form.email.value;
-    const location = form.location.value;
     const password = form.password.value;
     const confirmpass = form.confirmpass.value;
 
@@ -38,27 +40,44 @@ export default function NewMcoCreate() {
       firstName,
       lastName,
       email,
-      location,
       password,
     };
 
     console.log(data);
 
-    axiosPublic
-      .post("/admin/create-mco", data)
-      .then((res) => {
-        console.log(res.data);
-        // swal(
-        //   "Congratulations!",
-        //   res.data.message,
-        //   "success"
-        // );
-        setLoading(false);
+    createWithPass(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: `${firstName} ${lastName}`,
+        })
+          .then(() => {
+            axiosPublic
+              .post("/admin/create-mco", data, {
+                headers: {
+                  Authorization: `Bearer admin@gmail.com`,
+                },
+              })
+              .then((res) => {
+                console.log(res.data);
+                swal("Congratulations!", res.data.message, "success");
+                setLoading(false);
+              })
+              .catch((error) => {
+                console.log(error);
+                swal("Opps!", error.response.data.message, "error");
+                setLoading(false);
+              });
+          })
+          .catch((error) => {
+            // console.log(error);
+            swal("Opps!", error.message, "error");
+            setLoading(false);
+          });
       })
       .catch((error) => {
-        console.log(error);
-        // swal("Opps!", error.message, "error");
         setLoading(false);
+        swal("Opps!", error.message, "error");
       });
 
     setIsPassSame(true);
@@ -100,7 +119,7 @@ export default function NewMcoCreate() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 justify-between items-center">
+        <div className="grid grid-cols-1  gap-5 justify-between items-center">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -110,17 +129,6 @@ export default function NewMcoCreate() {
               className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
               required
               name="email"
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Location</span>
-            </label>
-            <input
-              type="test"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
-              required
-              name="location"
             />
           </div>
         </div>

@@ -8,6 +8,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import useStatus from "../Hooks/useStatus";
 import MCONavlist from "./Dashboard Navlist/MCONavlist";
 import AdminNavlist from "./Dashboard Navlist/AdminNavlist";
+import AdminTopbar from "./AdminTopbar";
 
 export default function Sidebar() {
   const [open, setOpen] = React.useState(false);
@@ -79,7 +80,11 @@ export default function Sidebar() {
             </div>
           </Drawer>
           <div className="flex-grow w-full  bg-gray-200 min-h-screen p-4 ">
-            <Topbar handleButtonClick={handleButtonClick} />
+            {isMemberDashboard ? (
+              <AdminTopbar />
+            ) : (
+              <Topbar handleButtonClick={handleButtonClick} />
+            )}
             <Outlet />
           </div>
         </div>
@@ -116,7 +121,12 @@ export default function Sidebar() {
             </div>
           </Drawer>
           <div className="w-full sm:w-8/12  lg:w-9/12 xl:w-full p-4 pt-2  main-outlet">
-            <Topbar />
+            {isMemberDashboard ? (
+              <AdminTopbar />
+            ) : (
+              <Topbar handleButtonClick={handleButtonClick} />
+            )}
+            {/* <Topbar /> */}
             <Outlet />
           </div>
         </div>

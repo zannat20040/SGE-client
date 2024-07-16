@@ -14,6 +14,7 @@ import AllMCOList from "./Component/Dashboard/AllMCOList";
 import StudentOfMco from "./Component/Dashboard/StudentOfMco";
 import MemberListForAdmin from "./Component/Dashboard/MemberListForAdmin";
 import StudentOfMember from "./Component/Dashboard/StudentOfMember";
+import AllStudentsForAdmin from "./Component/Dashboard/AllStudentsForAdmin";
 
 export const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
       {
         path: "admin/allMemberList/students/:email",
         element: <StudentOfMember />,
+      },
+      {
+        path: "admin/allStudents",
+        element: <AllStudentsForAdmin />,
       },
     ],
   },

@@ -1,32 +1,16 @@
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Loading from "../Loading";
 import useDateFormatter from "../../Hooks/useDateFormatter";
+import useAllMcoList from "../../Hooks/useAllMcoList";
 
 export default function AllMCOList() {
-  const axiosPublic = useAxiosPublic();
   const [searchQuery, setSearchQuery] = useState("");
   const { formatDate } = useDateFormatter();
-
-  const {
-    data: allMcoList,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["allMco"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/admin/all-mco`, {
-        headers: {
-          Authorization: `Bearer admin@gmail.com`,
-        },
-      });
-      return res?.data;
-    },
-  });
+  const { allMcoList, isLoading, refetch } = useAllMcoList();
 
 
   let filteredMco = allMcoList;

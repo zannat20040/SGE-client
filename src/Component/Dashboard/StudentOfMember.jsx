@@ -48,7 +48,7 @@ export default function StudentOfMember() {
     queryFn: async () => {
       const res = await axiosPublic.get(`/member/enrolled/${email}`, {
         headers: {
-          Authorization: `Bearer admin@gmail.com`,
+          Authorization: `Bearer ${email}`,
         },
       });
       return res?.data;

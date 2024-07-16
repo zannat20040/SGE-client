@@ -89,7 +89,7 @@ export default function Sidebar() {
           </div>
         </div>
       ) : (
-        <div className="flex  bg-gray-200 h-auto  w-full">
+        <div className="flex  bg-gray-200 h-auto w-full">
           <Drawer
             open={true}
             overlay={false}

@@ -1,17 +1,19 @@
 import { Typography } from "@material-tailwind/react";
 import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 
 export default function NewMcoCreate() {
+  // states
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPassSame, setIsPassSame] = useState(true);
   const axiosPublic = useAxiosPublic();
   const { createWithPass, loading, setLoading } = useContext(AuthContext);
 
+  // password show & hide
   const togglePasswordVisibility = (type) => {
     if (type === "password") {
       setShowPassword(!showPassword);
@@ -20,9 +22,9 @@ export default function NewMcoCreate() {
     }
   };
 
+  // mco create function
   const HandleMCO = (e) => {
     e.preventDefault();
-    setLoading(true);
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
@@ -65,7 +67,6 @@ export default function NewMcoCreate() {
               });
           })
           .catch((error) => {
-            // console.log(error);
             swal("Opps!", error.message, "error");
             setLoading(false);
           });
@@ -76,7 +77,6 @@ export default function NewMcoCreate() {
       });
 
     setIsPassSame(true);
-    setLoading(false);
   };
 
   return (
@@ -89,7 +89,10 @@ export default function NewMcoCreate() {
           Enter Details to Assign a New MCO
         </Typography>
       </div>
+
+      {/* mco create form */}
       <form className="card-body" onSubmit={HandleMCO}>
+        {/* row 1 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-between items-center">
           <div className="form-control">
             <label className="label">
@@ -114,6 +117,7 @@ export default function NewMcoCreate() {
             />
           </div>
         </div>
+        {/* row 2 */}
         <div className="grid grid-cols-1  gap-3 justify-between items-center">
           <div className="form-control">
             <label className="label">
@@ -127,6 +131,7 @@ export default function NewMcoCreate() {
             />
           </div>
         </div>
+        {/* row 3 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-between items-center">
           <div className="form-control ">
             <label className="label">
@@ -180,7 +185,7 @@ export default function NewMcoCreate() {
             <p className="text-red-700 ">&#10060; Passowrd doesn't match</p>
           )}
         </div>
-
+        {/* submit button */}
         <div className="form-control mt-6">
           <button className="btn rounded-md bg-customPurple text-white font-medium">
             {loading ? "Wait a Moment" : "Assign a New MCO"}

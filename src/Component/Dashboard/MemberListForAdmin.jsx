@@ -28,8 +28,6 @@ export default function MemberListForAdmin() {
     },
   });
 
-  console.log(allMemberList);
-
   let filteredMember = allMemberList;
   if (searchQuery) {
     filteredMember = allMemberList.filter((member) => {
@@ -45,6 +43,7 @@ export default function MemberListForAdmin() {
     });
   }
 
+  console.log(filteredMember)
   return (
     <div className="bg-white shadow-md  rounded-md pb-5">
       <div className="card-body border-b border-gray-200 flex justify-between items-center gap-5 flex-wrap flex-row">
@@ -123,7 +122,7 @@ export default function MemberListForAdmin() {
                           </td>
 
                           <td className="text-center">
-                            <Link to={`students/${member?.email}`}>
+                            <Link  to={`/dashboard/admin/allMemberList/students/${member?.email}`} >
                               <IconButton
                                 variant="text"
                                 className="rounded-full group"

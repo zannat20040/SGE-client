@@ -7,7 +7,6 @@ import { updateProfile } from "firebase/auth";
 
 export default function NewMcoCreate() {
   const [showPassword, setShowPassword] = useState(false);
-  //   const [loading, setLoading] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPassSame, setIsPassSame] = useState(true);
   const axiosPublic = useAxiosPublic();

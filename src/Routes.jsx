@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
         element: <AllMCOList />,
       },
       {
-        path: "admin/allMcoList/students",
+        path: "admin/allMcoList/students/:email",
         element: <StudentOfMco />,
       },
     ],

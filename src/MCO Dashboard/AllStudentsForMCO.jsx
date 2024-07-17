@@ -1,6 +1,5 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import useDateFormatter from "../Hooks/useDateFormatter";
-import CountDown from "../Component/Dashboard/CountDown";
 import { Link } from "react-router-dom";
 import { IconButton, Tooltip } from "@material-tailwind/react";
 import { IoEyeOutline } from "react-icons/io5";

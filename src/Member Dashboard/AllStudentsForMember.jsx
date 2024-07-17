@@ -5,7 +5,10 @@ import { IconButton, Tooltip } from "@material-tailwind/react";
 import { IoEyeOutline } from "react-icons/io5";
 import CountdownForMember from "./CountdownForMember";
 
-export default function AllStudentsForMember({ filteredStudents , refetchStudents}) {
+export default function AllStudentsForMember({
+  filteredStudents,
+  refetchStudents,
+}) {
   const { formatDate } = useDateFormatter();
 
   return (
@@ -27,7 +30,8 @@ export default function AllStudentsForMember({ filteredStudents , refetchStudent
         </thead>
         <tbody>
           {filteredStudents
-            ?.reverse()
+            ?.slice()
+            .reverse()
             .map((student, index) => (
               <tr key={student?._id} className="hover">
                 <td className="text-center">{index + 1}</td>
@@ -56,7 +60,9 @@ export default function AllStudentsForMember({ filteredStudents , refetchStudent
                       refetch={refetchStudents}
                     />
                   ) : (
-                    <span className="text-green-800 font-bold">{student?.paymentStatus}</span>
+                    <span className="text-green-800 font-bold">
+                      {student?.paymentStatus}
+                    </span>
                   )}
                 </td>
                 <td className="text-center">

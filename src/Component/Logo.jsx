@@ -10,7 +10,13 @@ export default function Logo({ color, role }) {
         <FaLeaf className="text-customPurple text-2xl" />
         <div className="flex gap-2">
           <h1 className={`font-medium ${color} text-xl`}>Shabuj Global</h1>
-          <Chip size="sm"   value={role}  className="font-thin  bg-green-700 w-fit rounded-full text-xs" />
+          {role && (
+            <Chip
+              size="sm"
+              value={role}
+              className="font-thin  bg-green-700 w-fit rounded-full text-xs"
+            />
+          )}
         </div>
       </div>
     </Link>

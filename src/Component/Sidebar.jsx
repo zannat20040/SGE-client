@@ -16,10 +16,9 @@ export default function Sidebar() {
   const closeDrawer = () => setOpen(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const navigate = useNavigate();
-  const { userinfo} = useStatus();
+  const { userinfo } = useStatus();
   const { pathname } = useLocation();
   const { signOutProfile } = useContext(AuthContext);
-
 
   // logout function
   const HandleLogout = () => {
@@ -48,6 +47,14 @@ export default function Sidebar() {
     }
   };
 
+  const getLogoRole = () => {
+    if (pathname.startsWith("/admin")) {
+      return "AD";
+    } else {
+      return userinfo === "member" ? "Mem" : "MCO";
+    }
+  };
+
   // admin path check
   const isMemberDashboard = pathname.startsWith("/admin");
 
@@ -62,7 +69,7 @@ export default function Sidebar() {
             className="bg-[#2f3349] min-w-[250px] w-[250px] "
           >
             <div className="mb-2 flex items-center justify-between p-4 ]">
-              <Logo color={"text-white"} />
+              <Logo color={"text-white"} role={getLogoRole()} />
             </div>
             {/* nav list change according to role */}
             {isMemberDashboard ? (
@@ -103,7 +110,7 @@ export default function Sidebar() {
           </div>
         </div>
       ) : (
-        // side bar for large device
+       
         <div className="flex  bg-gray-200 h-auto w-full">
           <Drawer
             open={true}
@@ -111,7 +118,7 @@ export default function Sidebar() {
             className="bg-[#2f3349] sticky left-0 min-h-screen min-w-[250px] w-[250px]"
           >
             <div className="mb-2 flex items-center justify-between p-4 ]">
-              <Logo color={"text-white"} />
+            <Logo color={"text-white"} role={getLogoRole()} />
             </div>
             {/* nav list change according to role */}
 

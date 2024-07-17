@@ -86,11 +86,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
               </Link>
             </p>
           </div>
-          <div className="flex justify-center mt-5 text-sm">
-            <Link to={"/admin/dashboard"}>
-              <button className="text-customPurple">Or, Log in as Admin</button>
-            </Link>
-          </div>
+    
         </div>
       </div>
     </div>

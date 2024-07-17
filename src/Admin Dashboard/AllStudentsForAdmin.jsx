@@ -99,7 +99,7 @@ export default function AllStudentsForAdmin() {
           <input
             type="text"
             className="grow "
-            placeholder="Search"
+            placeholder="Search by ID"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <svg
@@ -183,8 +183,9 @@ export default function AllStudentsForAdmin() {
                                   onChange={(e) =>
                                     setSelectedMco(e.target.value)
                                   }
+                                  defaultValue={''}
                                 >
-                                  <option value="" disabled>Select MCO</option>
+                                  <option value="" disabled>Not assigned</option>
                                   {allMcoList.map((mco) => (
                                     <option
                                       key={mco._id}

@@ -11,7 +11,8 @@ export default function NewMcoCreate() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPassSame, setIsPassSame] = useState(true);
   const axiosPublic = useAxiosPublic();
-  const { createWithPass, loading, setLoading } = useContext(AuthContext);
+  const { createWithPass, loading, setLoading, signOutProfile } =
+    useContext(AuthContext);
 
   // password show & hide
   const togglePasswordVisibility = (type) => {
@@ -58,8 +59,16 @@ export default function NewMcoCreate() {
                 },
               })
               .then((res) => {
-                swal("Congratulations!", res.data.message, "success");
+                signOutProfile()
+                  .then((res) => {
+                    console.log(res.data);
+                    setLoading(false);
+                  })
+                  .catch((error) => {
+                    setLoading(false);
+                  });
                 setLoading(false);
+                swal("Congratulations!", res.data.message, "success");
               })
               .catch((error) => {
                 swal("Opps!", error.response.data.message, "error");
@@ -76,6 +85,7 @@ export default function NewMcoCreate() {
         swal("Opps!", error.message, "error");
       });
 
+    form.reset();
     setIsPassSame(true);
   };
 
@@ -100,7 +110,7 @@ export default function NewMcoCreate() {
             </label>
             <input
               type="text"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
               required
               name="firstName"
             />
@@ -111,7 +121,7 @@ export default function NewMcoCreate() {
             </label>
             <input
               type="text"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
               required
               name="lastName"
             />
@@ -125,7 +135,7 @@ export default function NewMcoCreate() {
             </label>
             <input
               type="email"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
               required
               name="email"
             />

@@ -64,7 +64,7 @@ export default function AllStudents() {
           <input
             type="text"
             className="grow "
-            placeholder="Search bu student id"
+            placeholder="Search by student ID"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <svg

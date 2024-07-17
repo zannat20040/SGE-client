@@ -19,7 +19,7 @@ export default function Login() {
       navigate(
         userinfo === "member"
           ? location?.state?.redirectTo || "/dashboard/member"
-          : location?.state?.redirectTo || "/dashboard/admin"
+          : location?.state?.redirectTo || "/dashboard/mco"
       );
     }
   }, [userinfo, navigate, location]);

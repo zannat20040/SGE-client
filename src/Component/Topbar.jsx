@@ -71,7 +71,7 @@ export default function Topbar({ handleButtonClick }) {
                     duration={200}
                   >
                     <button>
-                      <CiDollar className="group text-2xl bg-yellow-800 text-white rounded-full cursor-pointer" />
+                      <CiDollar className="group  bg-yellow-800 text-white rounded-full cursor-pointer" />
                     </button>
                   </Tooltip>
                 </div>

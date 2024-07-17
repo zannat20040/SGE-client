@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "admin",
+        path: "mco",
         element: (
           <PrivateRoute>
             <MCODashboard />

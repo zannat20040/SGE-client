@@ -55,22 +55,6 @@ export default function NewMember() {
         setLoading(false);
       });
 
-    // try {
-    //   // eslint-disable-next-line no-unused-vars
-    //   const res = await a
-
-    // } catch (error) {
-    //   if (error.response && error.response.status === 400) {
-    //     if (error.response.data.message) {
-    //       swal("Oops!", error.response.data.message, "info");
-    //     } else if (error.response.data.errors) {
-    //     } else {
-    //     }
-    //   } else {
-    //     swal("Oops!", error.message, "error");
-    //   }
-    // } finally {
-    // }
     form.reset();
   };
 
@@ -94,7 +78,7 @@ export default function NewMember() {
             </label>
             <input
               type="text"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
               required
               name="firstName"
             />
@@ -105,7 +89,7 @@ export default function NewMember() {
             </label>
             <input
               type="text"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
               required
               name="lastName"
             />
@@ -118,7 +102,7 @@ export default function NewMember() {
             </label>
             <input
               type="email"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
               required
               name="email"
             />
@@ -129,7 +113,7 @@ export default function NewMember() {
             </label>
             <input
               type="number"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
               required
               name="primeNumber"
             />
@@ -140,7 +124,7 @@ export default function NewMember() {
             </label>
             <input
               type="number"
-              className="input input-bordered border focus:border-customPurple focus:border-2 focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
               required
               name="wpnumber"
             />

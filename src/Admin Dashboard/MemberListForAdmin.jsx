@@ -47,10 +47,10 @@ export default function MemberListForAdmin() {
       <div className="card-body border-b border-gray-200 flex justify-between items-center gap-5 flex-wrap flex-row">
         <div>
           <Typography variant="h5" color="blue-gray">
-            Student Records
+            Member Records
           </Typography>
           <Typography color="gray" className="mt-1 font-normal">
-            Explore Detailed Histories of Every Student
+            Explore Detailed Histories of Every Member
           </Typography>
         </div>
         <label className="input input-bordered flex items-center gap-2 rounded border-gray-300 lg:w-auto w-full">

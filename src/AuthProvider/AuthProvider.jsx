@@ -11,24 +11,23 @@ import app from "../Firebase/firebase.config";
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({children}) => {
-    const auth = getAuth(app);
+const AuthProvider = ({ children }) => {
+  const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
   const createWithPass = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const loginWithPass = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signOutProfile = () => {
-    setLoading(true)
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -36,12 +35,11 @@ const AuthProvider = ({children}) => {
     const unSubcribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-      setLoading(false);
+        setLoading(false);
       } else {
         setLoading(false);
         setUser(null);
       }
-     
     });
     return () => {
       unSubcribe();
@@ -55,7 +53,8 @@ const AuthProvider = ({children}) => {
     setUser,
     user,
     setLoading,
-    loading  };
+    loading,
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

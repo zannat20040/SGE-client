@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -14,6 +14,8 @@ export default function StudentOfMember() {
   const { email } = useParams();
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
+  const [totalAmount, setTotalAmount] = useState(null);
+
 
   // all student fetch for member
   const {
@@ -31,47 +33,64 @@ export default function StudentOfMember() {
     },
   });
 
+  useEffect(() => {
+    axiosPublic
+        .get(`/member/total-money/${email}`, {
+          headers: {
+            Authorization: `Bearer ${email}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setTotalAmount(response?.data?.totalMoney); //why this line showing error
+        })
+        .catch((error) => {
+          console.error("Error making GET request:", error);
+        });
+  }, [axiosPublic, email]);
+
+
   // insight counting
   const enrollmentCount = useMemo(() => {
     if (!allStudentofMember) return 0;
     return allStudentofMember.filter(
-      (student) => student.status.status === "enrollment"
+      (student) => student?.status?.status === "enrollment"
     ).length;
   }, [allStudentofMember]);
 
   const dropoutCount = useMemo(() => {
     if (!allStudentofMember) return 0;
     return allStudentofMember.filter(
-      (student) => student.status.status === "dropout"
+      (student) => student?.status?.status === "dropout"
     ).length;
   }, [allStudentofMember]);
 
   // enrolled student fetch
-  const { data: getEnrolledStudent } = useQuery({
-    queryKey: ["allEnrolledStudent", email],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/member/enrolled/${email}`, {
-        headers: {
-          Authorization: `Bearer ${email}`,
-        },
-      });
-      return res?.data;
-    },
-  });
+  // const { data: getEnrolledStudent } = useQuery({
+  //   queryKey: ["allEnrolledStudent", email],
+  //   queryFn: async () => {
+  //     const res = await axiosPublic.get(`/member/enrolled/${email}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${email}`,
+  //       },
+  //     });
+  //     return res?.data;
+  //   },
+  // });
 
-  // member earning count
-  const totalEarned = useMemo(() => {
-    if (!getEnrolledStudent) return 0;
+  // // member earning count
+  // const totalEarned = useMemo(() => {
+  //   if (!getEnrolledStudent) return 0;
 
-    const totalStudents = getEnrolledStudent.length;
-    const firstFourCount = Math.min(totalStudents, 4);
-    const remainingCount = Math.max(0, totalStudents - 4);
+  //   const totalStudents = getEnrolledStudent.length;
+  //   const firstFourCount = Math.min(totalStudents, 4);
+  //   const remainingCount = Math.max(0, totalStudents - 4);
 
-    const amountForFirstFour = 300 * firstFourCount;
-    const amountForRemaining = 400 * remainingCount;
+  //   const amountForFirstFour = 300 * firstFourCount;
+  //   const amountForRemaining = 400 * remainingCount;
 
-    return amountForFirstFour + amountForRemaining;
-  }, [allStudentofMember]);
+  //   return amountForFirstFour + amountForRemaining;
+  // }, [allStudentofMember]);
 
   return (
     <div>
@@ -112,7 +131,7 @@ export default function StudentOfMember() {
           </div>
           <div>
             <h1 className="text-customPurple">Total Earned</h1>
-            <h1 className="text-gray-700">${totalEarned}</h1>
+            <h1 className="text-gray-700">${totalAmount}</h1>
           </div>
         </div>
       </div>

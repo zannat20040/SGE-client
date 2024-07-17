@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import swal from "sweetalert";
@@ -6,7 +6,8 @@ import { Typography } from "@material-tailwind/react";
 
 export default function NewMember() {
   // states
-  const { user, loading, setLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false)
   const axiosPublic = useAxiosPublic();
 
   // member add funciton

@@ -1,10 +1,8 @@
-import React from "react";
-import Modal from "../Component/Modal";
+/* eslint-disable react/prop-types */
 import useDateFormatter from "../Hooks/useDateFormatter";
 import { Link } from "react-router-dom";
 import { IconButton, Tooltip } from "@material-tailwind/react";
 import { IoEyeOutline } from "react-icons/io5";
-import CountDown from "../Component/Dashboard/CountDown";
 import CountdownForMember from "./CountdownForMember";
 
 export default function AllStudentsForMember({ filteredStudents , refetchStudents}) {
@@ -29,8 +27,7 @@ export default function AllStudentsForMember({ filteredStudents , refetchStudent
         </thead>
         <tbody>
           {filteredStudents
-            ?.slice()
-            .reverse()
+            ?.reverse()
             .map((student, index) => (
               <tr key={student?._id} className="hover">
                 <td className="text-center">{index + 1}</td>

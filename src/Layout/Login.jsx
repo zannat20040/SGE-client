@@ -38,29 +38,29 @@ export default function Login() {
           email,
           username: userCredential?.user?.displayName,
         };
-        // axiosPublic
-        //   .post("/login", loginData)
-        //   .then((res) => {
-        //     console.log("response==> ", res);
-        //     swal("Good job!", res.data.message, "success");
-        //     setLoading(false);
-        //     navigate(
-        //       location?.state?.redirectTo
-        //         ? location?.state?.redirectTo
-        //         : "/dashboard/member"
-        //     );
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //     swal("Opps!", error.message, "error");
-        //     setLoading(false);
-        //   });
-        swal(
-          "Welcome back!",
-          "You're now logged in and ready to explore.",
-          "success"
-        );
-        setLoading(false);
+        axiosPublic
+          .post("/login", loginData)
+          .then((res) => {
+            console.log("response==> ", res);
+            swal("Good job!", res.data.message, "success");
+            setLoading(false);
+            navigate(
+              location?.state?.redirectTo
+                ? location?.state?.redirectTo
+                : "/dashboard/member"
+            );
+          })
+          .catch((error) => {
+            console.log(error);
+            swal("Opps!", error.message, "error");
+            setLoading(false);
+          });
+        // swal(
+        //   "Welcome back!",
+        //   "You're now logged in and ready to explore.",
+        //   "success"
+        // );
+        // setLoading(false);
       })
       .catch((error) => {
         swal("Opps!", error.message, "error");

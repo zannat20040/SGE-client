@@ -58,6 +58,7 @@ export default function AllStudentsForMember({
                       enrollmentStartDate={student?.enrollmentStartDate}
                       createdBy={student?.createdBy}
                       refetch={refetchStudents}
+                      paymentStatus={student?.paymentStatus}
                     />
                   ) : (
                     <span className="text-green-800 font-bold">

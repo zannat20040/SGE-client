@@ -1,17 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../AuthProvider/AuthProvider";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useEffect, useState } from "react";
 
 export default function CountdownForMember({
   enrollmentStartDate,
   refetch,
-  createdBy,
+  paymentStatus,
 }) {
   const [timeLeft, setTimeLeft] = useState(null);
-  const { user } = useContext(AuthContext);
-  const axiosPublic = useAxiosPublic();
-  const [willBePaid, setWillBePaid] = useState(0);
 
   useEffect(() => {
     let intervalId;
@@ -25,34 +20,7 @@ export default function CountdownForMember({
         setTimeLeft(timeDiff);
       } else {
         clearInterval(intervalId);
-
-        axiosPublic
-          .get(`/member/enrolled/${createdBy}`, {
-            headers: {
-              Authorization: `Bearer ${user?.email}`,
-            },
-          })
-          .then((response) => {
-            //here response contains an array that has the _id of the students that is enrolled.
-            console.log(response);
-            refetch();
-            const reversedEnrollments = response.data.slice().reverse();
-
-            let totalEarned = 0;
-            for (let i = 0; i < reversedEnrollments.length; i++) {
-              if (i < 4) {
-                totalEarned = 300;
-                setWillBePaid(totalEarned);
-              } else {
-                totalEarned = 400;
-                setWillBePaid(totalEarned);
-              }
-            }
-            setWillBePaid(totalEarned);
-          })
-          .catch((error) => {
-            console.error("Error making GET request:", error);
-          });
+        refetch();
       }
     };
 
@@ -66,7 +34,7 @@ export default function CountdownForMember({
     }
 
     return () => clearInterval(intervalId);
-  }, [axiosPublic, createdBy, enrollmentStartDate, refetch, user?.email]);
+  }, [enrollmentStartDate, refetch]);
 
   //convert times
   const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -78,7 +46,7 @@ export default function CountdownForMember({
   return (
     <div>
       {!timeLeft ? (
-        <span className="text-customPurple font-bold">${willBePaid}</span>
+        <span className="text-customPurple font-bold">${paymentStatus}</span>
       ) : (
         <span className="countdown font-mono text-xl">
           <span style={{ "--value": days }}></span>:

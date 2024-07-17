@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useContext, useEffect, useState } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useStatus from "../Hooks/useStatus";
@@ -11,29 +12,19 @@ export default function Topbar({ handleButtonClick }) {
   const axiosPublic = useAxiosPublic();
   const firstLetter = user?.displayName.trim().charAt(0).toUpperCase();
   const { userinfo } = useStatus();
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(null);
 
   useEffect(() => {
     if (userinfo === "member") {
       axiosPublic
-        .get(`/member/enrolled/${user?.email}`, {
+        .get(`/member/total-money/${user?.email}`, {
           headers: {
             Authorization: `Bearer ${user?.email}`,
           },
         })
         .then((response) => {
           console.log(response.data);
-          const reversedEnrollments = response.data.slice().reverse();
-
-          let total = 0;
-          for (let i = 0; i < reversedEnrollments.length; i++) {
-            if (i < 4) {
-              total += 300;
-            } else {
-              total += 400;
-            }
-          }
-          setTotalAmount(total);
+          setTotalAmount(response?.data?.totalMoney); //why this line showing error
         })
         .catch((error) => {
           console.error("Error making GET request:", error);

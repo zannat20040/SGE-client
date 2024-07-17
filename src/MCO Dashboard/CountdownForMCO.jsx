@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
@@ -34,11 +35,11 @@ export default function CountdownForMCO({
           .then((response) => {
             refetch();
             const numberOfEnrollments = response.data.slice().reverse();
-            
+
             if (numberOfEnrollments.length <= 4) {
-              setWillBePaid(300); 
+              setWillBePaid(300);
             } else {
-              setWillBePaid(400); 
+              setWillBePaid(400);
             }
 
             setTimeLeft(null);

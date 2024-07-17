@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
@@ -18,7 +19,7 @@ export default function CountdownForMember({
     const calculateTimeLeft = () => {
       const now = new Date();
       const enrollmentDate = new Date(enrollmentStartDate);
-      const timeDiff = enrollmentDate.getTime() + 10 * 1000 - now.getTime();
+      const timeDiff = enrollmentDate.getTime() + 15 * 1000 - now.getTime();
 
       if (timeDiff > 0) {
         setTimeLeft(timeDiff);
@@ -32,6 +33,8 @@ export default function CountdownForMember({
             },
           })
           .then((response) => {
+            //here response contains an array that has the _id of the students that is enrolled.
+            console.log(response);
             refetch();
             const reversedEnrollments = response.data.slice().reverse();
 
@@ -63,8 +66,9 @@ export default function CountdownForMember({
     }
 
     return () => clearInterval(intervalId);
-  }, [enrollmentStartDate, refetch]);
+  }, [axiosPublic, createdBy, enrollmentStartDate, refetch, user?.email]);
 
+  //convert times
   const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
   const hours = Math.floor(
     (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)

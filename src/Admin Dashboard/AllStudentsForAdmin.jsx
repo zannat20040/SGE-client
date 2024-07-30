@@ -118,7 +118,7 @@ export default function AllStudentsForAdmin() {
       </div>
 
       <>
-        {isLoading ? (
+        {mcoListLoading ? (
           <Loading />
         ) : (
           <>
@@ -164,7 +164,7 @@ export default function AllStudentsForAdmin() {
                             <p>{formatDate(student?.createdAt)?.time}</p>
                           </td>
                           <td className="text-center">
-                            <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
+                            <button type="button" className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
                               {student?.status?.status}
                             </button>
                           </td>
@@ -196,9 +196,8 @@ export default function AllStudentsForAdmin() {
                                     </option>
                                   ))}
                                 </select>
-                                <button
+                                <button type="button"
                                   className="btn btn-sm rounded  bg-customPurple text-white"
-                                  // disabled={!selectedMco}
                                 >
                                   <FaCheck className="text-xs" />
                                 </button>

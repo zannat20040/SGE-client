@@ -69,6 +69,7 @@ export default function NewMcoCreate() {
                   });
                 setLoading(false);
                 swal("Congratulations!", res.data.message, "success");
+                form.reset();
               })
               .catch((error) => {
                 swal("Opps!", error.response.data.message, "error");
@@ -85,7 +86,6 @@ export default function NewMcoCreate() {
         swal("Opps!", error.message, "error");
       });
 
-    form.reset();
     setIsPassSame(true);
   };
 
@@ -197,7 +197,7 @@ export default function NewMcoCreate() {
         </div>
         {/* submit button */}
         <div className="form-control mt-6">
-          <button className="btn rounded-md bg-customPurple text-white font-medium">
+          <button type="button" className="btn rounded-md bg-customPurple text-white font-medium">
             {loading ? "Wait a Moment" : "Assign a New MCO"}
           </button>
         </div>

@@ -7,7 +7,7 @@ import { Typography } from "@material-tailwind/react";
 export default function NewMember() {
   // states
   const { user } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const axiosPublic = useAxiosPublic();
 
   // member add funciton
@@ -49,14 +49,13 @@ export default function NewMember() {
           "success"
         );
         setLoading(false);
+        form.reset();
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         swal("Oops!", err.response.data.message, "error");
         setLoading(false);
       });
-
-    form.reset();
   };
 
   return (

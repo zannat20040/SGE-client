@@ -14,13 +14,13 @@ export default function CountdownForMember({
     const calculateTimeLeft = () => {
       const now = new Date();
       const enrollmentDate = new Date(enrollmentStartDate);
-      const timeDiff = enrollmentDate.getTime() + 15 * 1000 - now.getTime();
+      const timeDiff =Math.floor((enrollmentDate.getTime() + 15 * 1000) - now.getTime());
 
       if (timeDiff > 0) {
         setTimeLeft(timeDiff);
       } else {
         clearInterval(intervalId);
-        refetch();
+        refetch;
       }
     };
 
@@ -43,6 +43,8 @@ export default function CountdownForMember({
   );
   const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+
   return (
     <div>
       {!timeLeft ? (

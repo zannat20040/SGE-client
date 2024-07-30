@@ -60,13 +60,12 @@ export default function UniCommunication({ studentDetails, refetch }) {
         }
       );
       refetch;
+      form.reset();
       toast.success(response?.data?.message);
       refetch();
     } catch (error) {
       toast.success(err.response?.data);
     }
-
-    form.reset();
   };
 
   return (

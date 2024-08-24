@@ -37,8 +37,6 @@ export default function Modal({ id, student, refetch }) {
       comment,
     };
 
-    console.log(user?.email);
-
     axiosPublic
       .post(`/mco/change-status/${id}`, statusData, {
         headers: {
@@ -46,7 +44,6 @@ export default function Modal({ id, student, refetch }) {
         },
       })
       .then((res) => {
-        console.log(res);
         toast.success("Status updated successfully");
         setOpenModal(false);
         refetch();

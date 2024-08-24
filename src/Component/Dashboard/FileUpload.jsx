@@ -31,7 +31,6 @@ function FileUpload({ studentDetails, refetch }) {
           },
         }
       );
-      // console.log("File uploaded successfully: ", res.data);
       swal("Good job!", "File uploaded successfully", "success");
       setLoading(false); // Set loading to false when upload is complete
       e.target.reset(); // Reset the form input

@@ -16,6 +16,7 @@ import AdminDashboard from "./Admin Dashboard/AdminDashboard";
 import MCODashboard from "./MCO Dashboard/MCODashboard";
 import AllStudents from "./Component/Dashboard/AllStudents";
 import DetailsTab from "./Component/Dashboard/DetailsTab";
+import AdminCreate from "./Admin Dashboard/AdminCreate";
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <AdminDashboard />,
+      },
+      {
+        path: "adminCreate",
+        element: <AdminCreate />,
       },
       {
         path: "assignMCO",

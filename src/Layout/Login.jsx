@@ -41,7 +41,6 @@ export default function Login() {
         axiosPublic
           .post("/login", loginData)
           .then((res) => {
-            console.log("response==> ", res);
             swal("Good job!", res.data.message, "success");
             setLoading(false);
             navigate(

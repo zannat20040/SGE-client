@@ -23,7 +23,6 @@ export default function Topbar({ handleButtonClick }) {
           },
         })
         .then((response) => {
-          // console.log(response.data);
           setTotalAmount(response?.data?.totalMoney); //why this line showing error
         })
         .catch((error) => {

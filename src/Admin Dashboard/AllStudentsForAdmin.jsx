@@ -57,7 +57,6 @@ export default function AllStudentsForAdmin() {
       assignedTo: mcoselect,
     };
 
-    console.log("mco-=======> ", data);
 
     swal({
       title: "Do you really want to assign this MCO?",
@@ -196,7 +195,7 @@ export default function AllStudentsForAdmin() {
                                     </option>
                                   ))}
                                 </select>
-                                <button type="button"
+                                <button type="submit"
                                   className="btn btn-sm rounded  bg-customPurple text-white"
                                 >
                                   <FaCheck className="text-xs" />

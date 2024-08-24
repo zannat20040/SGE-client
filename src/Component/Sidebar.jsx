@@ -28,7 +28,6 @@ export default function Sidebar() {
         swal("Good job!", "Logged out successfully!", "success");
       })
       .catch((error) => {
-        // console.log(error);
       });
   };
 

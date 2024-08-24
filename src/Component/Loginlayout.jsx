@@ -18,7 +18,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
             />
           </div>
         </div>
-        <div className=" p-4 pt-36 md:p-10 md:pt-0  pb-16 card h-screen bg-white w-full  rounded-none">
+        <div className=" p-4 pt-20 md:p-10 md:pt-0  pb-16 card h-screen bg-white w-full  rounded-none">
           <h1 className="font-semibold text-2xl  md:mt-20 ">
             Welcome to Shabuj Global
           </h1>
@@ -29,7 +29,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
           <form className="mt-10 " onSubmit={HandleLogin}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-black">Email</span>
+                <span className="label-text text-black">Email *</span>
               </label>
               <input
                 type="email"
@@ -40,7 +40,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
             </div>
             <div className="form-control ">
               <label className="label">
-                <span className="label-text text-black">Password</span>
+                <span className="label-text text-black">Password *</span>
               </label>
               <div className="relative">
                 <input

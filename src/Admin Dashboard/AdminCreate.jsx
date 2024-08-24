@@ -6,7 +6,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-export default function NewMcoCreate() {
+export default function AdminCreate() {
   // states
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -26,7 +26,7 @@ export default function NewMcoCreate() {
   };
 
   // mco create function
-  const HandleMCO = (e) => {
+  const HandleAdmin = (e) => {
     e.preventDefault();
     const form = e.target;
     const firstName = form.firstName.value;
@@ -94,15 +94,15 @@ export default function NewMcoCreate() {
     <div className=" bg-white shadow-md rounded-md ">
       <div className="card-body border-b border-gray-200">
         <Typography variant="h5" color="blue-gray">
-          Proceed to Add MCO
+          Proceed to Add Admin
         </Typography>
         <Typography color="gray" className="mt-1 font-normal">
-          Enter Details to Assign a New MCO
+          Enter Details to Assign a New Admin
         </Typography>
       </div>
 
       {/* mco create form */}
-      <form className="card-body" onSubmit={HandleMCO}>
+      <form className="card-body" onSubmit={HandleAdmin}>
         {/* row 1 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-between items-center">
           <div className="form-control">
@@ -118,7 +118,8 @@ export default function NewMcoCreate() {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Last Name *</span>
+              <span className="label-text">Last Name *
+              </span>
             </label>
             <input
               type="text"
@@ -202,7 +203,7 @@ export default function NewMcoCreate() {
             type="submit"
             className="btn rounded-md bg-customPurple text-white font-medium"
           >
-            {loading ? "Wait a Moment......" : "Assign a New MCO"}
+            {loading ? "Wait a Moment......" : "Assign a New Admin"}
           </button>
         </div>
       </form>

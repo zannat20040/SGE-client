@@ -3,12 +3,14 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import swal from "sweetalert";
 import { Typography } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 export default function NewMember() {
   // states
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   // member add funciton
   const HandleNewMemberAdd = (e) => {
@@ -48,11 +50,11 @@ export default function NewMember() {
           "One student has been added successfully!",
           "success"
         );
+        navigate("/dashboard/membersStudent");
         setLoading(false);
         form.reset();
       })
       .catch((err) => {
-        console.log(err);
         swal("Oops!", err.response.data.message, "error");
         setLoading(false);
       });
@@ -74,7 +76,7 @@ export default function NewMember() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 justify-between items-center">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">First Name</span>
+              <span className="label-text">First Name *</span>
             </label>
             <input
               type="text"
@@ -85,7 +87,7 @@ export default function NewMember() {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Last Name</span>
+              <span className="label-text">Last Name *</span>
             </label>
             <input
               type="text"
@@ -98,7 +100,7 @@ export default function NewMember() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 justify-between items-center">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text">Email *</span>
             </label>
             <input
               type="email"
@@ -109,7 +111,7 @@ export default function NewMember() {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Primary Phone Number</span>
+              <span className="label-text">Primary Phone Number *</span>
             </label>
             <input
               type="number"
@@ -120,7 +122,7 @@ export default function NewMember() {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Whatsapp Number</span>
+              <span className="label-text">Whatsapp Number *</span>
             </label>
             <input
               type="number"
@@ -133,13 +135,17 @@ export default function NewMember() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2  gap-5  justify-between items-center">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Preferred Courses</span>
+              <span className="label-text">Preferred Courses *</span>
             </label>
             <select
               className="select select-bordered w-full rounded-md focus:outline-none"
               required
               name="preferredCourses"
+              defaultValue={""}
             >
+              <option value="" disabled>
+                Select from here
+              </option>
               <option>Computer Science</option>
               <option>Business Administration (MBA)</option>
               <option>Medicine</option>
@@ -151,13 +157,17 @@ export default function NewMember() {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Preferred University</span>
+              <span className="label-text">Preferred University *</span>
             </label>
             <select
               className="select select-bordered w-full rounded-md focus:outline-none"
               required
               name="preferredUni"
+              defaultValue={""}
             >
+              <option value="" disabled>
+                Select from here
+              </option>
               <option>Harvard University</option>
               <option>Stanford University</option>
               <option>University of Oxford</option>
@@ -167,8 +177,11 @@ export default function NewMember() {
           </div>
         </div>
         <div className="form-control mt-6">
-          <button className="btn rounded-md bg-customPurple text-white font-medium">
-            {loading ? "Wait a Moment" : "Add New Student"}
+          <button
+            type="submit"
+            className="btn rounded-md bg-customPurple text-white font-medium"
+          >
+            {loading ? "Wait a Moment......" : "Add New Student"}
           </button>
         </div>
       </form>

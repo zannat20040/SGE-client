@@ -41,11 +41,10 @@ export default function StudentOfMember() {
           },
         })
         .then((response) => {
-          console.log(response.data);
-          setTotalAmount(response?.data?.totalMoney); //why this line showing error
+          setTotalAmount(response?.data?.totalMoney || 0);
         })
         .catch((error) => {
-          console.error("Error making GET request:", error);
+          setTotalAmount(0); 
         });
   }, [axiosPublic, email]);
 
@@ -65,32 +64,6 @@ export default function StudentOfMember() {
     ).length;
   }, [allStudentofMember]);
 
-  // enrolled student fetch
-  // const { data: getEnrolledStudent } = useQuery({
-  //   queryKey: ["allEnrolledStudent", email],
-  //   queryFn: async () => {
-  //     const res = await axiosPublic.get(`/member/enrolled/${email}`, {
-  //       headers: {
-  //         Authorization: `Bearer ${email}`,
-  //       },
-  //     });
-  //     return res?.data;
-  //   },
-  // });
-
-  // // member earning count
-  // const totalEarned = useMemo(() => {
-  //   if (!getEnrolledStudent) return 0;
-
-  //   const totalStudents = getEnrolledStudent.length;
-  //   const firstFourCount = Math.min(totalStudents, 4);
-  //   const remainingCount = Math.max(0, totalStudents - 4);
-
-  //   const amountForFirstFour = 300 * firstFourCount;
-  //   const amountForRemaining = 400 * remainingCount;
-
-  //   return amountForFirstFour + amountForRemaining;
-  // }, [allStudentofMember]);
 
   return (
     <div>

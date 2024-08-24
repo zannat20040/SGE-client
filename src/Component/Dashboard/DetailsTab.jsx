@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
@@ -47,6 +47,7 @@ export default function DetailsTab() {
     queryFn: () => fetchStudentDetails(id),
   });
 
+
   // tab & tab panel
   const data = [
     {
@@ -89,7 +90,9 @@ export default function DetailsTab() {
 
   return (
     <div className="bg-white rounded-md  shadow-md p-5 ">
-      <Tabs value="Student/Course details" className="p-0 ">
+      <Tabs
+        className="p-0 "
+      >
         {/* tab header */}
         <TabsHeader className="items-center  p-2 flex-wrap sm:flex-nowrap rounded -z-0">
           {data.map(({ label, value }) => (

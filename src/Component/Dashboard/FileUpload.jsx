@@ -4,7 +4,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-<FaCloudDownloadAlt />;
+
 function FileUpload({ studentDetails, refetch }) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,6 +19,8 @@ function FileUpload({ studentDetails, refetch }) {
     const formData = new FormData();
     formData.append("file", file);
 
+    console.log(formData)
+    console.log(file)
     setLoading(true); // Set loading to true when upload starts
 
     try {

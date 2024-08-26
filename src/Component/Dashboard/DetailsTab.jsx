@@ -92,6 +92,8 @@ export default function DetailsTab() {
     <div className="bg-white rounded-md  shadow-md p-5 ">
       <Tabs
         className="p-0 "
+        value={'Student/Course details'}
+
       >
         {/* tab header */}
         <TabsHeader className="items-center  p-2 flex-wrap sm:flex-nowrap rounded -z-0">

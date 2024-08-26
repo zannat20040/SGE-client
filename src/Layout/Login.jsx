@@ -51,15 +51,9 @@ export default function Login() {
           })
           .catch((error) => {
             console.log(error);
-            swal("Opps!", error.message, "error");
+            swal("Opps!", error.response.data.error, "error");
             setLoading(false);
           });
-        // swal(
-        //   "Welcome back!",
-        //   "You're now logged in and ready to explore.",
-        //   "success"
-        // );
-        // setLoading(false);
       })
       .catch((error) => {
         swal("Opps!", error.message, "error");

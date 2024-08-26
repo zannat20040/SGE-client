@@ -17,6 +17,7 @@ export default function Sidebar() {
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const navigate = useNavigate();
   const { userinfo } = useStatus();
+  console.log(userinfo);
   const { pathname } = useLocation();
   const { signOutProfile } = useContext(AuthContext);
 
@@ -27,8 +28,7 @@ export default function Sidebar() {
         navigate("/");
         swal("Good job!", "Logged out successfully!", "success");
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
   };
 
   // responsive function
@@ -46,13 +46,13 @@ export default function Sidebar() {
     }
   };
 
-  const getLogoRole = () => {
-    if (pathname.startsWith("/admin")) {
-      return "AD";
-    } else {
-      return userinfo === "member" ? "Mem" : "MCO";
-    }
-  };
+  // const getLogoRole = () => {
+  //   if (pathname.startsWith("/admin")) {
+  //     return "AD";
+  //   } else {
+  //     return userinfo === "member" ? "Mem" : "MCO";
+  //   }
+  // };
 
   // admin path check
   const isMemberDashboard = pathname.startsWith("/admin");
@@ -71,36 +71,28 @@ export default function Sidebar() {
               <Logo color={"text-white"} role={getLogoRole()} />
             </div>
             {/* nav list change according to role */}
-            {isMemberDashboard ? (
+            {userinfo && userinfo === "member" ? (
+              <MemberNav />
+            ) : userinfo === "admin" ? (
               <AdminNavlist />
             ) : (
-              <>
-                {userinfo && userinfo === "member" ? (
-                  <MemberNav />
-                ) : (
-                  <MCONavlist />
-                )}
-              </>
+              <MCONavlist />
             )}
 
-            {/* sign out button according to role */}
-            {isMemberDashboard ? (
-              ""
-            ) : (
-              <div className="rounded font-normal px-2">
-                <Button
-                  className="w-full bg-red-400 font-medium  rounded"
-                  size="md"
-                  onClick={HandleLogout}
-                >
-                  Sign out
-                </Button>
-              </div>
-            )}
+            {/* sign out button */}
+            <div className="rounded font-normal px-2">
+              <Button
+                className="w-full bg-red-400 font-medium  rounded"
+                size="md"
+                onClick={HandleLogout}
+              >
+                Sign out
+              </Button>
+            </div>
           </Drawer>
           <div className="flex-grow w-full  bg-gray-200 min-h-screen md:p-4 p-2 ">
             {/* topbar change according to role */}
-            {isMemberDashboard ? (
+            {userinfo === "admin" ? (
               <AdminTopbar handleButtonClick={handleButtonClick} />
             ) : (
               <Topbar handleButtonClick={handleButtonClick} />
@@ -109,7 +101,6 @@ export default function Sidebar() {
           </div>
         </div>
       ) : (
-       
         <div className="flex  bg-gray-200 h-auto w-full">
           <Drawer
             open={true}
@@ -117,40 +108,33 @@ export default function Sidebar() {
             className="bg-[#2f3349] sticky left-0 min-h-screen min-w-[250px] w-[250px]"
           >
             <div className="mb-2 flex items-center justify-between p-4 ]">
-            <Logo color={"text-white"} role={getLogoRole()} />
+              <Logo color={"text-white"} role={userinfo?.substring(0, 3)} />
             </div>
+
             {/* nav list change according to role */}
 
-            {isMemberDashboard ? (
+            {userinfo && userinfo === "member" ? (
+              <MemberNav />
+            ) : userinfo === "admin" ? (
               <AdminNavlist />
             ) : (
-              <>
-                {userinfo && userinfo === "member" ? (
-                  <MemberNav />
-                ) : (
-                  <MCONavlist />
-                )}
-              </>
+              <MCONavlist />
             )}
 
             {/* sign out button according to role */}
-            {isMemberDashboard ? (
-              ""
-            ) : (
-              <div className="rounded font-normal px-2">
-                <Button
-                  className="w-full bg-red-400 font-medium rounded"
-                  size="md"
-                  onClick={HandleLogout}
-                >
-                  Sign out
-                </Button>
-              </div>
-            )}
+            <div className="rounded font-normal px-2">
+              <Button
+                className="w-full bg-red-400 font-medium rounded"
+                size="md"
+                onClick={HandleLogout}
+              >
+                Sign out
+              </Button>
+            </div>
           </Drawer>
           <div className="w-full sm:w-8/12  lg:w-9/12 xl:w-full md:p-4 p-2   main-outlet">
             {/* topbar change according to role */}
-            {isMemberDashboard ? (
+            {userinfo === "admin" ? (
               <AdminTopbar handleButtonClick={handleButtonClick} />
             ) : (
               <Topbar handleButtonClick={handleButtonClick} />

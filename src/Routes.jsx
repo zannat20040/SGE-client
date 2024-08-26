@@ -36,19 +36,12 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // member
       {
         path: "member",
         element: (
           <PrivateRoute>
             <MemDasboard />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "mco",
-        element: (
-          <PrivateRoute>
-            <MCODashboard />
           </PrivateRoute>
         ),
       },
@@ -68,6 +61,16 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
+      // mco
+      {
+        path: "mco",
+        element: (
+          <PrivateRoute>
+            <MCODashboard />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "mcoStudents",
         element: (
@@ -84,15 +87,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-    ],
-  },
 
-  {
-    path: "/admin",
-    element: <Dashboard />,
-    children: [
-      {
-        path: "dashboard",
+      // admin
+        {
+        path: "admin",
         element: <AdminDashboard />,
       },
       {
@@ -125,4 +123,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+
 ]);

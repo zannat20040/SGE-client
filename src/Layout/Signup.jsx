@@ -8,13 +8,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [isPassSame, setIsPassSame] = useState(true);
-  const { createWithPass, loading, setLoading } = useContext(AuthContext);
+  // const { createWithPass, loading, setLoading } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const HandleSignup = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
@@ -26,6 +27,7 @@ export default function Signup() {
 
     if (password !== confirmpass) {
       setIsPassSame(false);
+      setLoading(false);
       return;
     }
 
@@ -38,34 +40,20 @@ export default function Signup() {
       password,
     };
 
-    createWithPass(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        updateProfile(user, {
-          displayName: `${firstName} ${lastName}`,
-        })
-          .then(() => {
-            axiosPublic.post("/member/registration", data).then((res) => {
-              swal(
-                "Congratulations!",
-                "Get ready to unlock new educational opportunities with us.",
-                "success"
-              );
-              navigate("/");
-              setLoading(false);
-            });
-          })
-          .catch((error) => {
-            // console.log(error);
-            swal("Opps!", error.message, "error");
-            setLoading(false);
-          });
-      })
-      .catch((error) => {
+    axiosPublic
+      .post("/member/registration", data)
+      .then((res) => {
+        console.log(res);
+        swal("Congratulations!", res.data.message, "success");
+        navigate("/");
         setLoading(false);
-        swal("Opps!", error.message, "error");
+      })
+      .catch((err) => {
+        swal("Ops!", err.response.data.message, "error");
+        setLoading(false);
       });
 
+    setLoading(false);
     setIsPassSame(true);
   };
   return (

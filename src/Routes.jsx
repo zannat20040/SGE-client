@@ -95,10 +95,10 @@ export const router = createBrowserRouter([
         path: "dashboard",
         element: <AdminDashboard />,
       },
-      // {
-      //   path: "adminCreate",
-      //   element: <AdminCreate />,
-      // },
+      {
+        path: "adminCreate",
+        element: <AdminCreate />,
+      },
       {
         path: "assignMCO",
         element: <NewMcoCreate />,

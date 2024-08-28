@@ -13,13 +13,14 @@ export default function Login() {
   const { loginWithPass, setLoading, loading } = useContext(AuthContext);
   const { userinfo, refetch } = useStatus();
 
-
   useEffect(() => {
     if (userinfo) {
       navigate(
         userinfo === "member"
           ? location?.state?.redirectTo || "/dashboard/member"
-          : location?.state?.redirectTo || "/dashboard/mco"
+          : userinfo === "mco"
+          ? location?.state?.redirectTo || "/dashboard/mco"
+          : location?.state?.redirectTo || "/dashboard/admin"
       );
     }
   }, [userinfo, navigate, location]);

@@ -1,21 +1,19 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import SignupLayout from "../Component/SignupLayout";
-import { AuthContext } from "../AuthProvider/AuthProvider";
-import swal from "sweetalert";
-import { updateProfile } from "firebase/auth";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export default function Signup() {
   const [isPassSame, setIsPassSame] = useState(true);
-  // const { createWithPass, loading, setLoading } = useContext(AuthContext);
-  const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(false);
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
-  const HandleSignup = (e) => {
+  const HandleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
+    
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
@@ -40,22 +38,19 @@ export default function Signup() {
       password,
     };
 
-    axiosPublic
-      .post("/member/registration", data)
-      .then((res) => {
-        console.log(res);
-        swal("Congratulations!", res.data.message, "success");
-        navigate("/");
-        setLoading(false);
-      })
-      .catch((err) => {
-        swal("Ops!", err.response.data.message, "error");
-        setLoading(false);
-      });
-
-    setLoading(false);
-    setIsPassSame(true);
+    try {
+      const res = await axiosPublic.post("/member/registration", data);
+      swal("Congratulations!", res.data.message, "success");
+      navigate("/");
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || "An error occurred";
+      swal("Ops!", errorMessage, "error");
+    } finally {
+      setLoading(false);
+      setIsPassSame(true);
+    }
   };
+
   return (
     <SignupLayout
       HandleSignup={HandleSignup}

@@ -123,7 +123,7 @@ export default function MemberListForAdmin() {
 
                           <td className="text-center">
                             <Link
-                              to={`/admin/allMemberList/students/${member?.email}`}
+                              to={`/dashboard/allMemberList/students/${member?.email}`}
                             >
                               <IconButton
                                 variant="text"

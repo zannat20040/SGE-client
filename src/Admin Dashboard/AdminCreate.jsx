@@ -12,8 +12,7 @@ export default function AdminCreate() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPassSame, setIsPassSame] = useState(true);
   const axiosPublic = useAxiosPublic();
-  // const { createWithPass, loading, setLoading, signOutProfile } =
-  //   useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -27,9 +26,55 @@ export default function AdminCreate() {
   };
 
   // mco create function
-  const HandleAdmin = (e) => {
+  // const HandleAdmin = (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   const form = e.target;
+  //   const firstName = form.firstName.value;
+  //   const lastName = form.lastName.value;
+  //   const email = form.email.value;
+  //   const password = form.password.value;
+  //   const confirmpass = form.confirmpass.value;
+
+  //   if (password !== confirmpass) {
+  //     setLoading(false);
+  //     setIsPassSame(false);
+  //     return;
+  //   }
+
+  //   const data = {
+  //     firstName,
+  //     lastName,
+  //     email,
+  //     password,
+  //   };
+
+  //   axiosPublic
+  //     .post("/admin/create-admin", data, {
+  //       headers: {
+  //         Authorization: `Bearer admin@gmail.com`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       swal("Congratulations!", res.data.message, "success");
+  //       navigate("/admin/allMcoList");
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       swal("Ops!", err.response.data.message, "error");
+  //       setLoading(false);
+  //     });
+
+  //   setIsPassSame(true);
+  //   setLoading(false);
+  // };
+
+  // admin create function
+  const HandleAdmin = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
@@ -38,8 +83,8 @@ export default function AdminCreate() {
     const confirmpass = form.confirmpass.value;
 
     if (password !== confirmpass) {
-      setLoading(false);
       setIsPassSame(false);
+      setLoading(false);
       return;
     }
 
@@ -50,25 +95,21 @@ export default function AdminCreate() {
       password,
     };
 
-    axiosPublic
-      .post("/admin/create-admin", data, {
+    try {
+      const res = await axiosPublic.post("/admin/create-admin", data, {
         headers: {
-          Authorization: `Bearer admin@gmail.com`,
+          Authorization: `Bearer ${user?.email}`,
         },
-      })
-      .then((res) => {
-        console.log(res);
-        swal("Congratulations!", res.data.message, "success");
-        navigate("/admin/allMcoList");
-        setLoading(false);
-      })
-      .catch((err) => {
-        swal("Ops!", err.response.data.message, "error");
-        setLoading(false);
       });
-
-    setIsPassSame(true);
-    setLoading(false);
+      console.log(res);
+      swal("Congratulations!", res.data.message, "success");
+      navigate("/dashboard/allAdminList");
+    } catch (err) {
+      swal("Ops!", err.response?.data?.message || "An error occurred", "error");
+    } finally {
+      setLoading(false);
+      setIsPassSame(true);
+    }
   };
 
   return (

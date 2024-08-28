@@ -63,7 +63,7 @@ export default function AllMCOList() {
           <Loading />
         ) : (
           <>
-            {allMcoList?.length == 0 ? (
+            {filteredMco?.length == 0 ? (
               <tr className="flex justify-center w-full pt-8">
                 <td>You dont have any MCO. Please Assign first</td>
               </tr>

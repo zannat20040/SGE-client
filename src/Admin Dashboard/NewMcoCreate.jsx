@@ -12,8 +12,6 @@ export default function NewMcoCreate() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPassSame, setIsPassSame] = useState(true);
   const axiosPublic = useAxiosPublic();
-  // const { createWithPass, loading, setLoading, signOutProfile } =
-  //   useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -27,49 +25,47 @@ export default function NewMcoCreate() {
   };
 
   // mco create function
-  const HandleMCO = (e) => {
+  const HandleMCO = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
     const email = form.email.value;
     const password = form.password.value;
     const confirmpass = form.confirmpass.value;
-
+  
     if (password !== confirmpass) {
       setIsPassSame(false);
       setLoading(false);
       return;
     }
-
+  
     const data = {
       firstName,
       lastName,
       email,
       password,
     };
-
-    axiosPublic
-      .post("/admin/create-mco", data, {
+  
+    try {
+      const res = await axiosPublic.post("/admin/create-mco", data, {
         headers: {
           Authorization: `Bearer admin@gmail.com`,
         },
-      })
-      .then((res) => {
-        console.log(res);
-        swal("Congratulations!", res.data.message, "success");
-        navigate("/admin/allMcoList");
-        setLoading(false);
-      })
-      .catch((err) => {
-        swal("Ops!", err.response.data.message, "error");
-        setLoading(false);
       });
+      console.log(res);
+      swal("Congratulations!", res.data.message, "success");
+      navigate("/dashboard/allMcoList");
+    } catch (err) {
+      swal("Ops!", err.response?.data?.message || "An error occurred", "error");
+    } finally {
       setLoading(false);
-    setIsPassSame(true);
+      setIsPassSame(true);
+    }
   };
+  
 
   return (
     <div className=" bg-white shadow-md rounded-md ">

@@ -57,7 +57,6 @@ export default function AllStudentsForAdmin() {
       assignedTo: mcoselect,
     };
 
-
     swal({
       title: "Do you really want to assign this MCO?",
       text: "Once you assigned , You will not be able to change it further.",
@@ -163,12 +162,19 @@ export default function AllStudentsForAdmin() {
                             <p>{formatDate(student?.createdAt)?.time}</p>
                           </td>
                           <td className="text-center">
-                            <button type="button" className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
+                            <button
+                              type="button"
+                              className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light"
+                            >
                               {student?.status?.status}
                             </button>
                           </td>
                           <td className="text-center">
-                            {student.assignedTo === "Not Assigned" ? (
+                            {student.assignedTo === "Not Assigned" ||
+                            student.assignedTo === null ||
+                            student.assignedTo === undefined ||
+                            student.assignedTo === "" ||
+                            student.assignedTo === " " ? (
                               <form
                                 onSubmit={(e) =>
                                   HandleMCOAssign(e, student._id)
@@ -182,9 +188,11 @@ export default function AllStudentsForAdmin() {
                                   onChange={(e) =>
                                     setSelectedMco(e.target.value)
                                   }
-                                  defaultValue={''}
+                                  defaultValue={""}
                                 >
-                                  <option value="" disabled>Not assigned</option>
+                                  <option value="" disabled>
+                                    Not assigned
+                                  </option>
                                   {allMcoList.map((mco) => (
                                     <option
                                       key={mco._id}
@@ -195,7 +203,8 @@ export default function AllStudentsForAdmin() {
                                     </option>
                                   ))}
                                 </select>
-                                <button type="submit"
+                                <button
+                                  type="submit"
                                   className="btn btn-sm rounded  bg-customPurple text-white"
                                 >
                                   <FaCheck className="text-xs" />

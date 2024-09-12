@@ -18,7 +18,6 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const { userinfo } = useStatus();
   console.log(userinfo);
-  const { pathname } = useLocation();
   const { signOutProfile } = useContext(AuthContext);
 
   // logout function
@@ -46,16 +45,7 @@ export default function Sidebar() {
     }
   };
 
-  // const getLogoRole = () => {
-  //   if (pathname.startsWith("/admin")) {
-  //     return "AD";
-  //   } else {
-  //     return userinfo === "member" ? "Mem" : "MCO";
-  //   }
-  // };
 
-  // admin path check
-  const isMemberDashboard = pathname.startsWith("/admin");
 
   return (
     <React.Fragment>
@@ -68,7 +58,7 @@ export default function Sidebar() {
             className="bg-[#2f3349] min-w-[250px] w-[250px] "
           >
             <div className="mb-2 flex items-center justify-between p-4 ]">
-              <Logo color={"text-white"} role={getLogoRole()} />
+              <Logo color={"text-white"} role={userinfo?.substring(0, 3)}  />
             </div>
             {/* nav list change according to role */}
             {userinfo && userinfo === "member" ? (

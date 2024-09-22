@@ -18,7 +18,7 @@ export default function Loginlayout({ HandleLogin, loading }) {
             />
           </div>
         </div>
-        <div className=" p-4 pt-20 md:p-10 md:pt-0  pb-16 card h-screen bg-white w-full  rounded-none">
+        <div className=" p-4 pt-20 md:p-10 md:pt-0  pb-16 card min-h-screen overflow-y-scroll bg-white w-full  rounded-none">
           <h1 className="font-semibold text-2xl  md:mt-20 ">
             Welcome to Shabuj Global
           </h1>

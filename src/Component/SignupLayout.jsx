@@ -137,7 +137,7 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
               </div>
             </div>
             {!isPassSame && (
-              <p className="text-red-700 ">&#10060; Passowrd doesn't match</p>
+              <p className="text-red-600 ">&#10060; Passowrd doesn't match</p>
             )}
           </div>
 

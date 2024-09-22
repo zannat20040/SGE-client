@@ -122,7 +122,7 @@ export default function Sidebar() {
               </Button>
             </div>
           </Drawer>
-          <div className="w-full sm:w-8/12  lg:w-9/12 xl:w-full md:p-4 p-2   main-outlet">
+          <div className="w-full sm:w-8/12  lg:w-9/12 mx-auto md:p-4 p-2   main-outlet">
             {/* topbar change according to role */}
             {userinfo === "admin" ? (
               <AdminTopbar handleButtonClick={handleButtonClick} />

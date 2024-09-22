@@ -17,7 +17,7 @@ export default function Signup() {
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
-    const email = form.email.value;
+    const email = form.email.value.toLowerCase().trim(); 
     const primaryMobileNumber = form.number.value;
     const whatsappNumber = form.wpnumber.value;
     const password = form.password.value;

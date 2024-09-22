@@ -29,7 +29,7 @@ export default function Login() {
     e.preventDefault();
 
     const form = e.target;
-    const email = form.email.value;
+    const email = form.email.value.toLowerCase().trim();
     const password = form.password.value;
 
     loginWithPass(email, password)

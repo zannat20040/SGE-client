@@ -1,14 +1,22 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { IoEyeOutline } from "react-icons/io5";
+import { Dialog } from "@material-tailwind/react";
 
 function FileUpload({ studentDetails, refetch }) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const axiosPublic = useAxiosPublic();
+  const [open, setOpen] = useState(false);
+  const [selectedFileUrl, setSelectedFileUrl] = useState(null); // State to store selected file URL
+
+  const handleOpen = (imgUrl) => {
+    setSelectedFileUrl(imgUrl); // Store the specific file's URL
+    setOpen(!open); // Toggle the dialog
+  };
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -19,7 +27,7 @@ function FileUpload({ studentDetails, refetch }) {
     const formData = new FormData();
     formData.append("file", file);
 
-    setLoading(true); // Set loading to true when upload starts
+    setLoading(true);
 
     try {
       const res = await axiosPublic.post(
@@ -32,13 +40,13 @@ function FileUpload({ studentDetails, refetch }) {
         }
       );
       swal("Good job!", "File uploaded successfully", "success");
-      setLoading(false); // Set loading to false when upload is complete
-      e.target.reset(); // Reset the form input
+      setLoading(false);
+      e.target.reset();
       refetch();
     } catch (error) {
       console.error("Error uploading file: ", error);
       swal("Opps!", "Error uploading file", "error");
-      setLoading(false); // Set loading to false in case of error
+      setLoading(false);
     }
   };
 
@@ -72,6 +80,7 @@ function FileUpload({ studentDetails, refetch }) {
             className="flex sm:flex-row flex-col justify-between items-center gap-2 pt-10"
           >
             <input
+              required
               type="file"
               className="file-input file-input-bordered w-full rounded-md"
               onChange={handleFileChange}
@@ -80,7 +89,7 @@ function FileUpload({ studentDetails, refetch }) {
             <button
               type="submit"
               className="btn bg-[#2b3440] rounded-md font-normal text-white sm:w-fit w-full"
-              disabled={loading} // Disable the button when loading
+              disabled={loading}
             >
               {loading ? "Uploading..." : "Upload"}
             </button>
@@ -92,19 +101,37 @@ function FileUpload({ studentDetails, refetch }) {
       <div className="mt-5">
         <h2 className="text-lg font-semibold">Uploaded Files:</h2>
         {studentDetails?.files?.length > 0 ? (
-          <ul className="mt-2">
+          <ul className="mt-2 space-y-2">
             {studentDetails?.files?.map((file) => (
               <li
                 key={file?.public_id}
-                className="flex justify-between items-center mb-2 p-2 pl-4 border rounded-md bg-gray-200 drop-shadow-sm  "
+                className="flex justify-between items-center  p-2 pl-4 border rounded-md bg-gray-200 drop-shadow-sm gap-2"
               >
-                <span className="text-black">{file?.filename}</span>
-                <a
-                  onClick={() => handleDownload(file?.url, file?.filename)}
-                  className="btn bg-customPurple border-0 hover:text-customPurple rounded"
-                >
-                  <FaCloudDownloadAlt className="text-white  text-lg" />
-                </a>
+                <span className="text-black overflow-x-hidden">
+                  {file?.filename}
+                </span>
+                <div className="flex justify-between gap-3 items-center">
+                  <button
+                    onClick={() => handleOpen(file?.url)}
+                    className="bg-black block btn rounded broder-0"
+                  >
+                    <IoEyeOutline className="text-lg text-white" />
+                  </button>
+                  <Dialog open={open} handler={() => setOpen(!open)}>
+                    {selectedFileUrl && (
+                      <img
+                        src={selectedFileUrl}
+                        alt="file might be not supported to show preview, please download"
+                      />
+                    )}{" "}
+                  </Dialog>
+                  <a
+                    onClick={() => handleDownload(file?.url, file?.filename)}
+                    className="btn bg-customPurple border-0 hover:text-customPurple rounded"
+                  >
+                    <FaCloudDownloadAlt className="text-white  text-lg" />
+                  </a>
+                </div>
               </li>
             ))}
           </ul>

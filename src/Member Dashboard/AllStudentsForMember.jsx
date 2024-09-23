@@ -54,8 +54,8 @@ export default function AllStudentsForMember({
                         ? "text-red-600 bg-red-50 "
                         : student?.status?.status === "enrollment"
                         ? "bg-green-50 text-green-600"
-                        : "bg-indigo-50 text-indigo-600"
-                    } `}
+                        : "bg-[#cfcbf580] text-customPurple"
+                      } `}
                   >
                     {student?.status?.status}
                   </button>

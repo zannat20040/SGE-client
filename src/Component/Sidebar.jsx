@@ -17,7 +17,6 @@ export default function Sidebar() {
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const navigate = useNavigate();
   const { userinfo } = useStatus();
-  console.log(userinfo);
   const { signOutProfile } = useContext(AuthContext);
 
   // logout function

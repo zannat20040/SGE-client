@@ -27,7 +27,6 @@ export default function AllAdminList() {
           Authorization: `Bearer ${user?.email}`,
         },
       });
-      console.log(res);
       return res?.data?.admins || [];
     },
   });

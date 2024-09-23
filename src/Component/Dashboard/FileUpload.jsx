@@ -19,8 +19,6 @@ function FileUpload({ studentDetails, refetch }) {
     const formData = new FormData();
     formData.append("file", file);
 
-    console.log(formData)
-    console.log(file)
     setLoading(true); // Set loading to true when upload starts
 
     try {

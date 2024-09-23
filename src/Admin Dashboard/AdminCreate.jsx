@@ -14,6 +14,8 @@ export default function AdminCreate() {
   const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
 
   // password show & hide
   const togglePasswordVisibility = (type) => {
@@ -33,7 +35,7 @@ export default function AdminCreate() {
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
-    const email = form.email.value;
+    const email = form.email.value.toLowerCase().trim();
     const password = form.password.value;
     const confirmpass = form.confirmpass.value;
 
@@ -56,10 +58,10 @@ export default function AdminCreate() {
           Authorization: `Bearer ${user?.email}`,
         },
       });
-      console.log(res);
       swal("Congratulations!", res.data.message, "success");
       navigate("/dashboard/allAdminList");
     } catch (err) {
+      console.log(err)
       swal("Ops!", err.response?.data?.message || "An error occurred", "error");
     } finally {
       setLoading(false);
@@ -78,7 +80,7 @@ export default function AdminCreate() {
         </Typography>
       </div>
 
-      {/* mco create form */}
+      {/* admin create form */}
       <form className="card-body" onSubmit={HandleAdmin}>
         {/* row 1 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-between items-center">

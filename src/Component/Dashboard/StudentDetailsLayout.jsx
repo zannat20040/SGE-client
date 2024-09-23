@@ -38,11 +38,11 @@ export default function StudentDetailsLayout({ studentDetails, refetch }) {
                   ? "text-orange-600 "
                   : studentDetails?.status?.status === "application submitted"
                   ? "text-cyan-600 "
-                  : student?.status?.status === "dropout"
+                  : studentDetails?.status?.status === "dropout"
                   ? "text-red-600  "
                   : studentDetails?.status?.status === "enrollment"
                   ? " text-green-600"
-                  : " text-indigo-600"
+                  : " text-customPurple"
               }    flex justify-end`}
             >
               {studentDetails?.status?.status}

@@ -14,6 +14,8 @@ export default function NewMcoCreate() {
   const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
 
   // password show & hide
   const togglePasswordVisibility = (type) => {
@@ -52,10 +54,9 @@ export default function NewMcoCreate() {
     try {
       const res = await axiosPublic.post("/admin/create-mco", data, {
         headers: {
-          Authorization: `Bearer admin@gmail.com`,
+          Authorization: `Bearer ${user?.email}`,
         },
       });
-      console.log(res);
       swal("Congratulations!", res.data.message, "success");
       navigate("/dashboard/allMcoList");
     } catch (err) {

@@ -16,12 +16,8 @@ export default function StudentOfMember() {
   const { formatDate } = useDateFormatter();
   const [totalAmount, setTotalAmount] = useState(null);
 
-
   // all student fetch for member
-  const {
-    data: allStudentofMember,
-    isLoading,
-  } = useQuery({
+  const { data: allStudentofMember, isLoading } = useQuery({
     queryKey: ["allStudentofMco", email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/member/my-students`, {
@@ -35,19 +31,18 @@ export default function StudentOfMember() {
 
   useEffect(() => {
     axiosPublic
-        .get(`/member/total-money/${email}`, {
-          headers: {
-            Authorization: `Bearer ${email}`,
-          },
-        })
-        .then((response) => {
-          setTotalAmount(response?.data?.totalMoney || 0);
-        })
-        .catch((error) => {
-          setTotalAmount(0); 
-        });
+      .get(`/member/total-money/${email}`, {
+        headers: {
+          Authorization: `Bearer ${email}`,
+        },
+      })
+      .then((response) => {
+        setTotalAmount(response?.data?.totalMoney || 0);
+      })
+      .catch((error) => {
+        setTotalAmount(0);
+      });
   }, [axiosPublic, email]);
-
 
   // insight counting
   const enrollmentCount = useMemo(() => {
@@ -63,7 +58,6 @@ export default function StudentOfMember() {
       (student) => student?.status?.status === "dropout"
     ).length;
   }, [allStudentofMember]);
-
 
   return (
     <div>
@@ -160,7 +154,22 @@ export default function StudentOfMember() {
                           </td>
 
                           <td className="text-center">
-                            <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
+                            <button
+                              className={`rounded text-xs p-2 font-semibold ${
+                                student?.status?.status ===
+                                "application processing"
+                                  ? "text-orange-600 "
+                                  : student?.status?.status ===
+                                    "application submitted"
+                                  ? "text-cyan-600 "
+                                  : student?.status?.status === "dropout"
+                                  ? "text-red-600  "
+                                  : student?.status?.status ===
+                                    "enrollment"
+                                  ? " text-green-600"
+                                  : " text-customPurple"
+                              } `}
+                            >
                               {student?.status?.status}
                             </button>
                           </td>

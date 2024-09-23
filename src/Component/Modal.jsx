@@ -67,8 +67,8 @@ export default function Modal({ id, student, refetch }) {
             ? "text-red-600 bg-red-50 "
             : student?.status?.status === "enrollment"
             ? "bg-green-50 text-green-600"
-            : "bg-indigo-50 text-indigo-600"
-        }    font-light w-fit cursor-pointer`}
+            : "bg-[#cfcbf580] text-customPurple"
+          }    font-light w-fit cursor-pointer`}
       >
         {student?.status?.status}
       </button>

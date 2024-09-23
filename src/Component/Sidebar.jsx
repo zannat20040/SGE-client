@@ -56,7 +56,7 @@ export default function Sidebar() {
             onClose={closeDrawer}
             className="bg-[#2f3349] min-w-[270px] w-[270px] overflow-y-scroll "
           >
-            <div className="mb-2 flex items-center justify-between p-4 ]">
+            <div className="mb-2 flex items-center justify-between p-4 ">
               <Logo color={"text-white"} role={userinfo?.substring(0, 3)}  />
             </div>
             {/* nav list change according to role */}

@@ -58,7 +58,7 @@ export default function Modal({ id, student, refetch }) {
     <div className="">
       <button
         onClick={() => setOpenModal(true)}
-        className={`p-2 rounded text-sm font-semibold ${
+        className={`p-1  px-4 rounded text-sm font-semibold ${
           student?.status?.status === "application processing"
             ? "text-orange-600 bg-orange-50"
             : student?.status?.status === "application submitted"

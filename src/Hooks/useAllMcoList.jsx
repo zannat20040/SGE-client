@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import useAxiosPublic from './useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 export default function useAllMcoList() {
     const axiosPublic = useAxiosPublic(); 
+    const { user } = useContext(AuthContext);
 
     const {
       data: allMcoList,
@@ -14,7 +16,7 @@ export default function useAllMcoList() {
       queryFn: async () => {
         const res = await axiosPublic.get(`/admin/all-mco`, {
           headers: {
-            Authorization: `Bearer admin@gmail.com`,
+            Authorization: `Bearer ${user?.email}`,
           },
         });
         return res?.data;

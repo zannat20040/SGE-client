@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useDateFormatter from "../Hooks/useDateFormatter";
 import { useQuery } from "@tanstack/react-query";
@@ -6,12 +6,14 @@ import { IconButton, Typography } from "@material-tailwind/react";
 import Loading from "../Component/Loading";
 import { Link } from "react-router-dom";
 import { IoEyeOutline } from "react-icons/io5";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 export default function MemberListForAdmin() {
   // states
   const axiosPublic = useAxiosPublic();
   const [searchQuery, setSearchQuery] = useState("");
   const { formatDate } = useDateFormatter();
+  const { user } = useContext(AuthContext);
 
   // member list fetch
   const {
@@ -23,7 +25,7 @@ export default function MemberListForAdmin() {
     queryFn: async () => {
       const res = await axiosPublic.get(`/admin/all-member`, {
         headers: {
-          Authorization: `Bearer admin@gmail.com`,
+          Authorization: `Bearer ${user?.email}`,
         },
       });
       return res?.data;

@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 export default function Logo({ color, role }) {
   return (
-    <Link to={"/"}>
+    <div >
       <div className="flex items-center gap-3">
         <FaLeaf className="text-customPurple text-2xl" />
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center ">
           <h1 className={`font-medium ${color} text-xl`}>Shabuj Global</h1>
           {role && (
             <Chip
@@ -19,6 +19,6 @@ export default function Logo({ color, role }) {
           )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

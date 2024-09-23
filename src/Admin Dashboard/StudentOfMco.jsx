@@ -133,7 +133,19 @@ export default function StudentOfMco() {
 
                           <td className="text-center">
                             <button
-                              className={`  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light`}
+                              className={`rounded text-xs p-1  px-4 font-semibold ${
+                                student?.status?.status ===
+                                "application processing"
+                                  ? "text-orange-600 bg-orange-50"
+                                  : student?.status?.status ===
+                                    "application submitted"
+                                  ? "text-cyan-600 bg-cyan-50"
+                                  : student?.status?.status === "dropout"
+                                  ? "text-red-600 bg-red-50 "
+                                  : student?.status?.status === "enrollment"
+                                  ? "bg-green-50 text-green-600"
+                                  : "bg-[#cfcbf580] text-customPurple"
+                              }  `}
                             >
                               {student?.status?.status}
                             </button>

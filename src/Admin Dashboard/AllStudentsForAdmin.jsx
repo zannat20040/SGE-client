@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useDateFormatter from "../Hooks/useDateFormatter";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +8,7 @@ import useAllMcoList from "../Hooks/useAllMcoList";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa6";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 export default function AllStudentsForAdmin() {
   // states
@@ -16,6 +17,8 @@ export default function AllStudentsForAdmin() {
   const [searchQuery, setSearchQuery] = useState("");
   const { allMcoList, isLoading: mcoListLoading } = useAllMcoList();
   const [selectedMco, setSelectedMco] = useState("");
+  const { user } = useContext(AuthContext);
+
 
   // student fetch
   const {
@@ -27,7 +30,7 @@ export default function AllStudentsForAdmin() {
     queryFn: async () => {
       const res = await axiosPublic.get(`/admin/all-students`, {
         headers: {
-          Authorization: `Bearer admin@gmail.com`,
+          Authorization: `Bearer ${user?.email}`,
         },
       });
       return res?.data;
@@ -68,7 +71,7 @@ export default function AllStudentsForAdmin() {
         axiosPublic
           .post(`/admin/assign-student/${id}`, data, {
             headers: {
-              Authorization: `Bearer admin@gmail.com`,
+              Authorization: `Bearer ${user?.email}`,
             },
           })
           .then((res) => {
@@ -164,7 +167,7 @@ export default function AllStudentsForAdmin() {
                           <td className="text-center">
                             <button
                               type="button"
-                              className={`rounded text-xs p-2 font-semibold  ${
+                              className={`rounded text-xs p-1  px-4 font-semibold  ${
                                 student?.status?.status ===
                                 "application processing"
                                   ? "text-orange-600 bg-orange-50"
@@ -205,13 +208,13 @@ export default function AllStudentsForAdmin() {
                                   <option value="" disabled>
                                     Not assigned
                                   </option>
-                                  {allMcoList.map((mco) => (
+                                  {allMcoList?.slice().reverse().map((mco) => (
                                     <option
-                                      key={mco._id}
-                                      value={mco.email}
+                                      key={mco?._id}
+                                      value={mco?.email}
                                       className="capitalize"
                                     >
-                                      {mco.firstName} {mco.lastName}
+                                      {mco?.firstName} {mco?.lastName}
                                     </option>
                                   ))}
                                 </select>
@@ -223,7 +226,7 @@ export default function AllStudentsForAdmin() {
                                 </button>
                               </form>
                             ) : (
-                              <> {student.assignedTo}</>
+                              <> {student?.assignedTo}</>
                             )}
                           </td>
                         </tr>

@@ -45,7 +45,7 @@ export default function AllStudentsForMember({
                 </td>
                 <td className="text-center">
                   <button
-                    className={` rounded  text-xs p-2 font-semibold ${
+                    className={` rounded  text-xs p-1  px-4 font-semibold ${
                       student?.status?.status === "application processing"
                         ? "text-orange-600 bg-orange-50"
                         : student?.status?.status === "application submitted"

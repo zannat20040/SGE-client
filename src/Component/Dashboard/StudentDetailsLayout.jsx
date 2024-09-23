@@ -33,7 +33,7 @@ export default function StudentDetailsLayout({ studentDetails, refetch }) {
           <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 py-1  sm:gap-4 flex-wrap">
             <h1 className="font-semibold">Current Status: </h1>
             <button
-              className={` text-customPurple font-semibold ${
+              className={` text-customPurple font-semibold text-xs ${
                 studentDetails?.status?.status === "application processing"
                   ? "text-orange-600 "
                   : studentDetails?.status?.status === "application submitted"

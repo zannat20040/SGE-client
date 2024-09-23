@@ -44,7 +44,19 @@ export default function AllStudentsForMember({
                   <p>{student?.preferredCourse}</p>
                 </td>
                 <td className="text-center">
-                  <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
+                  <button
+                    className={` rounded  text-xs p-2 font-semibold ${
+                      student?.status?.status === "application processing"
+                        ? "text-orange-600 bg-orange-50"
+                        : student?.status?.status === "application submitted"
+                        ? "text-cyan-600 bg-cyan-50"
+                        : student?.status?.status === "dropout"
+                        ? "text-red-600 bg-red-50 "
+                        : student?.status?.status === "enrollment"
+                        ? "bg-green-50 text-green-600"
+                        : "bg-indigo-50 text-indigo-600"
+                    } `}
+                  >
                     {student?.status?.status}
                   </button>
                 </td>

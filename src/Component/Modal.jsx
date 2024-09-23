@@ -58,7 +58,17 @@ export default function Modal({ id, student, refetch }) {
     <div className="">
       <button
         onClick={() => setOpenModal(true)}
-        className={`p-2 rounded text-sm  text-customPurple  bg-[#e5e2ff] font-light w-fit cursor-pointer`}
+        className={`p-2 rounded text-sm font-semibold ${
+          student?.status?.status === "application processing"
+            ? "text-orange-600 bg-orange-50"
+            : student?.status?.status === "application submitted"
+            ? "text-cyan-600 bg-cyan-50"
+            : student?.status?.status === "dropout"
+            ? "text-red-600 bg-red-50 "
+            : student?.status?.status === "enrollment"
+            ? "bg-green-50 text-green-600"
+            : "bg-indigo-50 text-indigo-600"
+        }    font-light w-fit cursor-pointer`}
       >
         {student?.status?.status}
       </button>

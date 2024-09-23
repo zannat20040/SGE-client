@@ -132,7 +132,9 @@ export default function StudentOfMco() {
                           </td>
 
                           <td className="text-center">
-                            <button className="  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light">
+                            <button
+                              className={`  rounded text-customPurple text-xs p-2 bg-[#e5e2ff] font-light`}
+                            >
                               {student?.status?.status}
                             </button>
                           </td>

@@ -52,7 +52,7 @@ export default function StudentDetailsLayout({ studentDetails, refetch }) {
       </div>
 
       {/* student details */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-between items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-between items-start">
         {/* left-side ==>  */}
         <div>
           <div className="flex sm:grid grid-cols-2 justify-between gap-2 border-b border-gray-200 py-1 sm:gap-4 flex-wrap">

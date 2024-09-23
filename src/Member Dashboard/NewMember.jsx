@@ -20,7 +20,7 @@ export default function NewMember() {
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
-    const email = form.email.value;
+    const email = form.email.value.toLowerCase().trim();
     const primaryMobileNumber = form.primeNumber.value;
     const whatsappNumber = form.wpnumber.value;
     const preferredUniversity = form.preferredUni.value;

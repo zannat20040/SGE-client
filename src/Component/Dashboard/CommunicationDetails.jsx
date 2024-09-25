@@ -18,10 +18,10 @@ export default function CommunicationDetails({ studentDetails }) {
                 className="  rounded-md w-full  border-2 border-gray-200"
                 key={index}
               >
-                <div className="px-5 py-4 border-b border-gray-200  flex justify-between flex-wrap items-center">
-                  <p>{communication?.from}</p>
+                <div className=" px-5 py-2 border-b border-gray-200  flex justify-between flex-wrap items-center">
+                  <p className="font-semibold">{communication?.from}</p>
 
-                  <p className="text-xs">{communication?.date}</p>
+                  <p className="text-xs text-gray-600">{communication?.date}</p>
                 </div>
                 <div className="px-5 py-4">{communication?.subject}</div>
               </div>

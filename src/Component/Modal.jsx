@@ -5,8 +5,10 @@ import toast from "react-hot-toast";
 
 export default function Modal({ id, student, refetch }) {
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false); 
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
+  
   const allowedStatuses = [
     "application processing",
     "application submitted",
@@ -27,7 +29,7 @@ export default function Modal({ id, student, refetch }) {
 
   const HandleStatus = async (e, id) => {
     e.preventDefault();
-
+    setLoading(true); 
     const form = e.target;
     const status = form.selectedValue.value;
     const comment = form.comment.value;
@@ -37,38 +39,38 @@ export default function Modal({ id, student, refetch }) {
       comment,
     };
 
-    axiosPublic
-      .post(`/mco/change-status/${id}`, statusData, {
+    try {
+      await axiosPublic.post(`/mco/change-status/${id}`, statusData, {
         headers: {
           Authorization: `Bearer ${user?.email}`,
         },
-      })
-      .then((res) => {
-        toast.success("Status updated successfully");
-        setOpenModal(false);
-        refetch();
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err?.response?.data);
       });
+      toast.success("Status updated successfully");
+      setOpenModal(false);
+      refetch();
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.response?.data);
+    } finally {
+      setLoading(false); 
+    }
   };
 
   return (
     <div className="">
       <button
         onClick={() => setOpenModal(true)}
-        className={`p-1  px-4 rounded text-sm font-semibold ${
+        className={`p-1 px-4 rounded text-sm font-semibold ${
           student?.status?.status === "application processing"
             ? "text-orange-600 bg-orange-50"
             : student?.status?.status === "application submitted"
             ? "text-cyan-600 bg-cyan-50"
-            : student?.status?.status === "dropout"
+            : student?.status?.status === "dropout" || student?.status?.status === "application rejected" || student?.status?.status ===     "session expired"
             ? "text-red-600 bg-red-50 "
             : student?.status?.status === "enrollment"
             ? "bg-green-50 text-green-600"
             : "bg-[#cfcbf580] text-customPurple"
-          }    font-light w-fit cursor-pointer`}
+        } font-light w-fit cursor-pointer`}
       >
         {student?.status?.status}
       </button>
@@ -80,7 +82,7 @@ export default function Modal({ id, student, refetch }) {
       >
         <div
           onClick={(e_) => e_.stopPropagation()}
-          className={` absolute min-w-sm lg:w-4/12 md:w-5/12 w-auto rounded-lg bg-white p-6 drop-shadow-lg dark:bg-gray-800 dark:text-white ${
+          className={`absolute min-w-sm lg:w-4/12 md:w-5/12 w-auto rounded-lg bg-white p-6 drop-shadow-lg dark:bg-gray-800 dark:text-white ${
             openModal
               ? "scale-1 opacity-1 duration-300"
               : "scale-0 opacity-0 duration-150"
@@ -120,8 +122,11 @@ export default function Modal({ id, student, refetch }) {
               />
             </div>
             <div className="form-control">
-              <button className="btn text-white font-medium uppercase bg-customPurple">
-                Change
+              <button 
+                className={`btn text-white font-medium uppercase bg-customPurple ${loading ? 'opacity-50 cursor-not-allowed' : ''}`} 
+                disabled={loading} 
+              >
+                {loading ? 'Changing...' : 'Change'} 
               </button>
             </div>
           </form>

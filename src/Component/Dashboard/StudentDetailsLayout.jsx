@@ -1,6 +1,5 @@
 import React from "react";
 import useDateFormatter from "../../Hooks/useDateFormatter";
-import StatusModal from "../StatusModal";
 import useStatus from "../../Hooks/useStatus";
 import Modal from "../Modal";
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react"; // Import useState
 import { MdOutlineSubject } from "react-icons/md";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -9,6 +9,9 @@ export default function Comment({ studentDetails, refetch }) {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { formatDate } = useDateFormatter();
+  
+  // Add a loading state
+  const [loading, setLoading] = useState(false);
 
   const HandleComment = async (e) => {
     e.preventDefault();
@@ -24,6 +27,7 @@ export default function Comment({ studentDetails, refetch }) {
     };
 
     try {
+      setLoading(true); // Set loading to true when the request starts
       const response = await axiosPublic.post(
         `/mco/comments/${studentDetails?._id}`,
         sendedComment,
@@ -33,12 +37,14 @@ export default function Comment({ studentDetails, refetch }) {
           },
         }
       );
-      toast.success("Comment sended succesfully");
+      toast.success("Comment sent successfully");
       refetch();
       // Clear the form fields
       form.reset();
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message || "Something went wrong");
+    } finally {
+      setLoading(false); // Set loading to false after the request completes
     }
   };
 
@@ -55,7 +61,7 @@ export default function Comment({ studentDetails, refetch }) {
                   : ""
               }`}
             >
-              <div className="bg-gray-100  rounded-md w-5/6 lg:w-4/6 ">
+              <div className="bg-gray-100 rounded-md w-5/6 lg:w-4/6 ">
                 <div className="px-5 py-2 border-b-2 border-gray-200 gap-5 flex justify-between flex-wrap md:items-center items-start xs:flex-row flex-col-reverse">
                   <p className="font-semibold ">{comment?.subject}</p>
                   <div className="flex flex-col-reverse xs:items-end items-start ">
@@ -74,7 +80,7 @@ export default function Comment({ studentDetails, refetch }) {
       </div>
 
       <form
-        className="flex flex-col py-5 px-1  rounded-md"
+        className="flex flex-col py-5 px-1 rounded-md"
         onSubmit={HandleComment}
       >
         <div className="">
@@ -95,8 +101,11 @@ export default function Comment({ studentDetails, refetch }) {
             placeholder="Write here your comment........."
           ></textarea>
         </div>
-        <button className="btn bg-customPurple font-medium text-white rounded-md">
-          Send
+        <button 
+          className="btn bg-customPurple font-medium text-white rounded-md" 
+          disabled={loading} // Disable the button if loading
+        >
+          {loading ? "Sending..." : "Send"} 
         </button>
       </form>
     </div>

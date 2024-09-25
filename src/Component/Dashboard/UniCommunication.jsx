@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react"; // Import useState
 import CommunicationDetails from "./CommunicationDetails";
 import useStatus from "../../Hooks/useStatus";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
@@ -7,8 +7,11 @@ import toast from "react-hot-toast";
 
 export default function UniCommunication({ studentDetails, refetch }) {
   const { userinfo } = useStatus();
-  const { user, loading, setLoading } = useContext(AuthContext);
+  const { user, loading: authLoading } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
+  
+  // Add a loading state
+  const [loading, setLoading] = useState(false);
 
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
@@ -50,6 +53,7 @@ export default function UniCommunication({ studentDetails, refetch }) {
     };
 
     try {
+      setLoading(true); // Set loading to true when the request starts
       const response = await axiosPublic.post(
         `/mco/university-communication/${studentDetails?._id}`,
         data,
@@ -59,12 +63,13 @@ export default function UniCommunication({ studentDetails, refetch }) {
           },
         }
       );
-      refetch;
       form.reset();
       toast.success(response?.data?.message);
-      refetch();
+      refetch(); // Make sure to call refetch to update the data
     } catch (error) {
-      toast.success(err.response?.data);
+      toast.error(error.response?.data || "Something went wrong");
+    } finally {
+      setLoading(false); // Set loading to false after the request completes
     }
   };
 
@@ -99,8 +104,11 @@ export default function UniCommunication({ studentDetails, refetch }) {
             className="input border border-gray-300 rounded focus:outline-none focus:border-customPurple"
             placeholder="date"
           />
-          <button className="btn border-0 bg-customPurple rounded focus:outline-none text-white font-normal">
-            {loading ? "Adding.." : "Add this"}
+          <button 
+            className="btn border-0 bg-customPurple rounded focus:outline-none text-white font-normal" 
+            disabled={loading} // Disable the button if loading
+          >
+            {loading ? "Adding.." : "Add this"} 
           </button>
         </form>
       )}

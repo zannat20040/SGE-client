@@ -5,10 +5,10 @@ import toast from "react-hot-toast";
 
 export default function Modal({ id, student, refetch }) {
   const [openModal, setOpenModal] = useState(false);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
-  
+
   const allowedStatuses = [
     "application processing",
     "application submitted",
@@ -29,7 +29,7 @@ export default function Modal({ id, student, refetch }) {
 
   const HandleStatus = async (e, id) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
     const form = e.target;
     const status = form.selectedValue.value;
     const comment = form.comment.value;
@@ -52,7 +52,7 @@ export default function Modal({ id, student, refetch }) {
       console.log(err);
       toast.error(err?.response?.data);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -65,7 +65,9 @@ export default function Modal({ id, student, refetch }) {
             ? "text-orange-600 bg-orange-50"
             : student?.status?.status === "application submitted"
             ? "text-cyan-600 bg-cyan-50"
-            : student?.status?.status === "dropout" || student?.status?.status === "application rejected" || student?.status?.status ===     "session expired"
+            : student?.status?.status === "dropout" ||
+              student?.status?.status === "application rejected" ||
+              student?.status?.status === "session expired"
             ? "text-red-600 bg-red-50 "
             : student?.status?.status === "enrollment"
             ? "bg-green-50 text-green-600"
@@ -122,11 +124,13 @@ export default function Modal({ id, student, refetch }) {
               />
             </div>
             <div className="form-control">
-              <button 
-                className={`btn text-white font-medium uppercase bg-customPurple ${loading ? 'opacity-50 cursor-not-allowed' : ''}`} 
-                disabled={loading} 
+              <button
+                className={`btn text-white font-medium uppercase bg-customPurple ${
+                  loading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={loading}
               >
-                {loading ? 'Changing...' : 'Change'} 
+                {loading ? "Changing..." : "Change"}
               </button>
             </div>
           </form>

@@ -18,6 +18,7 @@ export default function AllStudentsForAdmin() {
   const { allMcoList, isLoading: mcoListLoading } = useAllMcoList();
   const [selectedMco, setSelectedMco] = useState("");
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState({});
 
   // student fetch
   const {
@@ -51,6 +52,10 @@ export default function AllStudentsForAdmin() {
   // assign to
   const HandleMCOAssign = (e, id) => {
     e.preventDefault();
+    setLoading({
+      id,
+      load: true,
+    });
 
     const form = e.target;
     const mcoselect = form.mcoselect.value;
@@ -76,10 +81,18 @@ export default function AllStudentsForAdmin() {
           .then((res) => {
             swal(res.data.message);
             refetch();
+            setLoading({
+              id,
+              load: false,
+            });
           })
           .catch((err) => swal(err.res.data.message));
       } else {
         swal("You didn't assign any MCO to this student");
+        setLoading({
+          id,
+          load: false,
+        });
       }
     });
   };
@@ -226,9 +239,17 @@ export default function AllStudentsForAdmin() {
                                 </select>
                                 <button
                                   type="submit"
-                                  className="btn btn-sm rounded  bg-customPurple text-white"
+                                  disabled={
+                                    loading?.id === student._id && loading?.load
+                                  }
+                                  className={` btn btn-sm rounded  bg-customPurple text-white`}
                                 >
-                                  <FaCheck className="text-xs" />
+                                  {loading?.id === student._id &&
+                                  loading?.load ? (
+                                    <span className="loading loading-spinner loading-xs"></span>
+                                  ) : (
+                                    <FaCheck className="text-xs" />
+                                  )}
                                 </button>
                               </form>
                             ) : (

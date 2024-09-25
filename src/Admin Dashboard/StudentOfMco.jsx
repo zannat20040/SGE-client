@@ -140,7 +140,11 @@ export default function StudentOfMco() {
                                   : student?.status?.status ===
                                     "application submitted"
                                   ? "text-cyan-600 bg-cyan-50"
-                                  : student?.status?.status === "dropout"
+                                  : student?.status?.status === "dropout" ||
+                                    student?.status?.status ===
+                                      "application rejected" ||
+                                    student?.status?.status ===
+                                      "session expired"
                                   ? "text-red-600 bg-red-50 "
                                   : student?.status?.status === "enrollment"
                                   ? "bg-green-50 text-green-600"

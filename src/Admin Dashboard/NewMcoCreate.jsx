@@ -16,7 +16,6 @@ export default function NewMcoCreate() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-
   // password show & hide
   const togglePasswordVisibility = (type) => {
     if (type === "password") {
@@ -30,27 +29,27 @@ export default function NewMcoCreate() {
   const HandleMCO = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     const form = e.target;
     const firstName = form.firstName.value;
     const lastName = form.lastName.value;
     const email = form.email.value.toLowerCase().trim();
     const password = form.password.value;
     const confirmpass = form.confirmpass.value;
-  
+
     if (password !== confirmpass) {
       setIsPassSame(false);
       setLoading(false);
       return;
     }
-  
+
     const data = {
       firstName,
       lastName,
       email,
       password,
     };
-  
+
     try {
       const res = await axiosPublic.post("/admin/create-mco", data, {
         headers: {
@@ -66,7 +65,6 @@ export default function NewMcoCreate() {
       setIsPassSame(true);
     }
   };
-  
 
   return (
     <div className=" bg-white shadow-md rounded-md ">
@@ -178,6 +176,7 @@ export default function NewMcoCreate() {
         <div className="form-control mt-6">
           <button
             type="submit"
+            disabled={loading}
             className="btn rounded-md bg-customPurple text-white font-medium"
           >
             {loading ? "Wait a Moment......" : "Assign a New MCO"}

@@ -156,16 +156,22 @@ export default function StudentOfMember() {
                           <td className="text-center">
                             <button
                               className={`rounded text-xs p-1  px-4 font-semibold ${
-                                student?.status?.status === "application processing"
+                                student?.status?.status ===
+                                "application processing"
                                   ? "text-orange-600 bg-orange-50"
-                                  : student?.status?.status === "application submitted"
+                                  : student?.status?.status ===
+                                    "application submitted"
                                   ? "text-cyan-600 bg-cyan-50"
-                                  : student?.status?.status === "dropout"
+                                  : student?.status?.status === "dropout" ||
+                                    student?.status?.status ===
+                                      "application rejected" ||
+                                    student?.status?.status ===
+                                      "session expired"
                                   ? "text-red-600 bg-red-50 "
                                   : student?.status?.status === "enrollment"
                                   ? "bg-green-50 text-green-600"
                                   : "bg-[#cfcbf580] text-customPurple"
-                                }  `}
+                              }  `}
                             >
                               {student?.status?.status}
                             </button>

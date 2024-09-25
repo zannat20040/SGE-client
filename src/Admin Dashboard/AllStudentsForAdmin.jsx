@@ -19,7 +19,6 @@ export default function AllStudentsForAdmin() {
   const [selectedMco, setSelectedMco] = useState("");
   const { user } = useContext(AuthContext);
 
-
   // student fetch
   const {
     data: allStudents,
@@ -174,7 +173,11 @@ export default function AllStudentsForAdmin() {
                                   : student?.status?.status ===
                                     "application submitted"
                                   ? "text-cyan-600 bg-cyan-50"
-                                  : student?.status?.status === "dropout"
+                                  : student?.status?.status === "dropout" ||
+                                    student?.status?.status ===
+                                      "application rejected" ||
+                                    student?.status?.status ===
+                                      "session expired"
                                   ? "text-red-600 bg-red-50 "
                                   : student?.status?.status === "enrollment"
                                   ? "bg-green-50 text-green-600"
@@ -208,15 +211,18 @@ export default function AllStudentsForAdmin() {
                                   <option value="" disabled>
                                     Not assigned
                                   </option>
-                                  {allMcoList?.slice().reverse().map((mco) => (
-                                    <option
-                                      key={mco?._id}
-                                      value={mco?.email}
-                                      className="capitalize"
-                                    >
-                                      {mco?.firstName} {mco?.lastName}
-                                    </option>
-                                  ))}
+                                  {allMcoList
+                                    ?.slice()
+                                    .reverse()
+                                    .map((mco) => (
+                                      <option
+                                        key={mco?._id}
+                                        value={mco?.email}
+                                        className="capitalize"
+                                      >
+                                        {mco?.firstName} {mco?.lastName}
+                                      </option>
+                                    ))}
                                 </select>
                                 <button
                                   type="submit"

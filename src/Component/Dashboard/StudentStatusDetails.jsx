@@ -26,13 +26,19 @@ export default function StudentStatusDetails({ studentDetails }) {
               >
                 <div className="flex w-full flex-col gap-1">
                   <div className="flex items-center justify-between">
-                    <Typography color="blue-gray" className="text-sm text-gray-600">
+                    <Typography
+                      color="blue-gray"
+                      className="text-sm text-gray-600"
+                    >
                       {`${formatDate(history?.createdAt)?.date} | ${
                         formatDate(history?.createdAt)?.time
                       }`}
                     </Typography>
                   </div>
-                  <Typography color="blue-gray" className="text-base capitalize">
+                  <Typography
+                    color="blue-gray"
+                    className="text-base capitalize"
+                  >
                     {history?.comment}
                   </Typography>
                 </div>
@@ -44,7 +50,9 @@ export default function StudentStatusDetails({ studentDetails }) {
                           ? "text-orange-600 bg-orange-50"
                           : history.status === "application submitted"
                           ? "text-cyan-600 bg-cyan-50"
-                          : history.status === "dropout"
+                          : history?.status === "dropout" ||
+                            history?.status === "application rejected" ||
+                            history?.status === "session expired"
                           ? "text-red-600 bg-red-50 "
                           : history.status === "enrollment"
                           ? "bg-green-50 text-green-600"

@@ -16,7 +16,6 @@ export default function AdminCreate() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-
   // password show & hide
   const togglePasswordVisibility = (type) => {
     if (type === "password") {
@@ -26,7 +25,6 @@ export default function AdminCreate() {
     }
   };
 
- 
   // admin create function
   const HandleAdmin = async (e) => {
     e.preventDefault();
@@ -61,7 +59,7 @@ export default function AdminCreate() {
       swal("Congratulations!", res.data.message, "success");
       navigate("/dashboard/allAdminList");
     } catch (err) {
-      console.log(err)
+      console.log(err);
       swal("Ops!", err.response?.data?.message || "An error occurred", "error");
     } finally {
       setLoading(false);
@@ -178,6 +176,7 @@ export default function AdminCreate() {
         {/* submit button */}
         <div className="form-control mt-6">
           <button
+            disabled={loading}
             type="submit"
             className="btn rounded-md bg-customPurple text-white font-medium"
           >

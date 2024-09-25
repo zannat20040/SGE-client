@@ -73,7 +73,10 @@ export default function Loginlayout({ HandleLogin, loading }) {
               </label>
             </div>
             <div className="form-control ">
-              <button className="btn  text-white font-medium uppercase bg-customPurple">
+              <button
+                disabled={loading}
+                className="btn  text-white font-medium uppercase bg-customPurple"
+              >
                 {loading ? "Wait a momemt..." : "Login"}
               </button>
             </div>
@@ -86,7 +89,6 @@ export default function Loginlayout({ HandleLogin, loading }) {
               </Link>
             </p>
           </div>
-    
         </div>
       </div>
     </div>

@@ -37,7 +37,9 @@ export default function StudentDetailsLayout({ studentDetails, refetch }) {
                   ? "text-orange-600 "
                   : studentDetails?.status?.status === "application submitted"
                   ? "text-cyan-600 "
-                  : studentDetails?.status?.status === "dropout"
+                  : studentDetails?.status?.status === "dropout" ||
+                    studentDetails?.status?.status === "application rejected" ||
+                    studentDetails?.status?.status === "session expired"
                   ? "text-red-600  "
                   : studentDetails?.status?.status === "enrollment"
                   ? " text-green-600"

@@ -155,7 +155,10 @@ export default function SignupLayout({ HandleSignup, isPassSame, loading }) {
             </label>
           </div>
           <div className="form-control ">
-            <button className="btn  text-white font-medium uppercase bg-customPurple">
+            <button
+              disabled={loading}
+              className="btn  text-white font-medium uppercase bg-customPurple"
+            >
               {loading ? "Wait a Moment ... " : "Signup"}
             </button>
           </div>

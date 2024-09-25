@@ -56,16 +56,16 @@ export default function Comment({ studentDetails, refetch }) {
               }`}
             >
               <div className="bg-gray-100  rounded-md w-5/6 lg:w-4/6 ">
-                <div className="px-5 py-2 border-b-2 border-gray-200  flex justify-between flex-wrap md:items-center items-start">
-                  <div className="flex flex-col-reverse md:flex-row gap-2 md:items-center items-start ">
-                    <p>{comment?.subject}</p>
-                    <p className="text-xs">
-                      {`${formatDate(comment?.createdAt)?.date} ${
+                <div className="px-5 py-2 border-b-2 border-gray-200 gap-5 flex justify-between flex-wrap md:items-center items-start xs:flex-row flex-col-reverse">
+                  <p className="font-semibold ">{comment?.subject}</p>
+                  <div className="flex flex-col-reverse xs:items-end items-start ">
+                    <p className="text-xs text-gray-600">
+                      {`${formatDate(comment?.createdAt)?.date} | ${
                         formatDate(comment?.createdAt)?.time
                       }`}
                     </p>
+                    <p className="text-sm">{comment?.commentedByEmail}</p>
                   </div>
-                  <p className="text-xs">{comment?.commentedByEmail}</p>
                 </div>
                 <div className="px-5 py-2">{comment?.comment}</div>
               </div>
@@ -83,7 +83,7 @@ export default function Comment({ studentDetails, refetch }) {
             <input
               required
               type="text"
-              className="grow outline-none w-full"
+              className="grow outline-none w-full text-black"
               placeholder="example"
               name="subject"
             />

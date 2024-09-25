@@ -12,7 +12,7 @@ export default function NewMember() {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
-  // member add funciton
+  // member add function
   const HandleNewMemberAdd = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -45,11 +45,7 @@ export default function NewMember() {
         },
       })
       .then((res) => {
-        swal(
-          "Congratulation!",
-          "One student has been added successfully!",
-          "success"
-        );
+        swal("Congratulation!", "One student has been added successfully!", "success");
         navigate("/dashboard/membersStudent");
         setLoading(false);
         form.reset();
@@ -61,7 +57,7 @@ export default function NewMember() {
   };
 
   return (
-    <div className=" bg-white shadow-md rounded-md ">
+    <div className="bg-white shadow-md rounded-md">
       {/* header */}
       <div className="card-body border-b border-gray-200">
         <Typography variant="h5" color="blue-gray">
@@ -80,7 +76,7 @@ export default function NewMember() {
             </label>
             <input
               type="text"
-              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple focus:outline-0 border-gray-300 rounded-md"
               required
               name="firstName"
             />
@@ -91,7 +87,7 @@ export default function NewMember() {
             </label>
             <input
               type="text"
-              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple focus:outline-0 border-gray-300 rounded-md"
               required
               name="lastName"
             />
@@ -104,7 +100,7 @@ export default function NewMember() {
             </label>
             <input
               type="email"
-              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple focus:outline-0 border-gray-300 rounded-md"
               required
               name="email"
             />
@@ -115,7 +111,7 @@ export default function NewMember() {
             </label>
             <input
               type="number"
-              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple focus:outline-0 border-gray-300 rounded-md"
               required
               name="primeNumber"
             />
@@ -126,13 +122,13 @@ export default function NewMember() {
             </label>
             <input
               type="number"
-              className="input input-bordered border focus:border-customPurple  focus:outline-0  border-gray-300 rounded-md"
+              className="input input-bordered border focus:border-customPurple focus:outline-0 border-gray-300 rounded-md"
               required
               name="wpnumber"
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2  gap-5  justify-between items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5 justify-between items-center">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Preferred Courses *</span>
@@ -180,6 +176,7 @@ export default function NewMember() {
           <button
             type="submit"
             className="btn rounded-md bg-customPurple text-white font-medium"
+            disabled={loading} 
           >
             {loading ? "Wait a Moment......" : "Add New Student"}
           </button>
